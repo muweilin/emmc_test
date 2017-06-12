@@ -1,0 +1,7 @@
+./rtl/src_common/DW_minmax.v
+./rtl/src_common/DW01_inc.v
+./rtl/src_common/dll_delay_element.v
+./rtl/src_common/dll_delay_line_128.v
+./rtl/src_common/dll_delay_line_256.v
+./rtl/src_common/dll_delay_line_512.v
+./rtl/src_common/mdlr.v

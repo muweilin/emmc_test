@@ -1,0 +1,65 @@
+
+#include <gpio.h>
+#include <uart.h>
+#include <utils.h>
+#include <spi.h>
+#include <ppu.h>
+#include <memctl.h>
+
+#define ext_ram_addr 0x22000000
+
+void waste_time() {
+  int i;
+  for(i = 0; i < 300; i++) asm volatile("nop");
+}
+
+int main()
+{
+
+  int i;
+  int rddat[2];
+  int tmp;
+  int * q;
+  int wrdat = 0xdeadbeef;
+  char ch;
+
+  memctl_init();
+  q = (volatile int*)ext_ram_addr;
+
+  uart_set_cfg(0, 49); //50M: 62500
+  uart_send("Booting PPU...\n", 15);
+
+  uart_send("Writing SPI...\n", 15);
+  waste_time();
+
+  spi_write(0x2, ext_ram_addr, 32, &wrdat, 32);
+
+  while(1) {
+    uart_send("Loading Memory...\n", 18);
+    uart_wait_tx_done();
+
+    spi_read(0xB, ext_ram_addr, 32, rddat, 64);
+
+    tmp = (rddat[0] << 1) | ((rddat[1] & 0x80000000) >> 31);
+
+    for(i = 0; i < 8; i++)
+     {
+       ch = ((tmp >> (28-i*4)) & 0xf) + 87;
+       uart_sendchar(ch);
+     }
+    uart_sendchar('\n');
+
+    waste_time();
+
+    for(i = 0; i < 8; i++)
+     {
+       ch = ((*q >> (28-i*4)) & 0xf) + 87;
+       uart_sendchar(ch);
+     }
+    uart_sendchar('\n');
+
+    waste_time();
+  }
+
+}
+

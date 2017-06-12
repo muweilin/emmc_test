@@ -1,0 +1,57 @@
+
+//============================================================================
+//
+//                   (C) COPYRIGHT 2001-2011 SYNOPSYS, INC.
+//                            ALL RIGHTS RESERVED
+//
+// This software and the associated documentation are confidential and
+// proprietary to Synopsys, Inc.  Your use or disclosure of this
+// software is subject to the terms and conditions of a written
+// license agreement between you, or your company, and Synopsys, Inc.
+//
+// The entire notice above must be reproduced on all authorized copies
+//
+// : //dwh/DW_ocb/DW_memctl/amba_dev/bin/ParamsParser.pl 
+/ : #6 
+/
+// Abstract  : DW_memctl, synchronous write, and asynchronous read FIFO. 
+// combinational flags and read-data.
+//
+//============================================================================
+  # Power-on Reset Register Values For Your Configuration
+
+  # The "initialize" bit-0 of SDRAM Control Register(SCTLR), on power-on
+  # will be set to "1" and after auto initialization sequence completion
+  # will get reset to 0"
+
+  Relative Address 0x00: SCONR = 32'h1c3188
+  Relative Address 0x04: STMG0R = 32'h27e5696
+  Relative Address 0x08: STMG1R = 32'h70008
+  Relative Address 0x0C: SCTLR = 32'h3089
+  Relative Address 0x10: SREFR = 32'h410
+  Relative Address 0x14: SCSLR0_LOW = 32'h80000000
+  Relative Address 0x18: SCSLR1_LOW = 32'h10000000
+  Relative Address 0x1C: SCSLR2_LOW = 32'h20000000
+  Relative Address 0x20: SCSLR3_LOW = 32'h30000000
+  Relative Address 0x24: SCSLR4_LOW = 32'h40000000
+  Relative Address 0x28: SCSLR5_LOW = 32'h50000000
+  Relative Address 0x2C: SCSLR6_LOW = 32'h60000000
+  Relative Address 0x30: SCSLR7_LOW = 32'h70000000
+  Relative Address 0x54: SMSKR0 = 32'h80c
+  Relative Address 0x58: SMSKR1 = 32'h801
+  Relative Address 0x5C: SMSKR2 = 32'h21
+  Relative Address 0x60: SMSKR3 = 32'h441
+  Relative Address 0x64: SMSKR4 = 32'h861
+  Relative Address 0x68: SMSKR5 = 32'h401
+  Relative Address 0x6C: SMSKR6 = 32'h401
+  Relative Address 0x70: SMSKR7 = 32'h401
+  Relative Address 0x74: CSALIAS0_LOW = 32'h80000000
+  Relative Address 0x78: CSALIAS1_LOW = 32'h18000000
+  Relative Address 0x84: CSREMAP0_LOW = 32'h80000000
+  Relative Address 0x88: CSREMAP1_LOW = 32'h12000000
+  Relative Address 0x94: SMTMGR_SET0 = 32'h10441
+  Relative Address 0x98: SMTMGR_SET1 = 32'h7c4f5b
+  Relative Address 0x9C: SMTMGR_SET2 = 32'h1c4f5b
+  Relative Address 0xA0: FLASH_TRPDR = 32'hc8
+  Relative Address 0xA4: SMCTLR = 32'h2480
+  Relative Address 0xAC: ETN_MODE_REG = 32'h0

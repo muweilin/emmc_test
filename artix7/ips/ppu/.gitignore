@@ -1,0 +1,6 @@
+.Xil
+fpga_top*
+*.ltx
+*.txt
+vivado*
+simu*

@@ -1,0 +1,34 @@
+#include <spi.h>
+#include <gpio.h>
+#include <uart.h>
+#include <utils.h>
+#include <ppu.h>
+
+void jump_and_start(volatile int *ptr);
+
+int main()
+{
+  uart_set_cfg(0, 49);//Lei
+
+  uart_send("Booting PPU...\n", 15);
+
+  for (int i = 0; i < 200; i++) 
+      asm volatile ("nop");
+
+  uart_send("Jumping to User App\n", 20);
+
+  uart_wait_tx_done();
+
+  BOOTREG = 0x00;
+
+  jump_and_start((volatile int *)(INSTR_RAM_START_ADDR));
+}
+
+void jump_and_start(volatile int *ptr)
+{
+  asm("jalr x0, %0\n"
+      "nop\n"
+      "nop\n"
+      "nop\n"
+      : : "r" (ptr) );
+}

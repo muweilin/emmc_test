@@ -1,0 +1,11 @@
+.elf
+  gcc -o *.elf  crt0.S   $(SOURCE_FILES)
+
+.s19 (ascii printable)
+  objcopy --output-target=srec --srec-len 1 *.elf
+
+slm_files/l2_ram.slm
+  s19toslm.py   *.s19
+
+vectors/stim.txt
+  parse_s19.pl  *.s19

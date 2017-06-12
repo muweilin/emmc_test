@@ -1,0 +1,39 @@
+
+#include <uart.h>
+#include <utils.h>
+#include <ppu.h>
+
+
+void waste_time() {
+  int i;
+  for(i = 0; i < 30000000; i++) asm volatile("nop");
+}
+
+int main()
+{
+
+  int i;
+  char ch;
+
+  uart_set_cfg(0, 49); //50M: 62500
+
+  uart_send("Booting PPU...\n", 15);
+
+  waste_time();
+
+  while(1) {
+    uart_send("Type a char:\n", 13);
+    uart_wait_tx_done();
+    
+    ch = uart_getchar();
+    ch = ch + 1;
+    uart_sendchar(ch);
+    uart_sendchar('\n');
+
+    waste_time();
+  }
+
+}
+
+
+

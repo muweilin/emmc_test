@@ -1,0 +1,45 @@
+
+#include <gpio.h>
+#include <uart.h>
+#include <utils.h>
+#include <ppu.h>
+
+void waste_time() {
+  int i;
+  for(i = 0; i < 100; i++) asm volatile("nop");
+}
+
+void jump_and_start(volatile int *ptr)
+{
+  asm("jalr x0, %0\n"
+      "nop\n"
+      "nop\n"
+      "nop\n"
+      : : "r" (ptr) );
+}
+
+int main()
+{
+
+  int i;
+  uart_set_cfg(0, 49); //50M: 62500
+
+  uart_send("Booting PPU...\n", 15);
+
+  waste_time();
+
+  for (i=0; i<2; i++) {
+    uart_send("looping...\n", 11);
+    uart_wait_tx_done();
+    
+    waste_time();
+  }
+
+
+  BOOTREG = 0x00;
+
+  jump_and_start((volatile int *)(INSTR_RAM_START_ADDR));
+}
+
+
+

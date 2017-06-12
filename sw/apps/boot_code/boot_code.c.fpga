@@ -1,0 +1,71 @@
+#include <uart.h>
+#include <utils.h>
+#include <spi.h>
+#include <ppu.h>
+#include <memctl.h>
+void jump_and_start(volatile int *ptr);
+
+int uart_getdata(){
+  int mid[4];
+  int data = 0;
+  for(int i = 0; i < 4; i++)
+  {
+    mid[i] = uart_getchar();
+    data |= (mid[i] << (24 - i*8));
+  }
+  return data;
+}
+
+int main()
+{
+  unsigned int addr = 0;
+  unsigned int data = 0;
+
+  uart_set_cfg(0, 49); //100M: 125000
+  memctl_init();
+
+  uart_send("################################\n", 33);
+  uart_send("##                            ##\n", 33);
+  uart_send("##  Dual 32b RISC-V MCU Chip  ##\n", 33);
+  uart_send("##                            ##\n", 33);
+  uart_send("##  by wusystem grp @ICT,CAS  ##\n", 33);
+  uart_send("##                            ##\n", 33);
+  uart_send("################################\n", 33);
+
+  uart_send("Starting WuPu1.0 big ......\n", 29);
+ 
+  uart_wait_tx_done();
+    
+  for(int i = 0; i < 3000; i++) 
+	asm volatile("nop");
+
+  uart_send("Please Upload Program via UART ...\n", 35);
+  uart_wait_tx_done();
+
+  uart_sendchar('\n');
+
+  addr = uart_getdata();
+  while(addr != 0xffffffff)
+  {
+    data = uart_getdata();
+    *(volatile int*)(addr) = data;
+    addr = uart_getdata();
+  }
+  uart_send("Done\n", 5);
+
+  uart_send("Jumping to Instruction RAM\n", 27);
+  uart_wait_tx_done();
+
+  BOOTREG = INSTR_RAM_BASE_ADDR;
+  
+  jump_and_start((volatile int *)(INSTR_RAM_START_ADDR));
+}
+
+void jump_and_start(volatile int *ptr)
+{
+  asm("jalr x0, %0\n"
+      "nop\n"
+      "nop\n"
+      "nop\n"
+      : : "r" (ptr) );
+}
