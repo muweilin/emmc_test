@@ -229,7 +229,7 @@ wire [1:0] reg_bank_clk_probe  ;
                 .hclk                   (hclk),
                 .hresetn                (hresetn),
                 .IPRD                   (IPRD),
-                .int_s_rd_dqs_mask      (int_s_rd_dqs_mask),
+                .int_s_rd_dqs_mask      (s_rd_dqs_mask),
                 .SampleEn               (gpo[0]),
                 .s_rd_start             (s_rd_start),
                 .s_rd_pop               (s_rd_pop),
