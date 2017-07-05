@@ -1,0 +1,83 @@
+
+#include <gpio.h>
+#include <uart.h>
+#include <utils.h>
+#include <spi.h>
+#include <ppu.h>
+
+#define ext_ram_addr 0x20010000
+
+void waste_time() {
+  int i;
+  for(i = 0; i < 30000000; i++) asm volatile("nop");
+}
+
+int main()
+{
+
+  int i;
+  int rddat[2];
+  int tmp;
+  int * q = (volatile int*)ext_ram_addr;
+  int wrdat = 0xdeadbeef;
+  char ch;
+
+  uart_set_cfg(0, 49); //50M: 62500
+
+//  set_gpio_pin_direction(0, DIR_OUT);
+//  set_gpio_pin_direction(1, DIR_OUT);
+
+//  set_pin_function(0, FUNC_GPIO);
+//  set_pin_function(1, FUNC_GPIO);
+
+  uart_send("Booting PPU...\n", 15);
+
+  waste_time();
+
+  spi_write(0x2, ext_ram_addr, 32, &wrdat, 32);
+
+  while(1) {
+  
+//    set_gpio_pin_value(0, 1);
+//    set_gpio_pin_value(1, 1);
+//    waste_time();
+
+    uart_send("SPI read...\n", 12);
+    uart_wait_tx_done();
+  
+    spi_read(0xB, ext_ram_addr, 32, rddat, 64);
+//    spi_read(0xB, ext_ram_addr, 32, &rddat, 32);
+
+    tmp = (rddat[0] << 1) | ((rddat[1] & 0x80000000) >> 31);
+
+//    rddat = rddat << 1;
+
+    for(i = 0; i < 8; i++)
+     {
+//       ch = ((rddat[0] >> (28-i*4)) & 0xf) + 87;
+       ch = ((tmp >> (28-i*4)) & 0xf) + 87;
+       uart_sendchar(ch);
+     }
+    uart_sendchar('\n');
+
+    waste_time();
+
+    uart_send("CPU read...\n", 12);
+    uart_wait_tx_done();
+  
+    for(i = 0; i < 8; i++)
+     {
+       ch = ((*q >> (28-i*4)) & 0xf) + 87;
+       uart_sendchar(ch);
+     }
+    uart_sendchar('\n');
+
+
+//    set_gpio_pin_value(0, 0);
+//    set_gpio_pin_value(1, 0);
+
+    waste_time();
+  }
+
+}
+

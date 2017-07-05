@@ -1,0 +1,2 @@
+./blk_mem_gen_v8_3.v
+./xilinx_mem_8192x32.v

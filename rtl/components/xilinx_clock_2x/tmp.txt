@@ -1,0 +1,6 @@
+./xilinx_clock_2x_clk_wiz.v
+./mmcm_pll_drp_func_us_mmcm.vh
+./xilinx_clock_2x.v
+./mmcm_pll_drp_func_7s_mmcm.vh
+./mmcm_pll_drp_func_us_pll.vh
+./mmcm_pll_drp_func_7s_pll.vh

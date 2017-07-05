@@ -1,0 +1,58 @@
+#include <uart.h>
+#include <utils.h>
+#include <ppu.h>
+#include "memctl.h"
+//#define COPY_SIZE 303 // The is the maximux size can be allocated 
+
+#define COPY_SIZE 6 // The is the maximux size can be allocated 
+#define ext_ram_addr 0x22000000
+
+void waste_time() {
+  int i;
+  for(i = 0; i < 3000000; i++) asm volatile("nop");
+//  for(i = 0; i < 300; i++) asm volatile("nop");
+}
+
+int main()
+{
+  int i, j;
+  int tmp;
+  char ch;
+  int dat = 0xaaaa1111;
+
+  uart_set_cfg(0, 49);
+
+  memctl_init();
+
+  int * q = (volatile int*)ext_ram_addr;
+
+  for(i = 0; i < COPY_SIZE; i++) {
+     *(q+i) =  dat;
+     dat = dat + 0x11111111;}
+
+  while(1) {
+  for(i = 0; i < COPY_SIZE; i++)
+    {
+     tmp = *(q+i);
+     for(j = 0; j < 8; j++){
+       ch = (tmp >> (28-j*4)) & 0xF;
+       if(ch < 0xa )
+         ch = ch + 48;
+       else
+         ch = ch + 87;
+       uart_sendchar(ch);
+     }
+     uart_sendchar('\n');
+
+     waste_time();
+    }
+  }
+
+  uart_send("Starting WuPu1.0 CORE ......\n", 29);
+ 
+  uart_wait_tx_done();
+
+  while(1) {}
+
+}
+

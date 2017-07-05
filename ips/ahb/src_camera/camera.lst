@@ -1,0 +1,4 @@
+./rtl/src_camera/camera_ahb_master.v
+./rtl/src_camera/camera_bridge.v
+./rtl/src_camera/camera_capture.v
+./rtl/src_camera/camera_csr.v

@@ -1,0 +1,18 @@
+              UUUUUUU
+                UUU
+                 UU
+            UUUUUUUUUUUU      UUUUUUUUUU    UUUUU  UUUUU
+           UUU   UU   UUU       U      UU    U        U
+          UUU    UU    UUU      U       U    U        U
+         UUU     UU     UUU     U      U     U        U
+         UUU     UU     UUU     U     U      U        U
+         UUU     UU     UUU     UUUUUU       U        U
+          UU     UU    UUU      U       IOT  U        U
+          UUU    UU   UUU       U            U        U
+           UUUUU UU UUUU        U     AI     U        U
+              UUUUUUUU          U            UU      UU
+                UUU    RISC-V   U      Chip   UU    UU
+               UUUUU          UUUUUUU          UUUUUU
+
+
+Designed by Wusystem Group @ ICT, the SoC is an IoT AI chip, including two RISC-V cores and an NPU core, supporting ANN and certain RNN graphs.

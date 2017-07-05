@@ -1,0 +1,5 @@
+apb_pwm:
+  files: [
+    apb_pwm.sv
+    pwm_gen.sv
+  ]
