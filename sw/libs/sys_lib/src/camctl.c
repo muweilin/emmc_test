@@ -1,6 +1,5 @@
 
 #include "camctl.h"
-#include "memctl.h"
 #include "event.h"
 #include <stdio.h>
 #include "uart.h"

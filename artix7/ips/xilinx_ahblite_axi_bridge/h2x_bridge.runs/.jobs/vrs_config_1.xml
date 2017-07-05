@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<Runs Version="1" Minor="0">
+	<Run Id="h2x_bridge_synth_1" LaunchDir="/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.runs/h2x_bridge_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+</Runs>
+

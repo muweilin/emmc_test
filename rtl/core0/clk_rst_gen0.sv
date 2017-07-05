@@ -8,7 +8,6 @@ module clk_rst_gen0
     input  logic                            lock_i,
 
     input  logic                            testmode_i,
-    input  logic                            pll_bps_i,
 
     output logic                            clk_o,
     output logic                            rstn_o
@@ -28,7 +27,6 @@ module clk_rst_gen0
 
       // TEST MODE
       .test_mode_i         ( testmode_i      ),
-      .pll_bps_i           ( pll_bps_i       ),
 
       // OUTPUT RESET
       .rst_no              ( rstn_o          )

@@ -2,10 +2,9 @@
 #include <utils.h>
 #include <spi.h>
 #include <ppu.h>
-#include <memctl.h>
 
 #define COPY_SIZE 5 // The is the maximux size can be allocated 
-#define ext_ram_addr 0x22000000
+#define ext_ram_addr 0x50000000
 
 void waste_time() {
   int i;
@@ -36,8 +35,13 @@ int main()
   char ch;
   int dat = 0xaaaa1111;
 
+<<<<<<< HEAD
+  uart_set_cfg(0, 49); //100M: 125000
+  
+=======
   uart_set_cfg(0, 24); //100M: 125000
   memctl_init();
+>>>>>>> b6f7552f80b2d3c0291eeeb705874daf8e7b2fe6
 
   int * q = (volatile int*)ext_ram_addr;
 

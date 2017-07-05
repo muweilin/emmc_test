@@ -7,29 +7,39 @@
 
   spi_sck,
   spi_csn,
-  spi_sdo,
-  spi_sdi,
+  spi_sdo0,
+  spi_sdi0,
 
   uart_tx,
   uart_rx,
 
-  scl,
-  sda,
+  scl_io,
+  sda_io,
 
-  memctl_s_ck_p,
-  memctl_s_ck_n,
-  memctl_s_sel_n,
-  memctl_s_cke,
-  memctl_s_ras_n,
-  memctl_s_cas_n,
-  memctl_s_we_n,
-  memctl_s_addr,
-  memctl_s_bank_addr,
-  memctl_s_dqm,
-  memctl_s_dqs,    
-  memctl_s_dq,   
-  memctl_s_rd_dqs_mask,
-  memctl_int_rd_dqs_mask,
+   ddr3_dq   ,
+  ddr3_dqs_n ,
+  ddr3_dqs_p ,
+  ddr3_addr  ,
+  ddr3_ba    ,
+  ddr3_ras_n ,
+  ddr3_cas_n ,
+   ddr3_we_n  ,
+  ddr3_reset_n    ,
+ ddr3_ck_p   ,
+ ddr3_ck_n   ,
+  ddr3_cke    ,
+ ddr3_cs_n   ,
+  ddr3_dm     ,
+ ddr3_odt    ,
+ 
+  emmc_cclk_out,     
+  emmc_ccmd,         
+  emmc_cdata,        
+// emmc_card_detect_n, 
+/// emmc_card_write_prt,
+  sdio_card_int_n,   
+//  mmc_4_4_rst_n;     
+
 
   gpio0
 //  gpio1,
@@ -61,30 +71,39 @@
 
   output        spi_sck;
   output        spi_csn;
-  output        spi_sdo;
-  input         spi_sdi;
+  output        spi_sdo0;
+  input         spi_sdi0;
   //uart
   output        uart_tx;
   input         uart_rx;
   inout         gpio0;
   //i2c eeprom
-  inout         scl;
-  inout         sda;
+  inout         scl_io;
+  inout         sda_io;
 
-  output        memctl_s_ck_p;
-  output        memctl_s_ck_n;
-  output        memctl_s_sel_n;
-  output        memctl_s_cke;
-  output        memctl_s_ras_n;
-  output        memctl_s_cas_n;
-  output        memctl_s_we_n;
-  output [13: 0]  memctl_s_addr;
-  output [ 1: 0]  memctl_s_bank_addr;
-  output [ 1: 0]  memctl_s_dqm;
-  inout  [ 1: 0]  memctl_s_dqs;    
-  inout  [15: 0]  memctl_s_dq;    
-  output        memctl_s_rd_dqs_mask;
-  input         memctl_int_rd_dqs_mask;
+   inout  wire    [31:0]     ddr3_dq;
+    inout  wire    [3:0]      ddr3_dqs_n;
+    inout  wire    [3:0]      ddr3_dqs_p;
+    output wire   [14:0]     ddr3_addr;
+    output wire   [2:0]      ddr3_ba;
+    output wire              ddr3_ras_n;
+    output wire              ddr3_cas_n;
+    output wire              ddr3_we_n;
+    output wire              ddr3_reset_n;
+    output wire              ddr3_ck_p;
+    output wire              ddr3_ck_n;
+    output wire              ddr3_cke;
+    output wire              ddr3_cs_n;
+    output wire   [3:0]      ddr3_dm;
+    output wire              ddr3_odt;
+    
+   output wire        emmc_cclk_out;
+	 inout wire        emmc_ccmd;
+	 inout wire   [3: 0]        emmc_cdata;
+//	input logic  [ 1: 0]      emmc_card_detect_n,
+//	input logic  [ 1: 0]      emmc_card_write_prt,
+	 input  wire        sdio_card_int_n;
+	// output logic [ 1: 0]        mmc_4_4_rst_n;
 /*
   inout         gpio0;
   inout         gpio1;
@@ -111,6 +130,18 @@
 */
 
   wire clk;
+  wire [31:0] gpio;
+ 
+  //wire spi_sdi0 ; 
+  wire spi_sdi1 ; 
+  wire spi_sdi2 ; 
+  wire spi_sdi3 ; 
+ // wire spi_sdo0 ;
+  wire spi_sdo1 ;
+  wire spi_sdo2 ;
+  wire spi_sdo3 ; 
+  
+  assign  gpio0 = gpio[0];
 //  wire [15:0] wire_memctl_s_addr;
 
 //  assign memctl_s_addr = wire_memctl_s_addr[13:0];
@@ -118,118 +149,164 @@
 // IBUFGDS: Differential Global Clock Input Buffer
 // 7 Series
 // Xilinx HDL Libraries Guide, version 14.5
-IBUFGDS #(.DIFF_TERM("TRUE"), // Differential Termination
-          .IOSTANDARD("DEFAULT")
-) IBUFGDS_inst (
-  .O  (  clk    ), // Clock buffer output
-  .I  (  clk_p  ), // Diff_p clock buffer input (connect directly to top-level port)
-  .IB (  clk_n  ) // Diff_n clock buffer input (connect directly to top-level port)
-);
-// End of IBUFGDS_inst instantiation
 
   // PPU SoC
-top top_i
- (
-//common
-     .clk_i             ( clk   ),
-     .div_pll_i         ( 2'b01 ),
-     .pll_bps_i         ( 1'b0  ),
-     .rstn_i            ( rst_n ),
-//ppu
-     .testmode_i        ( 1'b0  ),
+  
+ top  top_i
+(
+     .sys_clk_p         ( clk_p         ),
+     .sys_clk_n         ( clk_n        ),
+     .rstn_i            ( rst_n       ),
+     .testmode_i        ( 1'b0          ),
      .fetch_enable_i    ( 1'b1  ),
+
+   //SPI Slave
+     .spi_clk_i         ( spi_sck       ),
+     .spi_cs_i          ( spi_csn       ),
+     .spi_sdo0_o        ( spi_sdo0      ),
+     .spi_sdo1_o        ( spi_sdo1      ),
+     .spi_sdo2_o        ( spi_sdo2      ),
+     .spi_sdo3_o        ( spi_sdo3      ),
+     .spi_sdi0_i        ( spi_sdi0      ),
+     .spi_sdi1_i        ( spi_sdi1      ),
+     .spi_sdi2_i        ( spi_sdi2      ),
+     .spi_sdi3_i        ( spi_sdi3      ),
+
     //SPI Master
+     .spi_master_clk_o  (  ),
+     .spi_master_csn0_o (  ),
+     .spi_master_csn1_o (  ),
+     .spi_master_csn2_o (  ),
+     .spi_master_csn3_o (  ),
+     .spi_master_sdo0_o (  ),
+     .spi_master_sdo1_o (  ),
+     .spi_master_sdo2_o (  ),
+     .spi_master_sdo3_o (  ),
+     .spi_master_sdi0_i (  ),
+     .spi_master_sdi1_i (  ),
+     .spi_master_sdi2_i (  ),
+     .spi_master_sdi3_i (  ),
 
-     .spi_master_clk_o  ( spi_sck ),
-     .spi_master_csn0_o ( spi_csn ),
-     .spi_master_sdo0_o ( spi_sdo ),
-     .spi_master_sdi0_i ( spi_sdi ),
+     .spi_master1_clk_o  (  ),
+     .spi_master1_csn0_o ( ),
+     .spi_master1_csn1_o (  ),
+     .spi_master1_csn2_o (  ),
+     .spi_master1_csn3_o (  ),
+     .spi_master1_sdo0_o (  ),
+     .spi_master1_sdo1_o (  ),
+     .spi_master1_sdo2_o (  ),
+     .spi_master1_sdo3_o (  ),
+     .spi_master1_sdi0_i (),
+     .spi_master1_sdi1_i (  ),
+     .spi_master1_sdi2_i (  ),
+     .spi_master1_sdi3_i (  ),
 
-     //uart
-     .uart_tx           ( uart_tx ),
-     .uart_rx           ( uart_rx ),
-    //memctl
-	 .memctl_s_ck_p          ( memctl_s_ck_p  ),
-	 .memctl_s_ck_n          ( memctl_s_ck_n  ),
-	 .memctl_s_sel_n         ( memctl_s_sel_n ),
-	 .memctl_s_cke           ( memctl_s_cke  ),
-	 .memctl_s_ras_n         ( memctl_s_ras_n ),
-	 .memctl_s_cas_n         ( memctl_s_cas_n ),
-	 .memctl_s_we_n          ( memctl_s_we_n  ),
-	 .memctl_s_addr          ( memctl_s_addr  ),
-	 .memctl_s_bank_addr     ( memctl_s_bank_addr ),
-	 .memctl_s_dqm           ( memctl_s_dqm  ),
-	 .memctl_s_dqs           ( memctl_s_dqs  ),  //tri
-	 .memctl_s_dq            ( memctl_s_dq  ),  //tri
-	 .memctl_s_rd_dqs_mask   ( memctl_s_rd_dqs_mask  ),
-	 .memctl_int_rd_dqs_mask ( memctl_int_rd_dqs_mask ),
+    //uart
+     .uart_tx           ( uart_tx  ),
+     .uart_rx           ( uart_rx  ),
+
+     .uart1_tx          ( ),
+     .uart1_rx          (  ),
+
+    //I2C
+     .scl               ( scl_io ),
+     .sda               ( sda_io ),
+     .scl1              (  ),
+     .sda1              (  ),
+    //gpio
+     .gpio              ( gpio   ),   
+    //pwm
+     .pwm_o             (     ),
+
+    //camera
+     .cam_pclk          (   ),
+     .cam_vsync         (  ),
+     .cam_href          (   ),
+     .cam_data          (   ),
+
      //eMMC
-	 .emmc_cclk_out          ( ),
-	 .emmc_ccmd              ( ), //tri
-	 .emmc_cdata             ( ), //tri
-	 .emmc_card_detect_n     ( ),
-	 .emmc_card_write_prt    ( ),
-	 .sdio_card_int_n        ( ),
-	 .mmc_4_4_rst_n          ( ),
+	 .emmc_cclk_out          ( emmc_cclk_out  ),// R16
+	 .emmc_ccmd              ( emmc_ccmd  ), //tri R17
+	 .emmc_cdata             ( emmc_cdata  ), //tri data0 N13 data1 P15 data2 P20  data3 P16
+	 .emmc_card_detect_n     ( 1'b0  ),
+	 .emmc_card_write_prt    ( 1'b0  ),
+	 .sdio_card_int_n        ( sdio_card_int_n  ),//P17
+	 .mmc_4_4_rst_n          (   ),
 
-     //Mux Pins
-     .PIN0_scl_uart1tx        ( scl ),
-     .PIN1_sda_uart1rx        ( sda ),
-     .PIN2_spim1sdo0_gpio0    ( gpio0 ),
-     .PIN3_spim1csn0_gpio1    (  ),
-     .PIN4_spim1sdi0_vsync    (  ),
-     .PIN5_pwm0_href          (   ),
-     .PIN6_pwm1_camdata7      (   ),
-     .PIN7_pwm2_camdata6      (   ),
-     .PIN8_pwm3_camdata5      (  ),
-     .PIN9_gpio2_camdata4     (   ),
-     .PIN10_gpio3_camdata3    (   ),
-     .PIN11_gpio4_camdata2    ( ),
-     .PIN12_gpio5_camdata1    (  ),
-     .PIN13_gpio6_camdata0    (  ),
+   //ddr3 sdram if
+     .ddr3_dq                  (  ddr3_dq     ),
+     .ddr3_dqs_n               (  ddr3_dqs_n  ),
+     .ddr3_dqs_p               (  ddr3_dqs_p  ),
+     .ddr3_addr                (  ddr3_addr   ),
+     .ddr3_ba                  (  ddr3_ba      ),
+     .ddr3_ras_n               (  ddr3_ras_n  ),
+     .ddr3_cas_n               (  ddr3_cas_n  ),
+     .ddr3_we_n                (  ddr3_we_n   ),
+     .ddr3_reset_n             (  ddr3_reset_n       ),
+     .ddr3_ck_p               (  ddr3_ck_p   ),
+     .ddr3_ck_n               (  ddr3_ck_n   ),
+     .ddr3_cke                 (  ddr3_cke    ),
+     .ddr3_cs_n               (  ddr3_cs_n   ),    
+     .ddr3_dm                  (  ddr3_dm     ),    
+     .ddr3_odt                (  ddr3_odt    ),
 
-     .spim1clk                (  ),
-     .pclk                    ( ),
-
-/////////////////////////////////////
-///           ppu0               ////
-/////////////////////////////////////
-     .c0_testmode_i     ( 1'b0 ),
-     .c0_fetch_enable_i ( 1'b1 ),
-
-     .c0_uart_tx        (  ),
-     .c0_uart_rx        ( ),
-//     .c0_uart_tx        (  ),
-//     .c0_uart_rx        (  ),
-
-     .c0_PIN0_spimclk_scl   ( ),
-     .c0_PIN1_spimcsn_sda   ( ),
-     .c0_PIN2_spimsdo_gpio0 (),
-     .c0_PIN3_spimsdi_gpio1 ( ),
-     .c0_PIN4_pwm0_gpio2    ( ),
-     .c0_PIN5_pwm1_gpio3    ( ),
-     .c0_PIN6_pwm2_gpio4    ( ),
-     .c0_PIN7_pwm3_gpio5    ( ),
-
-/////////////////////////////////////
-///    shared part               ////
-/////////////////////////////////////
-     .select_c0_i       ( 1'b1 ),
-
-    //SPI Slave
-     .spi_clk_i         (  ),
-  .c0_spi_cs_i          (  ),
-     .spi_cs_i          (  ),
-     .spi_sdo0_o        (  ),
-     .spi_sdi0_i        (  ),
+     .init_calib_complete    (   ),
 
      //jtag
-     .tck_i             (  ),
-     .trstn_i           (  ),
-     .tms_i             (  ),
-     .tdi_i             (  ),
-     .tdo_o             (  )
+     .tck_i              (    ),
+     .trstn_i            (    ),
+     .tms_i              (    ),
+     .tdi_i              (    ),
+     .tdo_o              (    ),
+
+///////////////////////////////////////////
+////             PPU0                 ////
+//////////////////////////////////////////
+     .c0_testmode_i     ( 1'b0 ),
+     .c0_fetch_enable_i ( 1'b1 ),
+   //SPI Slave
+     .c0_spi_clk_i      (  ),
+     .c0_spi_cs_i       (  ),
+     .c0_spi_sdo0_o     (  ),
+     .c0_spi_sdo1_o     (  ),
+     .c0_spi_sdo2_o     (  ),
+     .c0_spi_sdo3_o     (  ),
+     .c0_spi_sdi0_i     (  ),
+     .c0_spi_sdi1_i     (  ),
+     .c0_spi_sdi2_i     (  ),
+     .c0_spi_sdi3_i     (  ),
+
+    //SPI Master
+     .c0_spim_clk_o      (  ),
+     .c0_spim_csn0_o     (  ),
+     .c0_spim_csn1_o     (  ),
+     .c0_spim_csn2_o     (  ),
+     .c0_spim_csn3_o     (  ),
+     .c0_spim_sdo0_o     (  ),
+     .c0_spim_sdo1_o     (  ),
+     .c0_spim_sdo2_o     (  ),
+     .c0_spim_sdo3_o     (  ),
+     .c0_spim_sdi0_i     (  ),
+     .c0_spim_sdi1_i     (  ),
+     .c0_spim_sdi2_i     (  ),
+     .c0_spim_sdi3_i     (  ),
+
+     .c0_uart_tx     (  ),
+     .c0_uart_rx     (  ),
+
+     .c0_scl       (  ),
+     .c0_sda       (  ),
+     .c0_gpio      (  ),
+
+     .c0_pwm_o     (  ),
+    //jtag
+     .c0_tck_i     (  ),
+     .c0_trstn_i   (  ),
+     .c0_tms_i     (  ),
+     .c0_tdi_i     (  ),
+     .c0_tdo_o     (  )
    );
+   
 
 endmodule
 

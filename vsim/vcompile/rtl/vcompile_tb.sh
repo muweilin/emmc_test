@@ -48,12 +48,13 @@ vlog -quiet -work ${LIB_PATH}  ${TB_PATH}/glbl.v          || goto error
 vlog -quiet -sv -work ${LIB_PATH} +incdir+${TB_PATH}                                                ${TB_PATH}/pkg_spi.sv          || goto error
 vlog -quiet -sv -work ${LIB_PATH} +incdir+${TB_PATH}                                                ${TB_PATH}/if_spi_slave.sv     || goto error
 vlog -quiet -sv -work ${LIB_PATH} +incdir+${TB_PATH}                                                ${TB_PATH}/if_spi_master.sv    || goto error
-vlog -quiet -sv -work ${LIB_PATH} +incdir+${TB_PATH}                                                ${TB_PATH}/AXI_slave_monitor.sv  || goto error
+#vlog -quiet -sv -work ${LIB_PATH} +incdir+${TB_PATH}                                                ${TB_PATH}/AXI_slave_monitor.sv  || goto error
 vlog -quiet -sv -work ${LIB_PATH} +incdir+${TB_PATH}                                                ${TB_PATH}/uart.sv             || goto error
 vlog -quiet -sv -work ${LIB_PATH} +incdir+${TB_PATH}                                                ${TB_PATH}/i2c_eeprom_model.sv || goto error
 vlog -quiet -sv -work ${LIB_PATH} +incdir+${TB_PATH} +incdir+${RTL_PATH}/includes/                  ${TB_PATH}/tb.sv               || goto error
 vlog -quiet     -work ${LIB_PATH} +incdir+${TB_PATH}                                                ${TB_PATH}/spiflash_s25fs128s.v || goto error
-vlog -quiet -work ${LIB_PATH} +incdir+${TB_PATH}/lpddr/ +define+x16+den1024Mb+FULL_MEM+sg5     ${TB_PATH}/lpddr/mobile_ddr.v   || goto error
+#vlog -quiet -work ${LIB_PATH} +incdir+${TB_PATH}/lpddr/ +define+x16+den1024Mb+FULL_MEM+sg5     ${TB_PATH}/lpddr/mobile_ddr.v   || goto error
+vlog -quiet -sv -work ${LIB_PATH} +incdir+${TB_PATH}/ddr3/ +define+x4Gb+sg125+x16  ${TB_PATH}/ddr3/ddr3_model.sv   || goto error
 
 vlog -quiet -sv -work ${LIB_PATH}     +incdir+${TB_PATH} -dpiheader ${TB_PATH}/jtag_dpi/dpiheader.h ${TB_PATH}/jtag_dpi.sv         || goto error
 vlog -quiet -64 -work ${LIB_PATH} -ccflags "-I${TB_PATH}/jtag_dpi/"                                 ${TB_PATH}/jtag_dpi/jtag_dpi.c || goto error

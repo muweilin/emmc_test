@@ -1,7 +1,7 @@
 
 //=================Camera Stimulus=======
-`define FRAME_WIDTH  4 
-`define FRAME_HEIGHT 4
+`define FRAME_WIDTH  32 
+`define FRAME_HEIGHT 16
 
 module camera_emu
 (

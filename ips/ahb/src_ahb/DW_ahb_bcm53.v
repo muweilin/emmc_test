@@ -20,7 +20,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
-
+`include "DW_amba_constants.v" 
+`include "DW_ahb_cc_constants.v"
+`include "DW_ahb_constants.v"
 
   module DW_ahb_bcm53 (
 	clk,

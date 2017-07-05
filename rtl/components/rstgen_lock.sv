@@ -15,11 +15,10 @@ module rstgen_lock
     input  logic rst_ni,
     
     // PLL LOCKED
-    input lock,
+    input  logic lock,
 
     // TEST MODE
     input  logic test_mode_i,
-    input  logic pll_bps_i,
 
     // OUTPUT RESET
     output logic rst_no
@@ -54,8 +53,6 @@ module rstgen_lock
   always_comb
   begin
     if (test_mode_i == 1'b1)
-      rst_no  = rst_ni;
-    else if (pll_bps_i == 1'b1)
       rst_no  = rst_ni;
     else 
       rst_no  = s_rst_n;

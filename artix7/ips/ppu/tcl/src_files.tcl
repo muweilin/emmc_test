@@ -336,35 +336,6 @@ set INC_EMMC " \
     $IPS/ahb/src_emmc/. \
 "
 
-# ahb_memctl
-set SRC_MCTL " \
-    $IPS/ahb/src_mctl/DW_memctl_params.v \
-    $IPS/ahb/src_mctl/DW_memctl_bcm_params.v \
-    $IPS/ahb/src_mctl/DW_memctl_constants.v \
-    $IPS/ahb/src_mctl/DW_memctl_bcm01.v \
-    $IPS/ahb/src_mctl/DW_memctl_hiu.v \
-    $IPS/ahb/src_mctl/DW_memctl_hiu_afifo.v \
-    $IPS/ahb/src_mctl/DW_memctl_fifo.v \
-    $IPS/ahb/src_mctl/DW_memctl_hiu_acore.v \
-    $IPS/ahb/src_mctl/DW_memctl_hiu_dfifo.v \
-    $IPS/ahb/src_mctl/DW_memctl_hiu_dcore.v \
-    $IPS/ahb/src_mctl/DW_memctl_hiu_ctl.v \
-    $IPS/ahb/src_mctl/DW_memctl_hiu_rbuf.v \
-    $IPS/ahb/src_mctl/DW_memctl_miu_ddrwr.v \
-    $IPS/ahb/src_mctl/DW_memctl_miu_dsdc.v \
-    $IPS/ahb/src_mctl/DW_memctl_miu_addrdec.v \
-    $IPS/ahb/src_mctl/DW_memctl_miu_refctl.v \
-    $IPS/ahb/src_mctl/DW_memctl_miu_cr.v \
-    $IPS/ahb/src_mctl/DW_memctl_miu_dmc.v \
-    $IPS/ahb/src_mctl/DW_memctl_miu.v \
-    $IPS/ahb/src_mctl/DW_memctl.v \
-    $IPS/ahb/src_mctl/DW_memctl_top.v \
-    $IPS/ahb/src_mctl/DW_memctl-undef.v \
-"
-set INC_MCTL " \
-    $IPS/ahb/src_mctl/. \
-"
-
 # axi2ahb
 set SRC_X2H " \
     $IPS/ahb/src_x2h/DW_axi_x2h_cc_constants.v \
@@ -398,9 +369,7 @@ set INC_X2H " \
 set SRC_CORE " \
    $RTL/core/ahb_subsystem.v \
    $RTL/core/periph_bus_wrap.sv \
-   $RTL/core/clk_div2.v \
    $RTL/core/clk_rst_gen.sv \
-   $RTL/core/pll.sv \
    $RTL/core/ppu_top.sv \
    $RTL/core/core_region.sv \
    $RTL/core/instr_ram_wrap.sv \
@@ -408,6 +377,7 @@ set SRC_CORE " \
    $RTL/core/boot_code.sv \
    $RTL/core/boot_rom_wrap.sv \
    $RTL/core/peripherals.sv \
+   $RTL/core/xilinx_ddr3_if_wrap.sv \
 "
 
 # core0
@@ -422,6 +392,7 @@ set SRC_CORE0 " \
    $RTL/core0/boot_code0.sv \
    $RTL/core0/boot_rom_wrap0.sv \
    $RTL/core0/peripherals0.sv \
+   $RTL/core0/clk_div2.v \
 "
 # components
 set SRC_COMPONENTS " \
@@ -467,7 +438,6 @@ add_files -norecurse -scan_for_includes $SRC_AHB
 add_files -norecurse -scan_for_includes $SRC_CAMERA
 add_files -norecurse -scan_for_includes $SRC_AHB_COMMON
 add_files -norecurse -scan_for_includes $SRC_EMMC
-add_files -norecurse -scan_for_includes $SRC_MCTL
 add_files -norecurse -scan_for_includes $SRC_X2H
 add_files -norecurse -scan_for_includes $SRC_ANN
 

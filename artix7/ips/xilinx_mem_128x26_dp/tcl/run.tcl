@@ -20,3 +20,7 @@ create_ip_run [get_files -of_objects [get_fileset sources_1] ./$ip_name.srcs/sou
 launch_run -jobs 8 ${ip_name}_synth_1
 
 wait_on_run ${ip_name}_synth_1
+
+open_run ${ip_name}_synth_1
+
+write_verilog -force -mode funcsim ${ip_name}_funcsim.v

@@ -26,7 +26,6 @@
 `include "DW_amba_constants.v" 
 `include "DW_ahb_cc_constants.v"
 `include "DW_ahb_constants.v"
-
 `define PL1_OFFSET         10'h000
 `define PL2_OFFSET         10'h004
 `define PL3_OFFSET         10'h008

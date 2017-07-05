@@ -1,0 +1,10 @@
+#-----------------------------------------------------------
+# Vivado v2015.2 (64-bit)
+# SW Build 1266856 on Fri Jun 26 16:35:25 MDT 2015
+# IP Build 1264090 on Wed Jun 24 14:22:01 MDT 2015
+# Start of session at: Sun Jul  2 17:22:07 2017
+# Process ID: 16518
+# Log file: /home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/vivado.log
+# Journal file: /home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/vivado.jou
+#-----------------------------------------------------------
+source tcl/run.tcl

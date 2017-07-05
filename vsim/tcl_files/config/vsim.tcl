@@ -8,14 +8,13 @@ set cmd "vsim -quiet $TB \
   -L unimacro_ver \
   -L unifast_ver \
   -L simprims_ver \
+  -L secureip \
   +nowarnTRAN \
   +nowarnTSCALE \
   +nowarnTFMPC \
   +MEMLOAD=$MEMLOAD \
   +RUNMODE=$RUNMODE \
-  -t ps \
-  -voptargs=\"+acc -suppress 2103\" \
-  +bus_conflict_off \
+  -t ps -novopt \
   $VSIM_FLAGS"
 
 eval $cmd

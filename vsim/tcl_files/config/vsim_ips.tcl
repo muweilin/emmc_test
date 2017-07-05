@@ -3,6 +3,7 @@ set VSIM_IP_LIBS " \
   -L axi_slice_dc_lib \
   -L apb_event_unit_lib \
   -L axi_node_lib \
+  -L axi_ddr3_if_lib \
   -L riscv_lib \
   -L apb_pulpino_lib \
   -L axi_mem_if_DP_lib \
@@ -20,9 +21,8 @@ set VSIM_IP_LIBS " \
   -L apb2per_lib \
   -L ahb_ann_lib \
   -L ahb_camera_lib \
-  -L ahb_common_lib \
   -L ahb_emmc_lib \
-  -L ahb_memctl_lib \
   -L ahb_node_lib \
   -L ahb_x2h_lib \
+  -L ahblite_axi_bridge_v3_0_6 \
 "

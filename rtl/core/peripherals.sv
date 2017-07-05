@@ -24,11 +24,6 @@ module peripherals
   )
   (
 
-`ifdef HAPS
-//    output logic [47: 0]   OBS_PIN,
-    input  logic           clk4x_i,
-`endif
-
     // Clock and Reset
     input logic clk_i,
     input logic clk2x_i,
@@ -53,6 +48,7 @@ module peripherals
 
     AXI_BUS.Slave  slave,
     AXI_BUS.Slave  x2h,
+    AXI_BUS.Master h2x,
 
     output logic              uart_tx,
     input  logic              uart_rx,
@@ -135,33 +131,6 @@ module peripherals
 	input  logic              cam_vsync,
 	input  logic              cam_href,
 	input  logic [ 7: 0]      cam_data,
-
-//memctl
-	output logic              memctl_s_scl,
-	output logic [ 2: 0]      memctl_s_sa,
-	//inout logic              s_sda,
-	output logic              memctl_s_sda_out,
-	output logic              memctl_s_sda_oe_n,
-	input  logic              memctl_s_sda_in,
-	output logic              memctl_s_ck_p,
-	output logic              memctl_s_ck_n,
-	output logic              memctl_s_sel_n,
-	output logic              memctl_s_cke,
-	output logic              memctl_s_ras_n,
-	output logic              memctl_s_cas_n,
-	output logic              memctl_s_we_n,
-	output logic [15: 0]      memctl_s_addr,
-	output logic [ 1: 0]      memctl_s_bank_addr,
-	output logic [ 1: 0]      memctl_s_dqm,
-	//inout logic [ 1: 0]      s_dqs,
-	//inout logic [15: 0]      s_dq,
-	output logic [ 1: 0]      memctl_s_dout_oe,
-	output logic [ 1: 0]      memctl_s_dqs_wr,
-	input logic  [ 1: 0]      memctl_s_dqs_rd,
-	output logic [15: 0]      memctl_s_dq_wr,
-	input logic  [15: 0]      memctl_s_dq_rd,
-	output logic              memctl_s_rd_dqs_mask,
-	input  logic              memctl_int_rd_dqs_mask,
 
 //eMMC
 	output logic [ 1: 0]      emmc_cclk_out,
@@ -252,47 +221,15 @@ module peripherals
   /// AXI2AHB Subsystem                                          ///
   ///                                                            ///
   //////////////////////////////////////////////////////////////////
+
   AHB_SUBSYSTEM 
   ahb_subsystem_i 
    (
-
-`ifdef HAPS
-//    .OBS_PIN             (  OBS_PIN                   ),
-    .hclk_4x             (  clk4x_i                   ),
-`endif
-
    //camera
     .pclk                (  cam_pclk                  ),
     .vsync               (  cam_vsync                 ),
     .href                (  cam_href                  ),
     .data                (  cam_data                  ),
-	
-	//memctl
-    .s_scl               (  memctl_s_scl              ),
-    .s_sa                (  memctl_s_sa               ),
-	//.s_sda(),
-    .s_sda_out           (  memctl_s_sda_out          ),
-    .s_sda_oe_n          (  memctl_s_sda_oe_n         ),
-    .s_sda_in            (  memctl_s_sda_in           ),
-    .s_ck_p              (  memctl_s_ck_p             ),
-    .s_ck_n              (  memctl_s_ck_n             ),
-    .s_sel_n	         (  memctl_s_sel_n            ),
-    .s_cke		         (  memctl_s_cke              ),
-    .s_ras_n	         (  memctl_s_ras_n            ),
-    .s_cas_n	         (  memctl_s_cas_n            ),
-    .s_we_n		         (  memctl_s_we_n             ),
-    .s_addr		         (  memctl_s_addr             ),
-    .s_bank_addr	     (  memctl_s_bank_addr        ),
-    .s_dqm		         (  memctl_s_dqm              ),
-	//.s_dqs(),
-	//.s_dq(),
-    .s_dout_oe           (  memctl_s_dout_oe          ),
-    .s_dqs_wr            (  memctl_s_dqs_wr           ),
-    .s_dqs_rd            (  memctl_s_dqs_rd           ),
-    .s_dq_wr             (  memctl_s_dq_wr            ),
-    .s_dq_rd             (  memctl_s_dq_rd            ),
-    .s_rd_dqs_mask       (  memctl_s_rd_dqs_mask      ),
-    .int_rd_dqs_mask     (  memctl_int_rd_dqs_mask    ),
 	
 	//eMMC
     .cclk_out            (  emmc_cclk_out             ),
@@ -324,6 +261,7 @@ module peripherals
 	.hclk_ann            (  clk_int[11]               ),
 	.hresetn             (  rst_n                     ),
 	
+    //AXI Slave
 	//AXI: Write Command Channel
 	.awid	             (  x2h.aw_id                 ),
 	.awaddr	             (  x2h.aw_addr               ),
@@ -368,6 +306,52 @@ module peripherals
     .rlast               (  x2h.r_last                ),
     .rvalid              (  x2h.r_valid               ),
     .rready              (  x2h.r_ready               ),
+
+    //AXI Master
+    //AXI: Write Command Channel
+	.m_awid	             (  h2x.aw_id                 ),
+	.m_awaddr	         (  h2x.aw_addr               ),
+	.m_awlen	         (  h2x.aw_len                ),
+	.m_awsize	         (  h2x.aw_size               ),
+	.m_awburst	         (  h2x.aw_burst              ),
+	.m_awlock	         (  h2x.aw_lock               ),
+    .m_awcache           (  h2x.aw_cache              ),
+    .m_awprot            (  h2x.aw_prot               ),
+    .m_awvalid           (  h2x.aw_valid              ),
+    .m_awready           (  h2x.aw_ready              ),
+	
+	//AXI: Write Data Channel
+    .m_wdata             (  h2x.w_data                ),
+    .m_wstrb             (  h2x.w_strb                ),
+    .m_wlast             (  h2x.w_last                ),
+    .m_wvalid            (  h2x.w_valid               ),
+    .m_wready            (  h2x.w_ready               ),
+	
+	//AXI: Write Response Channel
+    .m_bid               (  h2x.b_id                  ),
+    .m_bresp             (  h2x.b_resp                ),
+    .m_bvalid            (  h2x.b_valid               ),
+    .m_bready            (  h2x.b_ready               ),
+	
+	//AXI: Read Command Channel
+    .m_arid              (  h2x.ar_id                 ),
+    .m_araddr            (  h2x.ar_addr               ),
+    .m_arlen             (  h2x.ar_len                ),
+    .m_arsize            (  h2x.ar_size               ),
+    .m_arburst           (  h2x.ar_burst              ),
+    .m_arlock            (  h2x.ar_lock               ),
+    .m_arcache	         (  h2x.ar_cache              ),
+    .m_arprot            (  h2x.ar_prot               ),
+    .m_arvalid	         (  h2x.ar_valid              ),
+    .m_arready           (  h2x.ar_ready              ),
+	
+	//AXI: Read Response Channel
+    .m_rid               (  h2x.r_id                  ),
+    .m_rdata             (  h2x.r_data                ),
+    .m_rresp             (  h2x.r_resp                ),
+    .m_rlast             (  h2x.r_last                ),
+    .m_rvalid            (  h2x.r_valid               ),
+    .m_rready            (  h2x.r_ready               ),
 	
 	//interrupt
     .ahb_intr            (  ahb_int                   ),

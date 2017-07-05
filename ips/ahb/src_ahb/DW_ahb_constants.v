@@ -66,19 +66,19 @@
 
 
 // Name:         NUM_INT_SLAVES
-// Default:      6 (work.DW_ahb_cc_constants.v.NUM_IAHB_SLAVES+1)
+// Default:      5 (work.DW_ahb_cc_constants.v.NUM_IAHB_SLAVES+1)
 // Values:       2, ..., 31
 // 
 // Internal Master PortCount
-`define NUM_INT_SLAVES 6
+`define NUM_INT_SLAVES 5
 
 
 // Name:         HRESPBUS_WIDTH
-// Default:      12 ((work.DW_ahb_cc_constants.v.NUM_IAHB_SLAVES+1)*2)
+// Default:      10 ((work.DW_ahb_cc_constants.v.NUM_IAHB_SLAVES+1)*2)
 // Values:       2, ..., 62
 // 
 // Internal HTRANS Bus Width
-`define HRESPBUS_WIDTH 12
+`define HRESPBUS_WIDTH 10
 
 
 // Name:         HTRANSBUS_WIDTH
@@ -122,27 +122,27 @@
 
 
 // Name:         HREADY_WIDTH
-// Default:      6 (work.DW_ahb_cc_constants.v.NUM_IAHB_SLAVES+1)
+// Default:      5 (work.DW_ahb_cc_constants.v.NUM_IAHB_SLAVES+1)
 // Values:       1, ..., 32
 // 
 // HWRITE Address Bus Width
-`define HREADY_WIDTH 6
+`define HREADY_WIDTH 5
 
 
 // Name:         INTERNAL_HSEL
-// Default:      7 (work.DW_ahb_cc_constants.v.NUM_IAHB_SLAVES+2)
+// Default:      6 (work.DW_ahb_cc_constants.v.NUM_IAHB_SLAVES+2)
 // Values:       -2147483648, ..., 2147483647
 // 
 // InternalBusWidth
-`define INTERNAL_HSEL 7
+`define INTERNAL_HSEL 6
 
 
 // Name:         SPLITBUS_WIDTH
-// Default:      80 (work.DW_ahb_cc_constants.v.NUM_IAHB_SLAVES*16)
+// Default:      64 (work.DW_ahb_cc_constants.v.NUM_IAHB_SLAVES*16)
 // Values:       -2147483648, ..., 2147483647
 // 
 // HWRITE Address Bus Width
-`define SPLITBUS_WIDTH 80
+`define SPLITBUS_WIDTH 64
 
 
 // Name:         BUS_AHB_CCL_WIDTH

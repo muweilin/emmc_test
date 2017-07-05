@@ -2,47 +2,12 @@
 `include "config.sv"
 
 module AHB_SUBSYSTEM(
-
-`ifdef HAPS
-//    OBS_PIN ,
-    hclk_4x , 
-`endif
-
 	/*****************  pin  ***************/
 	//camera
 	pclk	            ,
 	vsync	            ,
 	href	            ,
 	data	            ,
-	
-	//memctl
-	s_scl	            ,		    
-	s_sa                ,
-	//s_sda		        ,   //双向，注：可以把双向控制器逻辑（目前在DW_memctl_top中）放到IOBuffer。
-	s_sda_out           ,   
-	s_sda_oe_n          ,
-	s_sda_in            ,
-	
-	s_ck_p              ,   //s_ck_p,s_ck_n是差分时钟，来自hclk。注：这两个端口可以不作为AHB_SUBSYSTEM的端口
-	s_ck_n              ,
-	s_sel_n		        ,
-	s_cke			    ,
-	s_ras_n		        ,
-	s_cas_n		        ,
-	s_we_n			    ,
-	s_addr			    ,
-	s_bank_addr	        ,
-	s_dqm			    ,
-	//s_dqs			    ,   //双向，注：可以把双向控制器逻辑（目前在DW_memctl_top中）放到IOBuffer。
-	//s_dq                ,   //双向，注：可以把双向控制器逻辑（目前在DW_memctl_top中）放到IOBuffer。
-	s_dout_oe           ,
-	s_dqs_wr            ,
-	s_dqs_rd            ,
-	s_dq_wr             ,
-	s_dq_rd             ,
-	                
-	s_rd_dqs_mask       ,   //s_rd_dqs_mask和int_rd_dqs_mask用于延时匹配，与Mem读数据采样逻辑实现方式相关
-	int_rd_dqs_mask     ,
 	
 	//eMMC
 	cclk_out		    ,	
@@ -89,6 +54,7 @@ module AHB_SUBSYSTEM(
     hclk_ann            ,
 	hresetn             ,
 	
+    //AXI Slave
 	//AXI: Write Command Channel
 	awid		        ,
 	awaddr		        ,
@@ -134,6 +100,51 @@ module AHB_SUBSYSTEM(
 	rvalid		        ,
 	rready		        ,
 	
+    //AXI Master
+    m_awid		        ,
+    m_awaddr	        ,
+    m_awlen		        ,
+    m_awsize	        ,
+    m_awburst	        ,
+    m_awlock	        ,
+    m_awcache	        ,
+    m_awprot	        ,
+    m_awvalid	        ,
+    m_awready	        ,
+	
+	//AXI: Write Data Channel
+    m_wdata	            ,
+    m_wstrb	            ,
+    m_wlast	            ,
+    m_wvalid	        ,
+    m_wready	        ,
+	
+	//AXI: Write Response Channel
+    m_bid		        ,
+    m_bresp		        ,
+    m_bvalid	        ,
+    m_bready	        ,
+	
+	//AXI: Read Command Channel
+    m_arid		        ,
+    m_araddr	        ,
+    m_arlen		        ,
+    m_arsize	        ,
+    m_arburst	        ,
+    m_arlock	        ,
+    m_arcache	        ,
+    m_arprot	        ,
+    m_arvalid	        ,
+    m_arready	        ,
+	
+	//AXI: Read Response Channel
+    m_rid		        ,
+    m_rdata		        ,
+    m_rresp		        ,
+    m_rlast		        ,
+    m_rvalid  		    ,
+    m_rready	   	    ,
+    
 	//interrupt
 	ahb_intr            ,
 	Camera_intr         ,
@@ -142,46 +153,13 @@ module AHB_SUBSYSTEM(
 	emmc_intr
 );
 
-`ifdef HAPS
-//    output[47: 0]   OBS_PIN ;
-    input           hclk_4x ;
-`endif
-   
+
 	/*****************  pin  ***************/
 	//camera
 	input           pclk	            ;
 	input           vsync	            ;
 	input           href	            ;
 	input [ 7: 0]   data	            ;
-	
-	//memctl
-	output          s_scl	            ;		    
-	output[ 2: 0]   s_sa                ;
-	//inout           s_sda		        ;   //双向，注：可以把双向控制器逻辑（目前在DW_memctl_top中）放到IOBuffer。
-	output          s_sda_out           ;
-	output          s_sda_oe_n          ;
-	input           s_sda_in            ;
-	
-	output          s_ck_p              ;   //s_ck_p,s_ck_n是差分时钟，来自hclk。注：这两个端口可以不作为AHB_SUBSYSTEM的端口
-	output          s_ck_n              ;
-	output          s_sel_n		        ;
-	output          s_cke			    ;
-	output          s_ras_n		        ;
-	output          s_cas_n		        ;
-	output          s_we_n			    ;
-	output[15: 0]   s_addr			    ;
-	output[ 1: 0]   s_bank_addr	        ;
-	output[ 1: 0]   s_dqm			    ;
-	//inout [ 1: 0]   s_dqs			    ;   //双向，注：可以把双向控制器逻辑（目前在DW_memctl_top中）放到IOBuffer。
-	//inout [15: 0]   s_dq                ;   //双向，注：可以把双向控制器逻辑（目前在DW_memctl_top中）放到IOBuffer。
-	output[ 1: 0]   s_dout_oe           ;
-	output[ 1: 0]   s_dqs_wr            ;
-	input [ 1: 0]   s_dqs_rd            ;
-	output[15: 0]   s_dq_wr             ;
-	input [15: 0]   s_dq_rd             ;
-	              
-	output          s_rd_dqs_mask       ;   //s_rd_dqs_mask和int_rd_dqs_mask用于延时匹配，与Mem读数据采样逻辑实现方式相关
-	input           int_rd_dqs_mask     ;
 	
 	//eMMC
 	output[ 1: 0]   cclk_out		    ;	
@@ -201,7 +179,6 @@ module AHB_SUBSYSTEM(
 	output[ 3: 0]   card_volt_a		    ;
 	output[ 3: 0]   card_volt_b		    ;
 	output          ccmd_od_pullup_en_n ;
-	                    
 	                    
 	//SD3.0 Start                    
 	output[ 1: 0]   biu_volt_reg        ;        
@@ -227,7 +204,8 @@ module AHB_SUBSYSTEM(
 	input           hclk_cam            ;
 	input           hclk_ann            ;
 	input           hresetn             ;
-	
+
+    // ========  AXI Slave	======== //
 	//AXI: Write Command Channel
 	input [15: 0]   awid		        ;
 	input [31: 0]   awaddr		        ;
@@ -273,6 +251,52 @@ module AHB_SUBSYSTEM(
 	output          rvalid		        ;
 	input           rready		        ;
 	
+    // ======== AXI master ======== //
+	//AXI: Write Command Channel
+	output [15: 0]   m_awid		        ;
+	output [31: 0]   m_awaddr	        ;
+	output [ 7: 0]   m_awlen		    ;
+	output [ 2: 0]   m_awsize	        ;
+	output [ 1: 0]   m_awburst	        ;
+	output           m_awlock	        ;
+	output [ 3: 0]   m_awcache	        ;
+	output [ 2: 0]   m_awprot	        ;
+	output           m_awvalid	        ;
+	input            m_awready	        ;
+	
+	//AXI: Write Data Channel
+	output [31: 0]   m_wdata	        ;
+	output [ 3: 0]   m_wstrb	        ;
+	output           m_wlast	        ;
+	output           m_wvalid	        ;
+	input            m_wready	        ;
+	
+	//AXI: Write Response Channel
+	input[15: 0]     m_bid		        ;
+	input[ 1: 0]     m_bresp		    ;
+	input            m_bvalid	        ;
+	output           m_bready	        ;
+	
+	//AXI: Read Command Channel
+	output [15: 0]   m_arid		        ;
+	output [31: 0]   m_araddr	        ;
+	output [ 7: 0]   m_arlen		    ;
+	output [ 2: 0]   m_arsize	        ;
+	output [ 1: 0]   m_arburst	        ;
+	output           m_arlock	        ;
+	output [ 3: 0]   m_arcache	        ;
+	output [ 2: 0]   m_arprot	        ;
+	output           m_arvalid	        ;
+	input            m_arready	        ;
+	
+	//AXI: Read Response Channel
+	input[15: 0]   m_rid		        ;
+	input[31: 0]   m_rdata		        ;
+	input[ 1: 0]   m_rresp		        ;
+	input          m_rlast		        ;
+	input          m_rvalid  		    ;
+	output         m_rready	    	    ;
+
 	//interrupt
 	output          ahb_intr            ;
 	output          Camera_intr         ;
@@ -334,9 +358,12 @@ module AHB_SUBSYSTEM(
     wire                hsel_s1         ;
     wire                hready_resp_s1  ;
     wire[ 1: 0]         hresp_s1        ;
-    wire[31: 0]         hrdata_s1       ;
-    
+    wire[31: 0]         hrdata_s1       ;  
+
     wire                hsel_s2         ;
+    wire                hready_resp_s2  ;
+    wire[ 1: 0]         hresp_s2        ;
+    wire[31: 0]         hrdata_s2       ;  
     
     wire                hsel_s3         ;
     wire                hready_resp_s3  ;
@@ -347,11 +374,7 @@ module AHB_SUBSYSTEM(
     wire                hready_resp_s4  ;
     wire[ 1: 0]         hresp_s4        ;
     wire[31: 0]         hrdata_s4       ;
-    
-    wire                hsel_s5         ;
-    wire                hready_resp_s5  ;
-    wire[ 1: 0]         hresp_s5        ;
-    wire[31: 0]         hrdata_s5       ;
+
     
     wire[31: 0]         haddr           ;
     wire[ 2: 0]         hburst          ;
@@ -369,7 +392,6 @@ module AHB_SUBSYSTEM(
     wire[ 3: 0]         hmaster_data    ;
     wire                hmastlock       ;
     
-    
 	/*=======================================================*/
 	/*======================= AHB BUS =======================*/
 	/*=======================================================*/
@@ -377,16 +399,15 @@ module AHB_SUBSYSTEM(
     //Master2: eMMC
     //Master3: AXI2AHB
     //Master4: Camera
-    
-    //Slave1 : Memctrl Memory
-    //Slave2 : Memctrl Register
-    //Slave3 : Camera
-    //Slave4 : ANN
-    //Slave5 : eMMC
-	DW_ahb  DW_ahb(
+
+    //Slave1 : Camera
+    //Slave2 : ANN
+    //Slave3 : eMMC
+    //Slave4 : AHBLite2AXI
+DW_ahb DW_ahb (
   		.hclk				(hclk           ),
         .hresetn			(hresetn        ),
-        	
+
         .haddr_m1			(haddr_m1	    ),
         .hburst_m1			(hburst_m1	    ),
         .hbusreq_m1			(hbusreq_m1	    ),
@@ -430,36 +451,33 @@ module AHB_SUBSYSTEM(
         .hwdata_m4			(hwdata_m4		),
         .hwrite_m4			(hwrite_m4		),
         .hgrant_m4			(hgrant_m4		),
-		
+
 		//how to connect? float?             	               	
         .hsel_s0			(hsel_s0		),	//output: When asserted, indicates that the arbiter slave has been selected.
         .hready_resp_s0		(hready_resp_s0	),	//output: Response from Arbiter Slave interface.
         .hresp_s0			(hresp_s0		),	//output: Transfer response from Arbiter Slave interface
         .hrdata_s0			(hrdata_s0		),	//output: Readback data from Arbiter Slave interface.
-        
+
         .hsel_s1			(hsel_s1		),
         .hready_resp_s1		(hready_resp_s1	),
         .hresp_s1			(hresp_s1		),
         .hrdata_s1			(hrdata_s1		),
         	
-        //Note: Slave2 Alias with Slave1               	
-        .hsel_s2			(hsel_s2        ),
-        
+        .hsel_s2			(hsel_s2		),
+        .hready_resp_s2		(hready_resp_s2	),
+        .hresp_s2			(hresp_s2		),
+        .hrdata_s2			(hrdata_s2		),
+        	
         .hsel_s3			(hsel_s3		),
         .hready_resp_s3		(hready_resp_s3	),
         .hresp_s3			(hresp_s3		),
         .hrdata_s3			(hrdata_s3		),
-        	
+
         .hsel_s4			(hsel_s4		),
         .hready_resp_s4		(hready_resp_s4	),
         .hresp_s4			(hresp_s4		),
         .hrdata_s4			(hrdata_s4		),
-        	
-        .hsel_s5			(hsel_s5		),
-        .hready_resp_s5		(hready_resp_s5	),
-        .hresp_s5			(hresp_s5		),
-        .hrdata_s5			(hrdata_s5		),
-        
+
         .haddr				(haddr		    ),	//This is passed to all AHB slaves.
         .hburst				(hburst		    ),	//This is passed to all AHB slaves.
         .hprot				(hprot		    ),	//This is passed to all AHB slaves.
@@ -477,7 +495,8 @@ module AHB_SUBSYSTEM(
         .hmaster_data		(hmaster_data	),	//Output: Indicates which master currently has ownership of the data bus.
         
         .ahbarbint			(ahb_intr       )	//The arbiter will flag an interrupt when an Early Burst Termination occurs.
-        );
+     );
+
 
 	/*=======================================================*/
 	/*======================= AXI2AHB =======================*/
@@ -493,7 +512,7 @@ module AHB_SUBSYSTEM(
 	 	
 	 	//=================AXI Slave==================//
 	 	//Write Command Channel
-	 	.awid				(awid[3:0]	    ),
+	 	.awid				(awid	    ),
 	 	.awaddr				(awaddr		    ), 
 	 	.awlen				(awlen		    ), 
 	 	.awsize				(awsize		    ),
@@ -513,13 +532,13 @@ module AHB_SUBSYSTEM(
         .wready				(wready		    ),
                    	
         //Write Response Channel
-        .bid				(bid[3:0]	    ),
+        .bid				(bid	    ),
         .bresp				(bresp		    ),  
         .bvalid				(bvalid		    ), 
         .bready				(bready		    ),  
 	 	
 	 	//Read Command Channel
-	 	.arid				(arid[3:0]	    ),
+	 	.arid				(arid	    ),
 	 	.araddr				(araddr		    ), 
         .arlen				(arlen		    ),
         .arsize				(arsize		    ), 
@@ -531,7 +550,7 @@ module AHB_SUBSYSTEM(
 	 	.arready			(arready	    ),
 	 	
 	 	//Read Response Channel
-	 	.rid				(rid[3:0]	    ), 
+	 	.rid				(rid	    ), 
 	 	.rdata				(rdata		    ), 
 	 	.rresp				(rresp		    ),
 	 	.rlast				(rlast		    ),
@@ -561,7 +580,7 @@ module AHB_SUBSYSTEM(
 	/*=====================   Camera   =====================*/
 	/*======================================================*/
 	
-	//Master4;Slave3
+	//Master4; Slave1
 	CAMERA_Bridge   CAMERA_Bridge(
 	    /***** pin *****/
 	    .pclk			(pclk	        ),
@@ -592,7 +611,7 @@ module AHB_SUBSYSTEM(
 	    .mHRDATA     	(hrdata         ),
 	    	            
 	    //Slave
-	    .sHSEL			(hsel_s3        ),
+	    .sHSEL			(hsel_s2        ),
 	    .sHWrite        (hwrite         ),
 	    .sHTRANS        (htrans         ),
 	    .sHSIZE         (hsize          ),
@@ -600,83 +619,20 @@ module AHB_SUBSYSTEM(
 	    .sHADDR         (haddr          ),
 	    .sHWDATA        (hwdata         ),
 	    .sHREADY        (hready         ),
-	    .sHREADY_RESP   (hready_resp_s3 ),	
-	    .sHRESP         (hresp_s3       ),
-	    .sHRDATA        (hrdata_s3      ),
+	    .sHREADY_RESP   (hready_resp_s2 ),	
+	    .sHRESP         (hresp_s2       ),
+	    .sHRDATA        (hrdata_s2      ),
         
 	    /**** interrupt ****/
 	    .Interrupt       (Camera_intr    )
         );
 	
-	
-	/*======================================================*/
-	/*==================== SDRAM MemCtl ====================*/
-	/*======================================================*/
-	
-	//memory Slave1; Register Slave2
-
-	DW_memctl_top	DW_memctl_top(
-
-`ifdef HAPS
-//        .OBS_PIN                (OBS_PIN        ),
-        .hclk_4x                (hclk_4x        ),
-`endif
-
-		//AHB interface
-		.hclk					(hclk           ), 
-       	.hclk_2x				(hclk_2x        ),  //ueed for DDR only
-        .hresetn				(hresetn        ), 	
-		                		
-		.hsel_mem				(hsel_s1        ), 
-        .hsel_reg				(hsel_s2        ),         
-        .hwrite					(hwrite         ), 
-        .htrans					(htrans         ),
-        .hsize					(hsize          ), 
-        .hburst					(hburst         ),
-        .hwdata					(hwdata         ),
-        .haddr					(haddr          ),          
-        .hready					(hready         ),
-        .hready_resp			(hready_resp_s1 ), 
-        .hresp					(hresp_s1       ), 
-        .hrdata					(hrdata_s1      ), 
-        
-        //SPD pin
-        .s_scl					(s_scl			),
-        .s_sa					(s_sa			),
-        //.s_sda                  (s_sda          ),
-        .s_sda_out              (s_sda_out      ),
-        .s_sda_oe_n             (s_sda_oe_n     ),
-        .s_sda_in               (s_sda_in       ),
-        
-		//SDRAM pin
-		.s_sel_n				(s_sel_n		), 
-		.s_cke					(s_cke			), 
-		.s_ras_n				(s_ras_n		), 
-        .s_cas_n				(s_cas_n		),
-        .s_we_n					(s_we_n			),
-        .s_addr					(s_addr			),
-        .s_bank_addr			(s_bank_addr	),
-        .s_dqm					(s_dqm			), 
-        //.s_dqs					(s_dqs			),
-        //.s_dq                   (s_dq           ),
-        .s_dout_valid           (s_dout_oe      ),
-        .s_dqs_wr               (s_dqs_wr       ),
-        .s_dqs_rd               (s_dqs_rd       ),
-        .s_data_wr              (s_dq_wr        ),
-        .s_data_rd              (s_dq_rd        ),
-        
-        .s_rd_dqs_mask			(s_rd_dqs_mask  ), 
-        .int_s_rd_dqs_mask      (int_rd_dqs_mask)
-        ); 
-    
-    assign  s_ck_p = hclk ;
-    assign  s_ck_n =~hclk ;
-            
+         
     /*======================================================*/
 	/*====================      ANN     ====================*/
 	/*======================================================*/
 	   
-	//Master1; Slave4
+	//Master1; Slave2
     ahb_ann ahb_ann(
         //global
         .hclk                   (hclk_ann       ),
@@ -700,7 +656,7 @@ module AHB_SUBSYSTEM(
         .ahbm_hrdata            (hrdata         ),
                                                 
         //ahb-slave                             
-        .ahbs_hsel              (hsel_s4        ),
+        .ahbs_hsel              (hsel_s3        ),
         .ahbs_hready_in         (hready         ),
         .ahbs_haddr             (haddr          ),
         .ahbs_htrans             (htrans         ),
@@ -709,9 +665,9 @@ module AHB_SUBSYSTEM(
         .ahbs_hburst            (hburst         ),
         .ahbs_hwdata            (hwdata         ),
                                 
-        .ahbs_hready_out        (hready_resp_s4 ),
-        .ahbs_hresp             (hresp_s4       ),
-        .ahbs_hrdata            (hrdata_s4      ),
+        .ahbs_hready_out        (hready_resp_s3 ),
+        .ahbs_hresp             (hresp_s3       ),
+        .ahbs_hrdata            (hrdata_s3      ),
                                 
         //interrupt
 //        .err_int                (ann_err_int    ),             
@@ -724,7 +680,7 @@ module AHB_SUBSYSTEM(
 	/*=====================eMMC & SDIO =====================*/
 	/*======================================================*/
 
-	//Master2;Slave5
+	//Master2;Slave3
 	DWC_mobile_storage_top	DWC_mobile_storage_top(
   		// CLOCKS and RESET
   		.clk_2x                 (hclk_2x            ),  		
@@ -732,7 +688,7 @@ module AHB_SUBSYSTEM(
         .reset_n			    (hresetn            ),
                                                     
         // AHB Slave                                
-        .hsel				    (hsel_s5            ), 
+        .hsel				    (hsel_s4            ), 
        	.hready				    (hready             ),
        	.haddr				    (haddr              ),
         .hwrite				    (hwrite             ),
@@ -741,9 +697,9 @@ module AHB_SUBSYSTEM(
         .hburst				    (hburst             ),
         .hwdata				    (hwdata             ), 
                                                     
-        .hready_resp		    (hready_resp_s5     ),
-        .hresp				    (hresp_s5           ),
-        .hrdata				    (hrdata_s5          ), 
+        .hready_resp		    (hready_resp_s4     ),
+        .hresp				    (hresp_s4           ),
+        .hrdata				    (hrdata_s4          ), 
                                                     
         // AHB Master                               
         .m_hreq				    (hbusreq_m2         ), 
@@ -804,4 +760,71 @@ module AHB_SUBSYSTEM(
     assign hlock_m2 = 1'b0;
 	assign hprot_m2 = 4'h1;
 	
+	/*======================================================*/
+	/*=================AHBLite2AXI Bridge ==================*/
+	/*======================================================*/
+
+	//Slave4
+    h2x_bridge xlnx_ahblite2axi (
+
+      //=================AHB slave==================//
+      .s_ahb_hclk          (hclk           ),              // input wire s_ahb_hclk
+      .s_ahb_hresetn       (hresetn        ),        // input wire s_ahb_hresetn
+      .s_ahb_hsel          (hsel_s1        ),              // input wire s_ahb_hsel
+      .s_ahb_haddr         (haddr          ),            // input wire [31 : 0] s_ahb_haddr
+      .s_ahb_hprot         (hprot          ),            // input wire [3 : 0] s_ahb_hprot
+      .s_ahb_htrans        (htrans         ),          // input wire [1 : 0] s_ahb_htrans
+      .s_ahb_hsize         (hsize          ),            // input wire [2 : 0] s_ahb_hsize
+      .s_ahb_hwrite        (hwrite         ),          // input wire s_ahb_hwrite
+      .s_ahb_hburst        (hburst         ),          // input wire [2 : 0] s_ahb_hburst
+      .s_ahb_hwdata        (hwdata         ),          // input wire [31 : 0] s_ahb_hwdata
+      .s_ahb_hready_out    (hready_resp_s1 ),  // output wire s_ahb_hready_out
+      .s_ahb_hready_in     (hready	       ),    // input wire s_ahb_hready_in
+      .s_ahb_hrdata        (hrdata_s1      ),          // output wire [31 : 0] s_ahb_hrdata
+      .s_ahb_hresp         (hresp_s1[0]       ),            // output wire s_ahb_hresp
+
+      //=================AXI Master==================//
+       //AXI: Write Command Channel
+      .m_axi_awid          (m_awid         ),              // output wire [7 : 0] m_axi_awid
+      .m_axi_awlen         (m_awlen        ),            // output wire [7 : 0] m_axi_awlen
+      .m_axi_awsize        (m_awsize       ),          // output wire [2 : 0] m_axi_awsize
+      .m_axi_awburst       (m_awburst      ),        // output wire [1 : 0] m_axi_awburst
+      .m_axi_awcache       (m_awcache      ),        // output wire [3 : 0] m_axi_awcache
+      .m_axi_awaddr        (m_awaddr       ),          // output wire [31 : 0] m_axi_awaddr
+      .m_axi_awprot        (m_awprot       ),          // output wire [2 : 0] m_axi_awprot
+      .m_axi_awvalid       (m_awvalid      ),        // output wire m_axi_awvalid
+      .m_axi_awready       (m_awready      ),        // input wire m_axi_awready
+      .m_axi_awlock        (m_awlock       ),          // output wire m_axi_awlock
+      //AXI: Write Data Channel
+      .m_axi_wdata         (m_wdata        ),            // output wire [31 : 0] m_axi_wdata
+      .m_axi_wstrb         (m_wstrb        ),            // output wire [3 : 0] m_axi_wstrb
+      .m_axi_wlast         (m_wlast        ),            // output wire m_axi_wlast
+      .m_axi_wvalid        (m_wvalid       ),          // output wire m_axi_wvalid
+      .m_axi_wready        (m_wready       ),          // input wire m_axi_wready
+      //AXI: Write Response Channel
+      .m_axi_bid           (m_bid          ),                // input wire [7 : 0] m_axi_bid
+      .m_axi_bresp         (m_bresp        ),            // input wire [1 : 0] m_axi_bresp
+      .m_axi_bvalid        (m_bvalid       ),          // input wire m_axi_bvalid
+      .m_axi_bready        (m_bready       ),          // output wire m_axi_bready
+      //AXI: Read Command Channel
+      .m_axi_arid          (m_arid         ),              // output wire [7 : 0] m_axi_arid
+      .m_axi_arlen         (m_arlen        ),            // output wire [7 : 0] m_axi_arlen
+      .m_axi_arsize        (m_arsize       ),          // output wire [2 : 0] m_axi_arsize
+      .m_axi_arburst       (m_arburst      ),        // output wire [1 : 0] m_axi_arburst
+      .m_axi_arprot        (m_arprot       ),          // output wire [2 : 0] m_axi_arprot
+      .m_axi_arcache       (m_arcache      ),        // output wire [3 : 0] m_axi_arcache
+      .m_axi_arvalid       (m_arvalid      ),        // output wire m_axi_arvalid
+      .m_axi_araddr        (m_araddr       ),          // output wire [31 : 0] m_axi_araddr
+      .m_axi_arlock        (m_arlock       ),          // output wire m_axi_arlock
+      .m_axi_arready       (m_arready      ),        // input wire m_axi_arready
+      //AXI: Read Response Channel
+      .m_axi_rid           (m_rid          ),                // input wire [7 : 0] m_axi_rid
+      .m_axi_rdata         (m_rdata        ),            // input wire [31 : 0] m_axi_rdata
+      .m_axi_rresp         (m_rresp        ),            // input wire [1 : 0] m_axi_rresp
+      .m_axi_rvalid        (m_rvalid       ),          // input wire m_axi_rvalid
+      .m_axi_rlast         (m_rlast        ),            // input wire m_axi_rlast
+      .m_axi_rready        (m_rready       )          // output wire m_axi_rready
+    );
+
 endmodule
+ 

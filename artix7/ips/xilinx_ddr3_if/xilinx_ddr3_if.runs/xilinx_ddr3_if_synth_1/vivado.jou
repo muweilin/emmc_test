@@ -1,0 +1,10 @@
+#-----------------------------------------------------------
+# Vivado v2015.2 (64-bit)
+# SW Build 1266856 on Fri Jun 26 16:35:25 MDT 2015
+# IP Build 1264090 on Wed Jun 24 14:22:01 MDT 2015
+# Start of session at: Wed Jul  5 09:16:40 2017
+# Process ID: 16436
+# Log file: /home/hetingting/artix7-board_boot_only/artix7/ips/xilinx_ddr3_if/xilinx_ddr3_if.runs/xilinx_ddr3_if_synth_1/xilinx_ddr3_if.vds
+# Journal file: /home/hetingting/artix7-board_boot_only/artix7/ips/xilinx_ddr3_if/xilinx_ddr3_if.runs/xilinx_ddr3_if_synth_1/vivado.jou
+#-----------------------------------------------------------
+source xilinx_ddr3_if.tcl -notrace

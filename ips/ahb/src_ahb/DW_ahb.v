@@ -35,6 +35,7 @@
 module DW_ahb (
   hclk,
                hresetn,
+               pause,
                haddr_m1,
                hburst_m1,
                hbusreq_m1,
@@ -84,6 +85,9 @@ module DW_ahb (
                hresp_s1,
                hrdata_s1,
                hsel_s2,
+               hready_resp_s2,
+               hresp_s2,
+               hrdata_s2,
                hsel_s3,
                hready_resp_s3,
                hresp_s3,
@@ -92,10 +96,6 @@ module DW_ahb (
                hready_resp_s4,
                hresp_s4,
                hrdata_s4,
-               hsel_s5,
-               hready_resp_s5,
-               hresp_s5,
-               hrdata_s5,
                haddr,
                hburst,
                hprot,
@@ -124,18 +124,19 @@ module DW_ahb (
   parameter big_endian = 0;
 
   // memory map parameters
-  parameter r1_n_sa_1 = 32'h20010000;
-  parameter r1_n_ea_1 = 32'h21ffffff;
-  parameter r1_n_sa_2 = 32'h28000000;
-  parameter r1_n_ea_2 = 32'h28000fff;
+  parameter r1_n_sa_1 = 32'h30010000;
+  parameter r1_n_ea_1 = 32'h6fffffff;
+  parameter r1_n_sa_2 = 32'h28001000;
+  parameter r1_n_ea_2 = 32'h28001fff;
 
   // derived parameters
   parameter addrbus_width = 160;
   parameter databus_width = 160;
-  parameter hrdatabus_width = 192;
+  parameter hrdatabus_width = 160;
 
   input                          hclk;
   input                          hresetn;
+  input                          pause;
 
 // Master #1 AHB signals
   input [haddr_width-1:0]        haddr_m1;
@@ -197,6 +198,9 @@ module DW_ahb (
   output                         hsel_s1;
 
 // Slave #2 AHB signals
+  input                          hready_resp_s2;
+  input [`HRESP_WIDTH-1:0]       hresp_s2;
+  input [ahb_data_width-1:0]     hrdata_s2;
   output                         hsel_s2;
 
 // Slave #3 AHB signals
@@ -210,12 +214,6 @@ module DW_ahb (
   input [`HRESP_WIDTH-1:0]       hresp_s4;
   input [ahb_data_width-1:0]     hrdata_s4;
   output                         hsel_s4;
-
-// Slave #5 AHB signals
-  input                          hready_resp_s5;
-  input [`HRESP_WIDTH-1:0]       hresp_s5;
-  input [ahb_data_width-1:0]     hrdata_s5;
-  output                         hsel_s5;
   output [haddr_width-1:0]      haddr;
   output [`HBURST_WIDTH-1:0]     hburst;
   output [`HPROT_WIDTH-1:0]      hprot;
@@ -376,9 +374,9 @@ module DW_ahb (
   assign bus_hresp[3:2] = hresp_s1;
   assign bus_hrdata[(ahb_data_width*2)-1:ahb_data_width*1] = hrdata_s1;
 
-  assign bus_hready[2] = hready_resp_s1;
-  assign bus_hresp[5:4] = hresp_s1;
-  assign bus_hrdata[(ahb_data_width*3)-1:(ahb_data_width*2)] = hrdata_s1;
+  assign bus_hready[2] = hready_resp_s2;
+  assign bus_hresp[5:4] = hresp_s2;
+  assign bus_hrdata[(ahb_data_width*3)-1:ahb_data_width*2] = hrdata_s2;
 
   assign bus_hready[3] = hready_resp_s3;
   assign bus_hresp[7:6] = hresp_s3;
@@ -388,24 +386,18 @@ module DW_ahb (
   assign bus_hresp[9:8] = hresp_s4;
   assign bus_hrdata[(ahb_data_width*5)-1:ahb_data_width*4] = hrdata_s4;
 
-  assign bus_hready[5] = hready_resp_s5;
-  assign bus_hresp[11:10] = hresp_s5;
-  assign bus_hrdata[(ahb_data_width*6)-1:ahb_data_width*5] = hrdata_s5;
-
   assign hsel_none = hsel[`NUM_IAHB_SLAVES+1];
   assign hsel_s0 = hsel[0];
   assign hsel_s1 = hsel[1];
   assign hsel_s2 = hsel[2];
   assign hsel_s3 = hsel[3];
   assign hsel_s4 = hsel[4];
-  assign hsel_s5 = hsel[5];
   assign bus_hsel = hsel[`NUM_IAHB_SLAVES:0];
 
   assign bus_hsplit[15:0] = {`HSPLIT_WIDTH{1'b0}};
   assign bus_hsplit[31:16] = {`HSPLIT_WIDTH{1'b0}};
   assign bus_hsplit[47:32] = {`HSPLIT_WIDTH{1'b0}};
   assign bus_hsplit[63:48] = {`HSPLIT_WIDTH{1'b0}};
-  assign bus_hsplit[79:64] = {`HSPLIT_WIDTH{1'b0}};
 
 
 // end of generated "assign" statements

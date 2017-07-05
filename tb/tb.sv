@@ -1,43 +1,29 @@
 `include "config.sv"
 `include "tb_jtag_pkg.sv"
-`include "wiredelay.v"
+`include "ddr3_sim_parameters.vh"
+`include "wiredly.v"
 `include "tb_camera_pkg.sv"
-`include "pin_map.sv"
 
-`ifndef HAPS
- `define CLK_PERIOD  40.00ns // 25 MHz: input for SN55PLL. PLL will generate 200MHz
-// `define CLK_PERIOD  5ns // Bypass PLL. 200 MHz from board to soc
-`else
- `define CLK_PERIOD  10.00ns // 100 MHz: input for Xilinx MMCL.
-`endif
+`define CLK_PERIOD  5.00ns // 200 MHz: input for Xilinx MIG/MMCL.
 
- `define CAM_CLK_PERIOD  40.00ns // 25 MHz camera clock
+`define CAM_CLK_PERIOD  40.00ns // 25 MHz camera clock
 
-`ifndef HAPS
- `define BAUDRATE      250000
-// `define BAUDRATE      125000
 
-`else
-  `ifdef CORE_50M
-    `define BAUDRATE   62500
-  `endif
-  `ifdef CORE_25M
-    `define BAUDRATE   31250
-  `endif
-`endif
+//`define BAUDRATE   93750  //ppu  83.333Mhz
+//`define BAUDRATE   62500  //ppu0 50MHz
+`define BAUDRATE   62500  //ppu 100MHz
 
 `define EXIT_SUCCESS  0
 `define EXIT_FAIL     1
 `define EXIT_ERROR   -1
-//`define SPILOOP
 
 
 module tb;
   timeunit      1ns;
   timeprecision 1ps;
 
-  // +MEMLOAD= valid values are "SPI", "PRELOAD", "" (no load of L2)
-  // +RUNMODE= valid values are "STANDALONE", "DEPENDENT"
+// +MEMLOAD= valid values are "SPI", "PRELOAD", "" (no load of L2)
+// +RUNMODE= valid values are "STANDALONE", "DEPENDENT"
 //  parameter  SPI           = "QUAD";    // valid values are "SINGLE", "QUAD"
   parameter  SPI           = "SINGLE";    // valid values are "SINGLE", "QUAD"
   parameter  TEST          = ""; //valid values are "" (NONE), "DEBUG"
@@ -46,6 +32,8 @@ module tb;
 
   string        memload;
   string        runmode;
+
+logic [31:0]          ddr_datarb;
 
   logic         s_clk   = 1'b0;
   logic         s_rst_n = 1'b0;
@@ -69,15 +57,9 @@ module tb;
 
   logic         uart1_tx;
   logic         uart1_rx;
-  logic         s_uart1_dtr;
-  logic         s_uart1_rts;
 
   tri1          scl_io;
   tri1          sda_io;
-
-  logic [31:0]  gpio_in = '0;
-  logic [31:0]  gpio_dir;
-  logic [31:0]  gpio_out;
 
   logic [31:0]  recv_data;
 
@@ -86,133 +68,273 @@ module tb;
   logic         cam_href;
   logic [7:0]   cam_data;
 
-  logic        s_ck_p_sdram;
-  logic        s_ck_p_soc;
-
-  logic        s_ck_n_sdram;
-  logic        s_ck_n_soc;
-
-  logic        s_cke_sdram;
-  logic        s_cke_soc;
-
-  logic [1:0]  s_dqm_sdram;
-  logic [1:0]  s_dqm_soc;            
-
-  logic        s_sel_n_sdram;
-  logic        s_sel_n_soc;    
-
-  logic        s_ras_n_sdram;
-  logic        s_ras_n_soc;  
-
-  logic        s_cas_n_sdram;
-  logic        s_cas_n_soc;
-
-  logic        s_we_n_sdram;
-  logic        s_we_n_soc;      
-
-  logic [15:0] s_addr_sdram;
-  logic [15:0] s_addr_soc; 
-
-  logic  [1:0] s_bank_addr_sdram;
-  logic  [1:0] s_bank_addr_soc; 
-
-//  tri0   [1:0] s_dqs_sdram;
-//  tri0   [1:0] s_dqs_soc;
-
-//  tri0  [15:0] s_dq_sdram;
-//  tri0  [15:0] s_dq_soc;
-
-  wire   [1:0] s_dqs_sdram;
-  wire   [1:0] s_dqs_soc;
-
-  wire  [15:0] s_dq_sdram;
-  wire  [15:0] s_dq_soc;
-
-  logic        int_rd_dqs_mask_soc;
-  logic        s_rd_dqs_mask_soc;
-
   logic [3:0]   pwm;
 
-  wire         pin0;
-  wire         pin1;
-  wire         pin2;
-  wire         pin3;
-  wire         pin4;
-  wire         pin5;
-  wire         pin6;
-  wire         pin7;
-  wire         pin8;
-  wire         pin9;
-  wire         pin10;
-  wire         pin11;
-  wire         pin12;
-  wire         pin13;
+  wire  [31:0]  gpio;
+  
 
-//  integer i_mem_addr;
+  //**************************************************************************//
+  // Memory Models instantiations: Adopted from Xilinx MIG
+  //**************************************************************************//
+
+  wire                      ddr3_reset_n;
+  wire [DQ_WIDTH-1:0]       ddr3_dq_fpga;
+  wire [DQS_WIDTH-1:0]      ddr3_dqs_p_fpga;
+  wire [DQS_WIDTH-1:0]      ddr3_dqs_n_fpga;
+  wire [ROW_WIDTH-1:0]      ddr3_addr_fpga;
+  wire [3-1:0]              ddr3_ba_fpga;
+  wire                      ddr3_ras_n_fpga;
+  wire                      ddr3_cas_n_fpga;
+  wire                      ddr3_we_n_fpga;
+  wire [1-1:0]              ddr3_cke_fpga;
+  wire [1-1:0]              ddr3_ck_p_fpga;
+  wire [1-1:0]              ddr3_ck_n_fpga;
+  wire [(CS_WIDTH*1)-1:0]   ddr3_cs_n_fpga;    
+  wire [DM_WIDTH-1:0]       ddr3_dm_fpga;
+  wire [ODT_WIDTH-1:0]      ddr3_odt_fpga;
+  
+  wire                      init_calib_complete;
+
+  reg [(CS_WIDTH*1)-1:0]    ddr3_cs_n_sdram_tmp;
+  reg [DM_WIDTH-1:0]        ddr3_dm_sdram_tmp;
+  reg [ODT_WIDTH-1:0]       ddr3_odt_sdram_tmp;
+    
+  wire [DQ_WIDTH-1:0]       ddr3_dq_sdram;
+  reg [ROW_WIDTH-1:0]       ddr3_addr_sdram [0:1];
+  reg [3-1:0]               ddr3_ba_sdram [0:1];
+  reg                       ddr3_ras_n_sdram;
+  reg                       ddr3_cas_n_sdram;
+  reg                       ddr3_we_n_sdram;
+  wire [(CS_WIDTH*1)-1:0]   ddr3_cs_n_sdram;
+  wire [ODT_WIDTH-1:0]      ddr3_odt_sdram;
+  reg [1-1:0]               ddr3_cke_sdram;
+  wire [DM_WIDTH-1:0]       ddr3_dm_sdram;
+  wire [DQS_WIDTH-1:0]      ddr3_dqs_p_sdram;
+  wire [DQS_WIDTH-1:0]      ddr3_dqs_n_sdram;
+  reg [1-1:0]               ddr3_ck_p_sdram;
+  reg [1-1:0]               ddr3_ck_n_sdram;
+
+
+  // Wire Delay
+  always @( * ) begin
+    ddr3_ck_p_sdram      <=  #(TPROP_PCB_CTRL) ddr3_ck_p_fpga;
+    ddr3_ck_n_sdram      <=  #(TPROP_PCB_CTRL) ddr3_ck_n_fpga;
+    ddr3_addr_sdram[0]   <=  #(TPROP_PCB_CTRL) ddr3_addr_fpga;
+    ddr3_addr_sdram[1]   <=  #(TPROP_PCB_CTRL) (CA_MIRROR == "ON") ?
+                                                 {ddr3_addr_fpga[ROW_WIDTH-1:9],
+                                                  ddr3_addr_fpga[7], ddr3_addr_fpga[8],
+                                                  ddr3_addr_fpga[5], ddr3_addr_fpga[6],
+                                                  ddr3_addr_fpga[3], ddr3_addr_fpga[4],
+                                                  ddr3_addr_fpga[2:0]} :
+                                                 ddr3_addr_fpga;
+    ddr3_ba_sdram[0]     <=  #(TPROP_PCB_CTRL) ddr3_ba_fpga;
+    ddr3_ba_sdram[1]     <=  #(TPROP_PCB_CTRL) (CA_MIRROR == "ON") ?
+                                                 {ddr3_ba_fpga[3-1:2],
+                                                  ddr3_ba_fpga[0],
+                                                  ddr3_ba_fpga[1]} :
+                                                 ddr3_ba_fpga;
+    ddr3_ras_n_sdram     <=  #(TPROP_PCB_CTRL) ddr3_ras_n_fpga;
+    ddr3_cas_n_sdram     <=  #(TPROP_PCB_CTRL) ddr3_cas_n_fpga;
+    ddr3_we_n_sdram      <=  #(TPROP_PCB_CTRL) ddr3_we_n_fpga;
+    ddr3_cke_sdram       <=  #(TPROP_PCB_CTRL) ddr3_cke_fpga;
+  end
+    
+
+  always @( * )
+    ddr3_cs_n_sdram_tmp   <=  #(TPROP_PCB_CTRL) ddr3_cs_n_fpga;
+  assign ddr3_cs_n_sdram =  ddr3_cs_n_sdram_tmp;
+
+  always @( * )
+    ddr3_dm_sdram_tmp <=  #(TPROP_PCB_DATA) ddr3_dm_fpga;//DM signal generation
+  assign ddr3_dm_sdram = ddr3_dm_sdram_tmp;
+
+  always @( * )
+    ddr3_odt_sdram_tmp  <=  #(TPROP_PCB_CTRL) ddr3_odt_fpga;
+  assign ddr3_odt_sdram =  ddr3_odt_sdram_tmp;
+    
+
+// Controlling the bi-directional BUS
+
+  genvar dqwd;
+  generate
+    for (dqwd = 1;dqwd < DQ_WIDTH;dqwd = dqwd+1) begin : dq_delay
+      WireDelay #
+       (
+        .Delay_g    (TPROP_PCB_DATA),
+        .Delay_rd   (TPROP_PCB_DATA_RD),
+        .ERR_INSERT ("OFF")
+       )
+      u_delay_dq
+       (
+        .A             (ddr3_dq_fpga[dqwd]),
+        .B             (ddr3_dq_sdram[dqwd]),
+        .reset         (s_rst_n),
+        .phy_init_done (init_calib_complete)
+       );
+    end
+    // For ECC ON case error is inserted on LSB bit from DRAM to FPGA
+     WireDelay #
+       (
+        .Delay_g    (TPROP_PCB_DATA),
+        .Delay_rd   (TPROP_PCB_DATA_RD),
+        .ERR_INSERT (ERR_INSERT)
+       )
+      u_delay_dq_0
+       (
+        .A             (ddr3_dq_fpga[0]),
+        .B             (ddr3_dq_sdram[0]),
+        .reset         (s_rst_n),
+        .phy_init_done (init_calib_complete)
+       );
+  endgenerate
+
+  genvar dqswd;
+  generate
+    for (dqswd = 0;dqswd < DQS_WIDTH;dqswd = dqswd+1) begin : dqs_delay
+      WireDelay #
+       (
+        .Delay_g    (TPROP_DQS),
+        .Delay_rd   (TPROP_DQS_RD),
+        .ERR_INSERT ("OFF")
+       )
+      u_delay_dqs_p
+       (
+        .A             (ddr3_dqs_p_fpga[dqswd]),
+        .B             (ddr3_dqs_p_sdram[dqswd]),
+        .reset         (s_rst_n),
+        .phy_init_done (init_calib_complete)
+       );
+
+      WireDelay #
+       (
+        .Delay_g    (TPROP_DQS),
+        .Delay_rd   (TPROP_DQS_RD),
+        .ERR_INSERT ("OFF")
+       )
+      u_delay_dqs_n
+       (
+        .A             (ddr3_dqs_n_fpga[dqswd]),
+        .B             (ddr3_dqs_n_sdram[dqswd]),
+        .reset         (s_rst_n),
+        .phy_init_done (init_calib_complete)
+       );
+    end
+  endgenerate
+  //wire delay end
+/*
+/* general case
+/*
+  genvar r,i;
+  generate
+    for (r = 0; r < CS_WIDTH; r = r + 1) begin: mem_rnk
+      if(DQ_WIDTH/16) begin: mem
+        for (i = 0; i < NUM_COMP; i = i + 1) begin: gen_mem
+          ddr3_model u_comp_ddr3
+            (
+             .rst_n   (ddr3_reset_n),
+             .ck      (ddr3_ck_p_sdram),
+             .ck_n    (ddr3_ck_n_sdram),
+             .cke     (ddr3_cke_sdram[r]),
+             .cs_n    (ddr3_cs_n_sdram[r]),
+             .ras_n   (ddr3_ras_n_sdram),
+             .cas_n   (ddr3_cas_n_sdram),
+             .we_n    (ddr3_we_n_sdram),
+             .dm_tdqs (ddr3_dm_sdram[(2*(i+1)-1):(2*i)]),
+             .ba      (ddr3_ba_sdram[r]),
+             .addr    (ddr3_addr_sdram[r]),
+             .dq      (ddr3_dq_sdram[16*(i+1)-1:16*(i)]),
+             .dqs     (ddr3_dqs_p_sdram[(2*(i+1)-1):(2*i)]),
+             .dqs_n   (ddr3_dqs_n_sdram[(2*(i+1)-1):(2*i)]),
+             .tdqs_n  (),
+             .odt     (ddr3_odt_sdram[r])
+             );
+        end
+      end
+      if (DQ_WIDTH%16) begin: gen_mem_extrabits
+        ddr3_model u_comp_ddr3
+          (
+           .rst_n   (ddr3_reset_n),
+           .ck      (ddr3_ck_p_sdram),
+           .ck_n    (ddr3_ck_n_sdram),
+           .cke     (ddr3_cke_sdram[r]),
+           .cs_n    (ddr3_cs_n_sdram[r]),
+           .ras_n   (ddr3_ras_n_sdram),
+           .cas_n   (ddr3_cas_n_sdram),
+           .we_n    (ddr3_we_n_sdram),
+           .dm_tdqs ({ddr3_dm_sdram[DM_WIDTH-1],ddr3_dm_sdram[DM_WIDTH-1]}),
+           .ba      (ddr3_ba_sdram[r]),
+           .addr    (ddr3_addr_sdram[r]),
+           .dq      ({ddr3_dq_sdram[DQ_WIDTH-1:(DQ_WIDTH-8)],
+                      ddr3_dq_sdram[DQ_WIDTH-1:(DQ_WIDTH-8)]}),
+           .dqs     ({ddr3_dqs_p_sdram[DQS_WIDTH-1],
+                      ddr3_dqs_p_sdram[DQS_WIDTH-1]}),
+           .dqs_n   ({ddr3_dqs_n_sdram[DQS_WIDTH-1],
+                      ddr3_dqs_n_sdram[DQS_WIDTH-1]}),
+           .tdqs_n  (),
+           .odt     (ddr3_odt_sdram[r])
+           );
+      end
+    end
+  endgenerate
+*/
+
+          ddr3_model ddr3_l
+            (
+             .rst_n   (ddr3_reset_n          ),
+             .ck      (ddr3_ck_p_sdram       ),
+             .ck_n    (ddr3_ck_n_sdram       ),
+             .cke     (ddr3_cke_sdram[0]     ),
+             .cs_n    (ddr3_cs_n_sdram[0]    ),
+             .ras_n   (ddr3_ras_n_sdram      ),
+             .cas_n   (ddr3_cas_n_sdram      ),
+             .we_n    (ddr3_we_n_sdram       ),
+             .dm_tdqs (ddr3_dm_sdram[1:0]    ),
+             .ba      (ddr3_ba_sdram[0]      ),
+             .addr    (ddr3_addr_sdram[0]    ),
+             .dq      (ddr3_dq_sdram[15:0]   ),
+             .dqs     (ddr3_dqs_p_sdram[1:0] ),
+             .dqs_n   (ddr3_dqs_n_sdram[1:0] ),
+             .tdqs_n  (),
+             .odt     (ddr3_odt_sdram[0])
+             );
+
+          ddr3_model ddr3_u
+            (
+             .rst_n   (ddr3_reset_n          ),
+             .ck      (ddr3_ck_p_sdram       ),
+             .ck_n    (ddr3_ck_n_sdram       ),
+             .cke     (ddr3_cke_sdram[0]     ),
+             .cs_n    (ddr3_cs_n_sdram[0]    ),
+             .ras_n   (ddr3_ras_n_sdram      ),
+             .cas_n   (ddr3_cas_n_sdram      ),
+             .we_n    (ddr3_we_n_sdram       ),
+             .dm_tdqs (ddr3_dm_sdram[3:2]    ),
+             .ba      (ddr3_ba_sdram[0]      ),
+             .addr    (ddr3_addr_sdram[0]    ),
+             .dq      (ddr3_dq_sdram[31:16]  ),
+             .dqs     (ddr3_dqs_p_sdram[3:2] ),
+             .dqs_n   (ddr3_dqs_n_sdram[3:2] ),
+             .tdqs_n  (),
+             .odt     (ddr3_odt_sdram[0])
+             );
+
+
+  //**************************************************************************//
+  // Memory Models instantiations: END
+  //**************************************************************************//
+
+
+  //**************************************************************************//
+  // JTAG Model instantiations
+  //**************************************************************************//
 
   jtag_i jtag_if();
 
   adv_dbg_if_t adv_dbg_if = new(jtag_if);
 
-  assign #`PCB_CTRL_DELAY    s_ck_p_sdram      =  s_ck_p_soc;
-  assign #`PCB_CTRL_DELAY    s_ck_n_sdram      =  s_ck_n_soc;
-  assign #`PCB_CTRL_DELAY    s_cke_sdram       =  s_cke_soc;
-  assign #`PCB_CTRL_DELAY    s_dqm_sdram       =  s_dqm_soc;            
-  assign #`PCB_CTRL_DELAY    s_sel_n_sdram     =  s_sel_n_soc;    
-  assign #`PCB_CTRL_DELAY    s_ras_n_sdram     =  s_ras_n_soc;  
-  assign #`PCB_CTRL_DELAY    s_cas_n_sdram     =  s_cas_n_soc;    
-  assign #`PCB_CTRL_DELAY    s_we_n_sdram      =  s_we_n_soc;      
-  assign #`PCB_CTRL_DELAY    s_addr_sdram      =  s_addr_soc; 
-  assign #`PCB_CTRL_DELAY    s_bank_addr_sdram =  s_bank_addr_soc; 
-  assign #`PCB_RDMASK_DELAY  int_rd_dqs_mask_soc  =  s_rd_dqs_mask_soc;
-
-   genvar dqwd;
-   generate
-      for (dqwd = 0; dqwd < 16; dqwd = dqwd + 1 ) begin : dq_wire_delay
-	 wiredelay #
-	   (
-            .Delay    (`PCB_DQ_DATA_DELAY)
-	    )
-	 dq_delay_i
-	   (
-            .A           ( s_dq_soc[dqwd]   ),
-            .B           ( s_dq_sdram[dqwd] ),
-            .rstn        ( s_rst_n          )
-	    );
-      end
-   endgenerate
-   
-   genvar dqswd;
-   generate
-      for (dqswd = 0; dqswd < 2; dqswd = dqswd + 1 ) begin : dqs_wire_delay
-	 wiredelay #
-	   (
-            .Delay   (`PCB_DQS_DELAY)
-	    )
-	 dqs_delay_i
-	   (
-            .A           ( s_dqs_soc[dqswd]   ),
-            .B           ( s_dqs_sdram[dqswd] ),
-            .rstn        ( s_rst_n            )
-	    );
-      end
-   endgenerate
-
-  mobile_ddr lpddr_i 
-  (
-    .Dq         ( s_dq_soc        ), //tri
-    .Dqs        ( s_dqs_soc       ), //tri
-    .Addr       ( s_addr_sdram      ), 
-    .Ba         ( s_bank_addr_sdram ), 
-    .Clk        ( s_ck_p_sdram      ), 
-    .Clk_n      ( s_ck_n_sdram      ), 
-    .Cke        ( s_cke_sdram       ), 
-    .Cs_n       ( s_sel_n_sdram     ), 
-    .Ras_n      ( s_ras_n_sdram     ), 
-    .Cas_n      ( s_cas_n_sdram     ), 
-    .We_n       ( s_we_n_sdram      ), 
-    .Dm         ( s_dqm_sdram       )
-  );
+  //**************************************************************************//
+  // Camera Model instantiations
+  //**************************************************************************//
 
   camera_emu camera_emu_i
   (
@@ -222,6 +344,10 @@ module tb;
     .cam_href   ( cam_href  ),
     .cam_data   ( cam_data  )
   );
+
+  //**************************************************************************//
+  // UART Model instantiations
+  //**************************************************************************//
 
   // use 8N1
   uart_bus
@@ -251,8 +377,16 @@ module tb;
     .rx_en      ( 1'b1    )
   );
 
+  //**************************************************************************//
+  // SPI Master Model instantiations
+  //**************************************************************************//
+
   spi_slave
   spi_master();
+
+  //**************************************************************************//
+  // I2C EEPROM Model instantiations
+  //**************************************************************************//
 
   i2c_eeprom_model
   #(
@@ -265,6 +399,9 @@ module tb;
     .rst_ni ( s_rst_n )
   );
 
+  //**************************************************************************//
+  // SPI Flash Model instantiations
+  //**************************************************************************//
 
   logic   spi_master1_sdo0;
   logic   spi_master1_sdi0;
@@ -291,157 +428,169 @@ module tb;
     .WPNeg    ( )
   );
 
+ //**************************************************************************//
+  // SoC instantiations
+  //**************************************************************************//
 
-`ifdef SPILOOP
-//looptest
-  logic        spim_sdi;
-  logic        spim_sdo;
-  logic        spim_clk;
-  logic        spim_csn;
-
-  logic        spis_sdo;
-  logic        spis_sdi;
-  logic        spis_clk;
-  logic        spis_csn;
-
-  assign spis_clk = spim_clk;
-  assign spis_csn = spim_csn;
-
-  assign spis_sdi = spim_sdo;
-  assign spim_sdi = spis_sdo;
-`endif
-
-top top_i
- (
-//common
-     .clk_i             (  s_clk   ),
-     .div_pll_i         (  2'b01   ),
-     .pll_bps_i         (  1'b0    ),
-     .rstn_i            (  s_rst_n ),
-//ppu
+ top  top_tb
+(
+     .sys_clk_p         ( s_clk         ),
+     .sys_clk_n         ( ~s_clk        ),
+     .rstn_i            ( s_rst_n       ),
      .testmode_i        ( 1'b0          ),
      .fetch_enable_i    ( fetch_enable  ),
+
+   //SPI Slave
+     .spi_clk_i         ( spi_sck       ),
+     .spi_cs_i          ( spi_csn       ),
+     .spi_sdo0_o        ( spi_sdi0      ),
+     .spi_sdo1_o        ( spi_sdi1      ),
+     .spi_sdo2_o        ( spi_sdi2      ),
+     .spi_sdo3_o        ( spi_sdi3      ),
+     .spi_sdi0_i        ( spi_sdo0      ),
+     .spi_sdi1_i        ( spi_sdo1      ),
+     .spi_sdi2_i        ( spi_sdo2      ),
+     .spi_sdi3_i        ( spi_sdo3      ),
+
     //SPI Master
-`ifdef SPILOOP
-     .spi_master_clk_o  ( spim_clk     ),
-     .spi_master_csn0_o ( spim_csn     ),
-     .spi_master_sdo0_o ( spim_sdo     ),
-     .spi_master_sdi0_i ( spim_sdi     ),
-`else
      .spi_master_clk_o  ( spi_master.clk     ),
      .spi_master_csn0_o ( spi_master.csn     ),
+     .spi_master_csn1_o (  ),
+     .spi_master_csn2_o (  ),
+     .spi_master_csn3_o (  ),
      .spi_master_sdo0_o ( spi_master.sdo[0]  ),
+     .spi_master_sdo1_o (  ),
+     .spi_master_sdo2_o (  ),
+     .spi_master_sdo3_o (  ),
      .spi_master_sdi0_i ( spi_master.sdi[0]  ),
- `endif
-     //uart
-     .uart_tx           ( uart_rx      ),
-     .uart_rx           ( uart_tx      ),
-    //memctl
-	 .memctl_s_ck_p          ( s_ck_p_soc          ),
-	 .memctl_s_ck_n          ( s_ck_n_soc          ),
-	 .memctl_s_sel_n         ( s_sel_n_soc         ),
-	 .memctl_s_cke           ( s_cke_soc           ),
-	 .memctl_s_ras_n         ( s_ras_n_soc         ),
-	 .memctl_s_cas_n         ( s_cas_n_soc         ),
-	 .memctl_s_we_n          ( s_we_n_soc          ),
-	 .memctl_s_addr          ( s_addr_soc          ),
-	 .memctl_s_bank_addr     ( s_bank_addr_soc     ),
-	 .memctl_s_dqm           ( s_dqm_soc           ),
-	 .memctl_s_dqs           ( s_dqs_soc           ),  //tri
-	 .memctl_s_dq            ( s_dq_soc            ),  //tri
-	 .memctl_s_rd_dqs_mask   ( s_rd_dqs_mask_soc   ),
-	 .memctl_int_rd_dqs_mask ( int_rd_dqs_mask_soc ),
+     .spi_master_sdi1_i (  ),
+     .spi_master_sdi2_i (  ),
+     .spi_master_sdi3_i (  ),
+
+     .spi_master1_clk_o  ( spi_master1_clk ),
+     .spi_master1_csn0_o ( spi_master1_csn0 ),
+     .spi_master1_csn1_o (  ),
+     .spi_master1_csn2_o (  ),
+     .spi_master1_csn3_o (  ),
+     .spi_master1_sdo0_o ( spi_master1_sdo0 ),
+     .spi_master1_sdo1_o (  ),
+     .spi_master1_sdo2_o (  ),
+     .spi_master1_sdo3_o (  ),
+     .spi_master1_sdi0_i ( spi_master1_sdi0 ),
+     .spi_master1_sdi1_i (  ),
+     .spi_master1_sdi2_i (  ),
+     .spi_master1_sdi3_i (  ),
+
+    //uart
+     .uart_tx           ( uart_rx  ),
+     .uart_rx           ( uart_tx  ),
+
+     .uart1_tx          ( uart1_rx ),
+     .uart1_rx          ( uart1_tx ),
+
+    //I2C
+     .scl               ( scl_io ),
+     .sda               ( sda_io ),
+     .scl1              (  ),
+     .sda1              (  ),
+    //gpio
+     .gpio              ( gpio   ),   
+    //pwm
+     .pwm_o             ( pwm    ),
+
+    //camera
+     .cam_pclk          ( cam_pclk  ),
+     .cam_vsync         ( cam_vsync ),
+     .cam_href          ( cam_href  ),
+     .cam_data          ( cam_data  ),
+
      //eMMC
-	 .emmc_cclk_out          ( ),
-	 .emmc_ccmd              ( ), //tri
-	 .emmc_cdata             ( ), //tri
-	 .emmc_card_detect_n     ( ),
-	 .emmc_card_write_prt    ( ),
-	 .sdio_card_int_n        ( ),
-	 .mmc_4_4_rst_n          ( ),
+	 .emmc_cclk_out          (   ),
+	 .emmc_ccmd              (   ), //tri
+	 .emmc_cdata             (   ), //tri
+	 .emmc_card_detect_n     (   ),
+	 .emmc_card_write_prt    (   ),
+	 .sdio_card_int_n        (   ),
+	 .mmc_4_4_rst_n          (   ),
 
-     //Mux Pins
-     `ifdef PIN0_SCL
-     .PIN0_scl_uart1tx        ( scl_io ),
-     `else
-     .PIN0_scl_uart1tx        ( pin0  ),
-     `endif
+   //ddr3 sdram if
+     .ddr3_dq                (  ddr3_dq_fpga     ),
+     .ddr3_dqs_n             (  ddr3_dqs_n_fpga  ),
+     .ddr3_dqs_p             (  ddr3_dqs_p_fpga  ),
+     .ddr3_addr              (  ddr3_addr_fpga   ),
+     .ddr3_ba                (  ddr3_ba_fpga     ),
+     .ddr3_ras_n             (  ddr3_ras_n_fpga  ),
+     .ddr3_cas_n             (  ddr3_cas_n_fpga  ),
+     .ddr3_we_n              (  ddr3_we_n_fpga   ),
+     .ddr3_reset_n           (  ddr3_reset_n     ),
+     .ddr3_ck_p              (  ddr3_ck_p_fpga   ),
+     .ddr3_ck_n              (  ddr3_ck_n_fpga   ),
+     .ddr3_cke               (  ddr3_cke_fpga    ),
+     .ddr3_cs_n              (  ddr3_cs_n_fpga   ),
+    
+     .ddr3_dm                (  ddr3_dm_fpga     ),
+    
+     .ddr3_odt               (  ddr3_odt_fpga    ),
 
-     `ifdef PIN1_SDA
-     .PIN1_sda_uart1rx        ( sda_io ),
-     `else
-     .PIN1_sda_uart1rx        ( pin1  ),
-     `endif
+     .init_calib_complete    (  init_calib_complete ),
 
-     .PIN2_spim1sdo0_gpio0    ( pin2  ),
-     .PIN3_spim1csn0_gpio1    ( pin3  ),
-     .PIN4_spim1sdi0_vsync    ( pin4  ),
-     .PIN5_pwm0_href          ( pin5  ),
-     .PIN6_pwm1_camdata7      ( pin6  ),
-     .PIN7_pwm2_camdata6      ( pin7  ),
-     .PIN8_pwm3_camdata5      ( pin8  ),
-     .PIN9_gpio2_camdata4    ( pin9  ),
-     .PIN10_gpio3_camdata3    ( pin10 ),
-     .PIN11_gpio4_camdata2    ( pin11 ),
-     .PIN12_gpio5_camdata1    ( pin12 ),
-     .PIN13_gpio6_camdata0    ( pin13 ),
-
-     .spim1clk ( spi_master1_clk ),
-     .pclk     ( cam_pclk        ),
-/////////////////////////////////////
-///           ppu0               ////
-/////////////////////////////////////
-     .c0_testmode_i     ( 1'b0 ),
-     .c0_fetch_enable_i ( 1'b0 ),
-
-     .c0_uart_tx        ( ),
-     .c0_uart_rx        ( ),
-
-    //PIN0
-     .c0_PIN0_spimclk_scl   ( ),
-    //PIN1
-     .c0_PIN1_spimcsn_sda   ( ),
-    //PIN2
-     .c0_PIN2_spimsdo_gpio0 ( ),
-    //PIN3
-     .c0_PIN3_spimsdi_gpio1 ( ),
-   //PIN4
-     .c0_PIN4_pwm0_gpio2    ( ),
-   //PIN5
-     .c0_PIN5_pwm1_gpio3    ( ),
-   //PIN6
-     .c0_PIN6_pwm2_gpio4    ( ),
-   //PIN7
-     .c0_PIN7_pwm3_gpio5    ( ),
-///
-/////////////////////////////////////
-///    shared part               ////
-/////////////////////////////////////
-     .select_c0_i       ( 1'b0 ),
-    //SPI Slave
-
-`ifdef SPILOOP
-     .spi_clk_i         ( spis_clk   ),
-  .c0_spi_cs_i          ( 1'b1       ),
-     .spi_cs_i          ( spis_csn   ),
-     .spi_sdo0_o        ( spis_sdo   ),
-     .spi_sdi0_i        ( spis_sdi   ),
-`else
-     .spi_clk_i         ( spi_sck    ),
-  .c0_spi_cs_i          ( 1'b1       ),
-     .spi_cs_i          ( spi_csn    ),
-     .spi_sdo0_o        ( spi_sdi0   ),
-     .spi_sdi0_i        ( spi_sdo0   ),
-`endif
      //jtag
      .tck_i             ( jtag_if.tck     ),
      .trstn_i           ( jtag_if.trstn   ),
      .tms_i             ( jtag_if.tms     ),
      .tdi_i             ( jtag_if.tdi     ),
-     .tdo_o             ( jtag_if.tdo     )
+     .tdo_o             ( jtag_if.tdo     ),
+
+///////////////////////////////////////////
+////             PPU0                 ////
+//////////////////////////////////////////
+     .c0_testmode_i     ( 1'b0 ),
+     .c0_fetch_enable_i ( 1'b0 ),
+   //SPI Slave
+     .c0_spi_clk_i      (  ),
+     .c0_spi_cs_i       (  ),
+     .c0_spi_sdo0_o     (  ),
+     .c0_spi_sdo1_o     (  ),
+     .c0_spi_sdo2_o     (  ),
+     .c0_spi_sdo3_o     (  ),
+     .c0_spi_sdi0_i     (  ),
+     .c0_spi_sdi1_i     (  ),
+     .c0_spi_sdi2_i     (  ),
+     .c0_spi_sdi3_i     (  ),
+
+    //SPI Master
+     .c0_spim_clk_o      (  ),
+     .c0_spim_csn0_o     (  ),
+     .c0_spim_csn1_o     (  ),
+     .c0_spim_csn2_o     (  ),
+     .c0_spim_csn3_o     (  ),
+     .c0_spim_sdo0_o     (  ),
+     .c0_spim_sdo1_o     (  ),
+     .c0_spim_sdo2_o     (  ),
+     .c0_spim_sdo3_o     (  ),
+     .c0_spim_sdi0_i     (  ),
+     .c0_spim_sdi1_i     (  ),
+     .c0_spim_sdi2_i     (  ),
+     .c0_spim_sdi3_i     (  ),
+
+     .c0_uart_tx     (  ),
+     .c0_uart_rx     (  ),
+
+     .c0_scl       (  ),
+     .c0_sda       (  ),
+     .c0_gpio      (  ),
+
+     .c0_pwm_o     (  ),
+    //jtag
+     .c0_tck_i     (  ),
+     .c0_trstn_i   (  ),
+     .c0_tms_i     (  ),
+     .c0_tdi_i     (  ),
+     .c0_tdo_o     (  )
    );
 
-  AXI_slave_monitor AXI_slave_monitor_i();
+
+//  AXI_slave_monitor AXI_slave_monitor_i();
 
   generate
     begin
@@ -476,34 +625,14 @@ top top_i
 
   initial
   begin
-    int i;
 
-  `ifdef HAPS 
-    `ifdef CORE_50M    
-      $display("PPU(FPGA) Simulation @ 50MHz");
-    `endif
-    `ifdef CORE_25M    
-      $display("PPU(FPGA) Simulation @ 25MHz");
-    `endif
-  `else 
-      $display("PPU(ASIC) Simulation @ 200MHz");
-  `endif
-
+    $display("PPU(FPGA) Simulation @ 100MHz");
 
     if(!$value$plusargs("MEMLOAD=%s", memload))
       memload = "PRELOAD";
 
     if(!$value$plusargs("RUNMODE=%s", runmode))
       runmode = "DEPENDENT";
-
-    `ifdef HAPS
-      memload = "SPI";
-    `endif
-
-    `ifdef SPILOOP
-      memload = "PRELOAD";
-      $display("spi selfloop testing...");
-    `endif
 
     $display("Using MEMLOAD : %s", memload);
     $display("Using RUNMODE : %s", runmode);
@@ -513,51 +642,26 @@ top top_i
     s_rst_n      = 1'b0;
     fetch_enable = 1'b0;
 
-    #500ns;
+    #RESET_PERIOD
 
     s_rst_n = 1'b1;
 
-    //wait until system rst goes up
-    wait(top_i.ppu_top_i.clk_rst_gen_i.rstn_o) 
-
-    //wait(top_i.ppu_top_i.peripherals_i.ahb_subsystem_i.DW_memctl_top.FstTestComplete==1);
+    //wait until memctl init done
+    wait(init_calib_complete) 
+    $display("DDR3 INIT DONE");
 
     #500ns;
     if (use_qspi)
       spi_enable_qpi();
 
+   ddr3_load();
+   ddr3_check();
+
+
+   #200ns;
+     $display("Load complete. Enable fetch");
+     fetch_enable = 1'b1;
 /*
-    if (runmode != "STANDALONE")
-    begin
-      // Configure JTAG and set boot address
-      adv_dbg_if.jtag_reset();
-      adv_dbg_if.jtag_softreset();
-      adv_dbg_if.init();
-//      adv_dbg_if.axi4_write32(32'h1A10_6008, 1, 32'h2600_0000);//memctl not initialized
-      adv_dbg_if.axi4_write32(32'h1A10_6008, 1, 32'h1_0000);
-    end
-
-    if (memload == "PRELOAD")
-    begin
-      // preload memories
-      mem_preload();
-    end
-    else
-    begin
-      //spi_load(use_qspi);
-      lpddr_load();
-      //spi_check(use_qspi);
-      lpddr_check();
-    end
-*/
-
-   lpddr_load();
-   lpddr_check();
-
-
-    #200ns;
-      fetch_enable = 1'b1;
-
    if(TEST == "DEBUG") begin
       debug_tests();
     end else if (TEST == "MEM_DPI") begin
@@ -666,27 +770,27 @@ top top_i
         spi_master.send(0, {>>{8'h38}});
       end
     end
+*/
 
 
-//    #1000000us;
-
+    #1000000us;
+/*
     // end of computation
     if (~gpio_out[0])
       wait(gpio_out[0]);
 
     spi_check_return_codes(exit_status);
-
+*/
     $fflush();
     $stop();
   end
 
   // TODO: this is a hack, do it properly!
   `include "tb_spi_pkg.sv"
-  `include "tb_lpddr_pkg.sv"
+  `include "tb_ddr3_pkg.sv"
   `include "tb_smic_ram_pkg.sv"
   `include "spi_debug_test.svh"
   `include "mem_dpi.svh"
-  `include "pin_map.svh"
 
 endmodule
 

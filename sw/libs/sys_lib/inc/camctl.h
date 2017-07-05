@@ -60,9 +60,9 @@
 #define   SET_PROERR_INT   1
 #define UNSET_PROERR_INT   0
 
-#define FRAME1_ADDR       0x22020000
-#define FRAME2_ADDR       0x22040000
-#define FRAME3_ADDR       0x22060000
+#define FRAME1_ADDR       0x32020000
+#define FRAME2_ADDR       0x32040000
+#define FRAME3_ADDR       0x32060000
 
 
 void camctl_init(void);

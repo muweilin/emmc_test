@@ -1,0 +1,543 @@
+#-----------------------------------------------------------
+# Vivado v2015.2 (64-bit)
+# SW Build 1266856 on Fri Jun 26 16:35:25 MDT 2015
+# IP Build 1264090 on Wed Jun 24 14:22:01 MDT 2015
+# Start of session at: Sun Jul  2 17:22:07 2017
+# Process ID: 16518
+# Log file: /home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/vivado.log
+# Journal file: /home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/vivado.jou
+#-----------------------------------------------------------
+source tcl/run.tcl
+# if { ![info exists ::env(XILINX_PART)] } {
+#   set ::env(XILINX_PART) "xc7a100tfgg484-2"
+# }
+# set partNumber $::env(XILINX_PART)
+# set ip_name h2x_bridge
+# create_project $ip_name . -part $partNumber
+# create_ip -name ahblite_axi_bridge -vendor xilinx.com -library ip -version 3.0 -module_name $ip_name
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/Xilinx/Vivado/2015.2/data/ip'.
+# set_property -dict [list CONFIG.C_M_AXI_THREAD_ID_WIDTH {8} CONFIG.C_S_AHB_DATA_WIDTH {32} CONFIG.C_M_AXI_DATA_WIDTH {32} CONFIG.C_M_AXI_SUPPORTS_NARROW_BURST {1}] [get_ips $ip_name]
+# generate_target {instantiation_template} [get_files ./$ip_name.srcs/sources_1/ip/$ip_name/$ip_name.xci]
+INFO: [IP_Flow 19-1686] Generating 'Instantiation Template' target for IP 'h2x_bridge'...
+# generate_target all [get_files  ./$ip_name.srcs/sources_1/ip/$ip_name/$ip_name.xci]
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'h2x_bridge'...
+WARNING: [IP_Flow 19-1687] The current project language is set to Verilog. However IP 'h2x_bridge' does not support 'Verilog Synthesis' output products, delivering 'VHDL Synthesis' output products instead.
+INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'h2x_bridge'...
+WARNING: [IP_Flow 19-1687] The current project language is set to Verilog. However IP 'h2x_bridge' does not support 'Verilog Simulation' output products, delivering 'VHDL Simulation' output products instead.
+INFO: [IP_Flow 19-1686] Generating 'Change Log' target for IP 'h2x_bridge'...
+# create_ip_run [get_files -of_objects [get_fileset sources_1] ./$ip_name.srcs/sources_1/ip/$ip_name/$ip_name.xci]
+# launch_run -jobs 8 ${ip_name}_synth_1
+[Sun Jul  2 17:22:13 2017] Launched h2x_bridge_synth_1...
+Run output will be captured here: /home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.runs/h2x_bridge_synth_1/runme.log
+# wait_on_run ${ip_name}_synth_1
+[Sun Jul  2 17:22:13 2017] Waiting for h2x_bridge_synth_1 to finish...
+
+*** Running vivado
+    with args -log h2x_bridge.vds -m64 -mode batch -messageDb vivado.pb -notrace -source h2x_bridge.tcl
+
+
+****** Vivado v2015.2 (64-bit)
+  **** SW Build 1266856 on Fri Jun 26 16:35:25 MDT 2015
+  **** IP Build 1264090 on Wed Jun 24 14:22:01 MDT 2015
+    ** Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+
+source h2x_bridge.tcl -notrace
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/Xilinx/Vivado/2015.2/data/ip'.
+WARNING: [IP_Flow 19-3664] IP 'h2x_bridge' generated file not found '/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/h2x_bridge.dcp'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'h2x_bridge' generated file not found '/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/h2x_bridge_stub.v'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'h2x_bridge' generated file not found '/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/h2x_bridge_stub.vhdl'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'h2x_bridge' generated file not found '/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/h2x_bridge_funcsim.v'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'h2x_bridge' generated file not found '/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/h2x_bridge_funcsim.vhdl'. Please regenerate to continue.
+Command: synth_design -top h2x_bridge -part xc7a100tfgg484-2 -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 953.172 ; gain = 142.516 ; free physical = 5537 ; free virtual = 26036
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'h2x_bridge' [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/synth/h2x_bridge.vhd:113]
+	Parameter C_FAMILY bound to: artix7 - type: string 
+	Parameter C_INSTANCE bound to: h2x_bridge - type: string 
+	Parameter C_M_AXI_SUPPORTS_NARROW_BURST bound to: 1 - type: integer 
+	Parameter C_M_AXI_NON_SECURE bound to: 1 - type: integer 
+	Parameter C_S_AHB_ADDR_WIDTH bound to: 32 - type: integer 
+	Parameter C_M_AXI_ADDR_WIDTH bound to: 32 - type: integer 
+	Parameter C_S_AHB_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_M_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_M_AXI_PROTOCOL bound to: AXI4 - type: string 
+	Parameter C_M_AXI_THREAD_ID_WIDTH bound to: 8 - type: integer 
+	Parameter C_AHB_AXI_TIMEOUT bound to: 0 - type: integer 
+INFO: [Synth 8-3491] module 'ahblite_axi_bridge' declared at '/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/ahblite_axi_bridge_v3_0/hdl/src/vhdl/ahblite_axi_bridge.vhd:264' bound to instance 'U0' of component 'ahblite_axi_bridge' [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/synth/h2x_bridge.vhd:240]
+INFO: [Synth 8-638] synthesizing module 'ahblite_axi_bridge' [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/ahblite_axi_bridge_v3_0/hdl/src/vhdl/ahblite_axi_bridge.vhd:360]
+	Parameter C_FAMILY bound to: artix7 - type: string 
+	Parameter C_INSTANCE bound to: h2x_bridge - type: string 
+	Parameter C_M_AXI_SUPPORTS_NARROW_BURST bound to: 1 - type: integer 
+	Parameter C_S_AHB_ADDR_WIDTH bound to: 32 - type: integer 
+	Parameter C_M_AXI_ADDR_WIDTH bound to: 32 - type: integer 
+	Parameter C_S_AHB_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_M_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_M_AXI_PROTOCOL bound to: AXI4 - type: string 
+	Parameter C_M_AXI_THREAD_ID_WIDTH bound to: 8 - type: integer 
+	Parameter C_AHB_AXI_TIMEOUT bound to: 0 - type: integer 
+	Parameter C_M_AXI_NON_SECURE bound to: 1 - type: integer 
+INFO: [Synth 8-638] synthesizing module 'ahblite_axi_control' [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/ahblite_axi_bridge_v3_0/hdl/src/vhdl/ahblite_axi_control.vhd:197]
+INFO: [Synth 8-256] done synthesizing module 'ahblite_axi_control' (1#1) [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/ahblite_axi_bridge_v3_0/hdl/src/vhdl/ahblite_axi_control.vhd:197]
+INFO: [Synth 8-638] synthesizing module 'ahb_if' [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/ahblite_axi_bridge_v3_0/hdl/src/vhdl/ahb_if.vhd:296]
+	Parameter C_S_AHB_ADDR_WIDTH bound to: 32 - type: integer 
+	Parameter C_M_AXI_ADDR_WIDTH bound to: 32 - type: integer 
+	Parameter C_S_AHB_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_M_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_M_AXI_THREAD_ID_WIDTH bound to: 8 - type: integer 
+	Parameter C_M_AXI_NON_SECURE bound to: 1 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'ahb_if' (2#1) [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/ahblite_axi_bridge_v3_0/hdl/src/vhdl/ahb_if.vhd:296]
+INFO: [Synth 8-638] synthesizing module 'ahb_data_counter' [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/ahblite_axi_bridge_v3_0/hdl/src/vhdl/ahb_data_counter.vhd:151]
+	Parameter C_FAMILY bound to: virtex7 - type: string 
+INFO: [Synth 8-638] synthesizing module 'counter_f' [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/ahblite_axi_bridge_v3_0/hdl/src/vhdl/counter_f.vhd:147]
+	Parameter C_NUM_BITS bound to: 5 - type: integer 
+	Parameter C_FAMILY bound to: virtex7 - type: string 
+INFO: [Synth 8-256] done synthesizing module 'counter_f' (3#1) [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/ahblite_axi_bridge_v3_0/hdl/src/vhdl/counter_f.vhd:147]
+INFO: [Synth 8-256] done synthesizing module 'ahb_data_counter' (4#1) [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/ahblite_axi_bridge_v3_0/hdl/src/vhdl/ahb_data_counter.vhd:151]
+INFO: [Synth 8-638] synthesizing module 'axi_wchannel' [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/ahblite_axi_bridge_v3_0/hdl/src/vhdl/axi_wchannel.vhd:242]
+	Parameter C_FAMILY bound to: virtex7 - type: string 
+	Parameter C_S_AHB_ADDR_WIDTH bound to: 32 - type: integer 
+	Parameter C_M_AXI_ADDR_WIDTH bound to: 32 - type: integer 
+	Parameter C_S_AHB_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_M_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_M_AXI_THREAD_ID_WIDTH bound to: 8 - type: integer 
+	Parameter C_M_AXI_SUPPORTS_NARROW_BURST bound to: 1 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'axi_wchannel' (5#1) [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/ahblite_axi_bridge_v3_0/hdl/src/vhdl/axi_wchannel.vhd:242]
+INFO: [Synth 8-638] synthesizing module 'axi_rchannel' [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/ahblite_axi_bridge_v3_0/hdl/src/vhdl/axi_rchannel.vhd:196]
+	Parameter C_S_AHB_ADDR_WIDTH bound to: 32 - type: integer 
+	Parameter C_M_AXI_ADDR_WIDTH bound to: 32 - type: integer 
+	Parameter C_M_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_M_AXI_THREAD_ID_WIDTH bound to: 8 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'axi_rchannel' (6#1) [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/ahblite_axi_bridge_v3_0/hdl/src/vhdl/axi_rchannel.vhd:196]
+INFO: [Synth 8-638] synthesizing module 'time_out' [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/ahblite_axi_bridge_v3_0/hdl/src/vhdl/time_out.vhd:155]
+	Parameter C_FAMILY bound to: artix7 - type: string 
+	Parameter C_AHB_AXI_TIMEOUT bound to: 0 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'time_out' (7#1) [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/ahblite_axi_bridge_v3_0/hdl/src/vhdl/time_out.vhd:155]
+INFO: [Synth 8-256] done synthesizing module 'ahblite_axi_bridge' (8#1) [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/ahblite_axi_bridge_v3_0/hdl/src/vhdl/ahblite_axi_bridge.vhd:360]
+INFO: [Synth 8-256] done synthesizing module 'h2x_bridge' (9#1) [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/synth/h2x_bridge.vhd:113]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 989.461 ; gain = 178.805 ; free physical = 5499 ; free virtual = 25997
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 989.461 ; gain = 178.805 ; free physical = 5499 ; free virtual = 25997
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7a100tfgg484-2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Feature available: Internal_bitstream
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/h2x_bridge_ooc.xdc]
+Finished Parsing XDC File [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/h2x_bridge_ooc.xdc]
+Completed Processing XDC Constraints
+
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 1277.906 ; gain = 0.000 ; free physical = 5309 ; free virtual = 25808
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 1277.910 ; gain = 467.254 ; free physical = 5309 ; free virtual = 25807
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a100tfgg484-2
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 1277.910 ; gain = 467.254 ; free physical = 5309 ; free virtual = 25807
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 1277.910 ; gain = 467.254 ; free physical = 5309 ; free virtual = 25807
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'ctl_sm_cs_reg' in module 'ahblite_axi_control'
+INFO: [Synth 8-5544] ROM "core_is_idle" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "ctl_sm_ns" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "ctl_sm_ns" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "ctl_sm_ns" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "ctl_sm_ns" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "valid_cnt_required_i" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "AXI_ALEN_i" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "AXI_ABURST_i" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "M_AXI_WSTRB_i" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                     Old Encoding 
+---------------------------------------------------------------------------------------------------
+                ctl_idle |                              000 |                              000
+                ctl_addr |                              001 |                              001
+               ctl_write |                              010 |                              010
+               ctl_bresp |                              011 |                              101
+           ctl_bresp_err |                              100 |                              110
+                ctl_read |                              101 |                              011
+            ctl_read_err |                              110 |                              100
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'ctl_sm_cs_reg' using encoding 'sequential' in module 'ahblite_axi_control'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 1277.910 ; gain = 467.254 ; free physical = 5298 ; free virtual = 25796
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      6 Bit       Adders := 2     
+	   2 Input      5 Bit       Adders := 6     
++---Registers : 
+	               32 Bit    Registers := 4     
+	                8 Bit    Registers := 1     
+	                6 Bit    Registers := 2     
+	                5 Bit    Registers := 4     
+	                4 Bit    Registers := 2     
+	                3 Bit    Registers := 3     
+	                2 Bit    Registers := 3     
+	                1 Bit    Registers := 36    
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 1     
+	   3 Input      6 Bit        Muxes := 2     
+	   2 Input      6 Bit        Muxes := 2     
+	   4 Input      4 Bit        Muxes := 3     
+	   3 Input      4 Bit        Muxes := 1     
+	   9 Input      4 Bit        Muxes := 1     
+	  15 Input      3 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 1     
+	   3 Input      2 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 3     
+	   2 Input      1 Bit        Muxes := 73    
+	   7 Input      1 Bit        Muxes := 13    
+	   4 Input      1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+Module ahblite_axi_control 
+Detailed RTL Component Info : 
++---Registers : 
+	                1 Bit    Registers := 3     
++---Muxes : 
+	  15 Input      3 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 14    
+	   7 Input      1 Bit        Muxes := 13    
+Module ahb_if 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      5 Bit       Adders := 1     
++---Registers : 
+	               32 Bit    Registers := 2     
+	                8 Bit    Registers := 1     
+	                5 Bit    Registers := 3     
+	                4 Bit    Registers := 1     
+	                3 Bit    Registers := 3     
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 14    
++---Muxes : 
+	   4 Input      4 Bit        Muxes := 2     
+	   3 Input      4 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 1     
+	   3 Input      2 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 19    
+Module counter_f 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      6 Bit       Adders := 1     
++---Registers : 
+	                6 Bit    Registers := 1     
++---Muxes : 
+	   3 Input      6 Bit        Muxes := 1     
+	   2 Input      6 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 2     
+Module axi_wchannel 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      5 Bit       Adders := 5     
++---Registers : 
+	               32 Bit    Registers := 2     
+	                5 Bit    Registers := 1     
+	                4 Bit    Registers := 1     
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 11    
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 1     
+	   9 Input      4 Bit        Muxes := 1     
+	   4 Input      4 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 25    
+	   4 Input      1 Bit        Muxes := 1     
+Module axi_rchannel 
+Detailed RTL Component Info : 
++---Registers : 
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 8     
++---Muxes : 
+	   2 Input      2 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 11    
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 240 (col length:80)
+BRAMs: 270 (col length: RAMB18 80 RAMB36 40)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+Start Parallel Synthesis Optimization  : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 1277.910 ; gain = 467.254 ; free physical = 5297 ; free virtual = 25796
+---------------------------------------------------------------------------------
+Start Cross Boundary Optimization
+---------------------------------------------------------------------------------
+INFO: [Synth 8-4471] merging register 'U0/AXI_WCHANNEL/axi_waddr_done_i_reg' into 'U0/AHBLITE_AXI_CONTROL/ahb_wnr_i_reg' [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/ahblite_axi_bridge_v3_0/hdl/src/vhdl/axi_wchannel.vhd:585]
+INFO: [Synth 8-5544] ROM "U0/AHB_IF/AXI_ALEN_i" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-3917] design h2x_bridge has port m_axi_awid[7] driven by constant 0
+INFO: [Synth 8-3917] design h2x_bridge has port m_axi_awid[6] driven by constant 0
+INFO: [Synth 8-3917] design h2x_bridge has port m_axi_awid[5] driven by constant 0
+INFO: [Synth 8-3917] design h2x_bridge has port m_axi_awid[4] driven by constant 0
+INFO: [Synth 8-3917] design h2x_bridge has port m_axi_awid[3] driven by constant 0
+INFO: [Synth 8-3917] design h2x_bridge has port m_axi_awid[2] driven by constant 0
+INFO: [Synth 8-3917] design h2x_bridge has port m_axi_awid[1] driven by constant 0
+INFO: [Synth 8-3917] design h2x_bridge has port m_axi_awid[0] driven by constant 0
+INFO: [Synth 8-3917] design h2x_bridge has port m_axi_awlock driven by constant 0
+INFO: [Synth 8-3917] design h2x_bridge has port m_axi_arid[7] driven by constant 0
+INFO: [Synth 8-3917] design h2x_bridge has port m_axi_arid[6] driven by constant 0
+INFO: [Synth 8-3917] design h2x_bridge has port m_axi_arid[5] driven by constant 0
+INFO: [Synth 8-3917] design h2x_bridge has port m_axi_arid[4] driven by constant 0
+INFO: [Synth 8-3917] design h2x_bridge has port m_axi_arid[3] driven by constant 0
+INFO: [Synth 8-3917] design h2x_bridge has port m_axi_arid[2] driven by constant 0
+INFO: [Synth 8-3917] design h2x_bridge has port m_axi_arid[1] driven by constant 0
+INFO: [Synth 8-3917] design h2x_bridge has port m_axi_arid[0] driven by constant 0
+INFO: [Synth 8-3917] design h2x_bridge has port m_axi_arlock driven by constant 0
+WARNING: [Synth 8-3331] design h2x_bridge has unconnected port m_axi_bid[7]
+WARNING: [Synth 8-3331] design h2x_bridge has unconnected port m_axi_bid[6]
+WARNING: [Synth 8-3331] design h2x_bridge has unconnected port m_axi_bid[5]
+WARNING: [Synth 8-3331] design h2x_bridge has unconnected port m_axi_bid[4]
+WARNING: [Synth 8-3331] design h2x_bridge has unconnected port m_axi_bid[3]
+WARNING: [Synth 8-3331] design h2x_bridge has unconnected port m_axi_bid[2]
+WARNING: [Synth 8-3331] design h2x_bridge has unconnected port m_axi_bid[1]
+WARNING: [Synth 8-3331] design h2x_bridge has unconnected port m_axi_bid[0]
+WARNING: [Synth 8-3331] design h2x_bridge has unconnected port m_axi_rid[7]
+WARNING: [Synth 8-3331] design h2x_bridge has unconnected port m_axi_rid[6]
+WARNING: [Synth 8-3331] design h2x_bridge has unconnected port m_axi_rid[5]
+WARNING: [Synth 8-3331] design h2x_bridge has unconnected port m_axi_rid[4]
+WARNING: [Synth 8-3331] design h2x_bridge has unconnected port m_axi_rid[3]
+WARNING: [Synth 8-3331] design h2x_bridge has unconnected port m_axi_rid[2]
+WARNING: [Synth 8-3331] design h2x_bridge has unconnected port m_axi_rid[1]
+WARNING: [Synth 8-3331] design h2x_bridge has unconnected port m_axi_rid[0]
+---------------------------------------------------------------------------------
+Finished Cross Boundary Optimization : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 1277.910 ; gain = 467.254 ; free physical = 5297 ; free virtual = 25796
+---------------------------------------------------------------------------------
+Finished Parallel Reinference  : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 1277.910 ; gain = 467.254 ; free physical = 5297 ; free virtual = 25796
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\U0/AHB_IF/valid_cnt_required_i_reg[4] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\U0/AHB_IF/AXI_ALEN_i_reg[7] )
+INFO: [Synth 8-3332] Sequential element (\U0/AHB_IF/valid_cnt_required_i_reg[4] ) is unused and will be removed from module h2x_bridge.
+INFO: [Synth 8-3332] Sequential element (\U0/AHB_IF/valid_cnt_required_i_reg[0] ) is unused and will be removed from module h2x_bridge.
+INFO: [Synth 8-3332] Sequential element (\U0/AHB_DATA_COUNTER/AHB_SAMPLE_CNT_MODULE/INFERRED_GEN.icount_out_reg[5] ) is unused and will be removed from module h2x_bridge.
+INFO: [Synth 8-3332] Sequential element (\U0/AHB_IF/AXI_ALEN_i_reg[0] ) is unused and will be removed from module h2x_bridge.
+INFO: [Synth 8-3332] Sequential element (\U0/AHB_IF/S_AHB_HSIZE_i_reg[2] ) is unused and will be removed from module h2x_bridge.
+INFO: [Synth 8-3332] Sequential element (\U0/AXI_WCHANNEL/AXI_WRITE_CNT_MODULE/INFERRED_GEN.icount_out_reg[5] ) is unused and will be removed from module h2x_bridge.
+INFO: [Synth 8-3332] Sequential element (\U0/AXI_WCHANNEL/axi_cnt_required_reg[4] ) is unused and will be removed from module h2x_bridge.
+INFO: [Synth 8-3332] Sequential element (\U0/AXI_WCHANNEL/axi_cnt_required_reg[0] ) is unused and will be removed from module h2x_bridge.
+INFO: [Synth 8-3332] Sequential element (\U0/AHB_IF/burst_term_txer_cnt_i_reg[4] ) is unused and will be removed from module h2x_bridge.
+INFO: [Synth 8-3332] Sequential element (\U0/AHB_IF/burst_term_txer_cnt_i_reg[0] ) is unused and will be removed from module h2x_bridge.
+INFO: [Synth 8-3332] Sequential element (\U0/AXI_RCHANNEL/axi_rresp_avlbl_reg[0] ) is unused and will be removed from module h2x_bridge.
+INFO: [Synth 8-3332] Sequential element (\U0/AHB_IF/AXI_ALEN_i_reg[4] ) is unused and will be removed from module h2x_bridge.
+INFO: [Synth 8-3332] Sequential element (\U0/AXI_WCHANNEL/timeout_detected_i_reg ) is unused and will be removed from module h2x_bridge.
+INFO: [Synth 8-3332] Sequential element (\U0/AHB_IF/AXI_ALEN_i_reg[5] ) is unused and will be removed from module h2x_bridge.
+INFO: [Synth 8-3332] Sequential element (\U0/AHB_IF/AXI_ALEN_i_reg[6] ) is unused and will be removed from module h2x_bridge.
+INFO: [Synth 8-3332] Sequential element (\U0/AHB_IF/AXI_ALEN_i_reg[7] ) is unused and will be removed from module h2x_bridge.
+---------------------------------------------------------------------------------
+Start Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Area Optimization : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1277.914 ; gain = 467.258 ; free physical = 5286 ; free virtual = 25784
+---------------------------------------------------------------------------------
+Finished Parallel Area Optimization  : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1277.914 ; gain = 467.258 ; free physical = 5286 ; free virtual = 25784
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+Finished Parallel Synthesis Optimization  : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1277.914 ; gain = 467.258 ; free physical = 5286 ; free virtual = 25784
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:20 ; elapsed = 00:00:20 . Memory (MB): peak = 1277.914 ; gain = 467.258 ; free physical = 5249 ; free virtual = 25747
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:20 ; elapsed = 00:00:20 . Memory (MB): peak = 1277.914 ; gain = 467.258 ; free physical = 5248 ; free virtual = 25747
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+INFO: [Synth 8-3332] Sequential element (\U0/AHB_IF/GEN_1_PROT_CACHE_REG_NON_SECURE.AXI_ACACHE_i_reg[3] ) is unused and will be removed from module h2x_bridge.
+INFO: [Synth 8-3332] Sequential element (\U0/AHB_IF/GEN_1_PROT_CACHE_REG_NON_SECURE.AXI_ACACHE_i_reg[2] ) is unused and will be removed from module h2x_bridge.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:20 ; elapsed = 00:00:20 . Memory (MB): peak = 1277.914 ; gain = 467.258 ; free physical = 5227 ; free virtual = 25726
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 1277.914 ; gain = 467.258 ; free physical = 5226 ; free virtual = 25725
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 1277.914 ; gain = 467.258 ; free physical = 5226 ; free virtual = 25725
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 1277.914 ; gain = 467.258 ; free physical = 5226 ; free virtual = 25725
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 1277.914 ; gain = 467.258 ; free physical = 5226 ; free virtual = 25725
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 1277.914 ; gain = 467.258 ; free physical = 5226 ; free virtual = 25725
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-----+------+
+|      |Cell |Count |
++------+-----+------+
+|1     |LUT1 |     2|
+|2     |LUT2 |    21|
+|3     |LUT3 |    16|
+|4     |LUT4 |    26|
+|5     |LUT5 |    68|
+|6     |LUT6 |    73|
+|7     |FDRE |   203|
+|8     |FDSE |     6|
++------+-----+------+
+
+Report Instance Areas: 
++------+----------------------------+--------------------+------+
+|      |Instance                    |Module              |Cells |
++------+----------------------------+--------------------+------+
+|1     |top                         |                    |   415|
+|2     |  U0                        |ahblite_axi_bridge  |   415|
+|3     |    AHBLITE_AXI_CONTROL     |ahblite_axi_control |    47|
+|4     |    AHB_DATA_COUNTER        |ahb_data_counter    |    12|
+|5     |      AHB_SAMPLE_CNT_MODULE |counter_f_0         |    12|
+|6     |    AHB_IF                  |ahb_if              |   167|
+|7     |    AXI_RCHANNEL            |axi_rchannel        |    34|
+|8     |    AXI_WCHANNEL            |axi_wchannel        |   155|
+|9     |      AXI_WRITE_CNT_MODULE  |counter_f           |    23|
++------+----------------------------+--------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 1277.914 ; gain = 467.258 ; free physical = 5226 ; free virtual = 25725
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 16 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 1277.914 ; gain = 70.293 ; free physical = 5226 ; free virtual = 25725
+Synthesis Optimization Complete : Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 1277.914 ; gain = 467.258 ; free physical = 5226 ; free virtual = 25725
+INFO: [Project 1-571] Translating synthesized netlist
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/h2x_bridge_ooc.xdc]
+Finished Parsing XDC File [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/h2x_bridge_ooc.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+INFO: [Common 17-83] Releasing license: Synthesis
+82 Infos, 21 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:20 ; elapsed = 00:00:20 . Memory (MB): peak = 1277.914 ; gain = 358.738 ; free physical = 5226 ; free virtual = 25725
+INFO: [Common 17-600] The following parameters have non-default value.
+synth.vivado.isSynthRun
+INFO: [Coretcl 2-1174] Renamed 8 cell refs.
+report_utilization: Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.10 . Memory (MB): peak = 1285.926 ; gain = 0.000 ; free physical = 5223 ; free virtual = 25722
+INFO: [Common 17-206] Exiting Vivado at Sun Jul  2 17:22:40 2017...
+[Sun Jul  2 17:22:45 2017] h2x_bridge_synth_1 finished
+wait_on_run: Time (s): cpu = 00:00:00.09 ; elapsed = 00:00:32 . Memory (MB): peak = 965.402 ; gain = 3.887 ; free physical = 5726 ; free virtual = 26225
+# open_run ${ip_name}_synth_1
+Design is defaulting to impl run constrset: h2x_bridge
+Design is defaulting to synth run part: xc7a100tfgg484-2
+INFO: [Project 1-479] Netlist was created with Vivado 2015.2
+INFO: [Device 21-403] Loading part xc7a100tfgg484-2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Feature available: Internal_bitstream
+Parsing XDC File [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/h2x_bridge_ooc.xdc]
+Finished Parsing XDC File [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_ahblite_axi_bridge/h2x_bridge.srcs/sources_1/ip/h2x_bridge/h2x_bridge_ooc.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+# write_verilog -force -mode funcsim ${ip_name}_funcsim.v
+INFO: [Common 17-206] Exiting Vivado at Sun Jul  2 17:22:49 2017...

@@ -39,7 +39,6 @@
    `undef zero32
    `undef KBYTE
    `undef USE_FOUNDATION
-   `undef AHB_USE_FOUNDATION_IS_ONE
    `undef AHB_LITE
    `undef NUM_AHB_MASTERS
    `undef LOG2_NUM_INT_MASTERS

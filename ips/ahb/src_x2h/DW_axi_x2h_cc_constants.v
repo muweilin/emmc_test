@@ -97,7 +97,7 @@
 // 
 // Read and write ID width of the AXI system to  
 // which the bridge is attached as an AXI slave.
-`define X2H_AXI_ID_WIDTH 4
+`define X2H_AXI_ID_WIDTH 16
 
 
 // Name:         X2H_AXI_BLW

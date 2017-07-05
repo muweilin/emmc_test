@@ -33,9 +33,8 @@
 // Foundation parts. Customers with only a Source license, CANNOT use 
 // Foundation parts. Customers with both Source and DesignWare licenses 
 // have the option of using Foundation parts.
-`define USE_FOUNDATION 1
+`define USE_FOUNDATION 0
 
-`define AHB_USE_FOUNDATION_IS_ONE
 
 
 // Name:         AHB_LITE
@@ -196,11 +195,11 @@
 // bus to the Dummy master when the system is entering 
 // low-power mode. When AHB_LITE = 1, pause mode is 
 // disabled.
-`define PAUSE 0
+`define PAUSE 1
 
 
 // Name:         AHB_DELAYED_PAUSE
-// Default:      false ([ <functionof> AHB_LITE PAUSE ])
+// Default:      true ([ <functionof> AHB_LITE PAUSE ])
 // Values:       false (0), true (1)
 // Enabled:      (PAUSE==1) && (AHB_LITE==0)
 // 
@@ -211,7 +210,7 @@
 // edge once the pause signal is set. By delaying the action 
 // on pause, any other transfers on the bus can be completed 
 // before the system is paused.
-`define AHB_DELAYED_PAUSE 0
+`define AHB_DELAYED_PAUSE 1
 
 
 // Name:         AHB_HAS_ARBIF
@@ -287,7 +286,7 @@
 // unspecified length. This, in effect, early terminates the 
 // currently granted transfer on the bus. This will not override 
 // the updating of the grants if a SPLIT or a RETRy is received.
-`define AHB_FULL_INCR 0
+`define AHB_FULL_INCR 1
 
 
 // Name:         NUM_IAHB_SLAVES
@@ -301,11 +300,11 @@
 // of the addressing modes there can be 15 assigned 
 // slaves. If there is only one addressing mode, then 
 // this is the number of slaves in the system.
-`define NUM_IAHB_SLAVES 5
+`define NUM_IAHB_SLAVES 4
 
 
 // Name:         NUM_NAHB_SLAVES
-// Default:      5 (NUM_IAHB_SLAVES)
+// Default:      4 (NUM_IAHB_SLAVES)
 // Values:       0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
 // Enabled:      REMAP == 1 && [<functionof> AHB_HAS_XDCDR]
 // 
@@ -314,7 +313,7 @@
 // visibility. Slaves can be visible in both Normal and 
 // Boot modes. This parameter option is active only if 
 // you enable the Memory Remap Feature.
-`define NUM_NAHB_SLAVES 5
+`define NUM_NAHB_SLAVES 4
 
 
 // Name:         NUM_BAHB_SLAVES
@@ -339,7 +338,7 @@
 // Slave Interface must be included in the design 
 // (that is, when AHB_HAS_ARBIF = 1), and the decoder must 
 // be configured as internal (when AHB_HAS_XDCDR = 0).
-`define R1_N_SA_0 32'h28004000
+`define R1_N_SA_0 32'h1000000
 
 
 // Name:         R1_N_EA_0
@@ -351,7 +350,7 @@
 // Slave Interface must be included in the design 
 // (that is, when AHB_HAS_ARBIF = 1), and the decoder must 
 // be configured as internal (when AHB_HAS_XDCDR = 0).
-`define R1_N_EA_0 32'h280043ff
+`define R1_N_EA_0 32'h10003ff
 
 
 // Name:         R1_B_SA_0
@@ -420,7 +419,7 @@
 // Default Master will be read only. If there is no 
 // Arbiter Slave Interface, this parameter is dimmed 
 // and hardcoded to Yes.
-`define HC_DFLT_MSTR 1
+`define HC_DFLT_MSTR 0
 
 
 // Name:         EBTEN
@@ -723,7 +722,7 @@
 // if the Slave Visibility Mode is set to "Normal" or "Normal 
 // & Boot". Additionally, this option applies only if you have 
 // an internal decoder (AHB_HAS_XDCDR = 0).
-`define MR_N1 3
+`define MR_N1 0
 
 
 // Name:         MR_B1
@@ -785,7 +784,7 @@
 // This parameter option is available only if the 
 // "Slave Visibility Mode" is set to "Normal" or "Normal & Boot" 
 // and if you have an internal decoder (AHB_HAS_XDCDR = 0).
-`define R1_N_SA_1 32'h20010000
+`define R1_N_SA_1 32'h30010000
 
 
 // Name:         R1_N_EA_1
@@ -797,7 +796,7 @@
 // Slave 1. This parameter option is available only if the 
 // "Slave Visibility Mode" is set to "Normal" or "Normal & Boot" 
 // and if you have an internal decoder (AHB_HAS_XDCDR = 0).
-`define R1_N_EA_1 32'h21ffffff
+`define R1_N_EA_1 32'h6fffffff
 
 
 // Name:         R2_N_SA_1
@@ -811,7 +810,7 @@
 // available only if the "Multiple Memory Regions in Normal Mode" 
 // is set to True (1) and if you have an internal decoder 
 // (AHB_HAS_XDCDR = 0).
-`define R2_N_SA_1 32'h22000000
+`define R2_N_SA_1 32'h3000000
 
 
 // Name:         R2_N_EA_1
@@ -825,7 +824,7 @@
 // is available only if the "Multiple Memory Regions in 
 // Normal Mode" is set to True (1) and if you have an 
 // internal decoder (AHB_HAS_XDCDR = 0).
-`define R2_N_EA_1 32'h23ffffff
+`define R2_N_EA_1 32'h300ffff
 
 
 // Name:         R3_N_SA_1
@@ -839,7 +838,7 @@
 // available only if the "Multiple Memory Regions in Normal Mode" 
 // is set to True (1) and if you have an internal decoder 
 // (AHB_HAS_XDCDR = 0).
-`define R3_N_SA_1 32'h24000000
+`define R3_N_SA_1 32'h4000000
 
 
 // Name:         R3_N_EA_1
@@ -853,7 +852,7 @@
 // is available only if the "Multiple Memory Regions in 
 // Normal Mode" is set to True (1) and if you have an 
 // internal decoder (AHB_HAS_XDCDR = 0).
-`define R3_N_EA_1 32'h25ffffff
+`define R3_N_EA_1 32'h400ffff
 
 
 // Name:         R4_N_SA_1
@@ -867,7 +866,7 @@
 // available only if the "Multiple Memory Regions in Normal Mode" 
 // is set to True (1) and if you have an internal decoder 
 // (AHB_HAS_XDCDR = 0).
-`define R4_N_SA_1 32'h26000000
+`define R4_N_SA_1 32'h5000000
 
 
 // Name:         R4_N_EA_1
@@ -881,7 +880,7 @@
 // is available only if the "Multiple Memory Regions in 
 // Normal Mode" is set to True (1) and if you have an 
 // internal decoder (AHB_HAS_XDCDR = 0).
-`define R4_N_EA_1 32'h27ffffff
+`define R4_N_EA_1 32'h500ffff
 
 
 // Name:         R5_N_SA_1
@@ -1251,7 +1250,7 @@
 // This parameter option is available only if the 
 // "Slave Visibility Mode" is set to "Normal" or "Normal & Boot" 
 // and if you have an internal decoder (AHB_HAS_XDCDR = 0).
-`define R1_N_SA_2 32'h28000000
+`define R1_N_SA_2 32'h28001000
 
 
 // Name:         R1_N_EA_2
@@ -1263,7 +1262,7 @@
 // Slave 2. This parameter option is available only if the 
 // "Slave Visibility Mode" is set to "Normal" or "Normal & Boot" 
 // and if you have an internal decoder (AHB_HAS_XDCDR = 0).
-`define R1_N_EA_2 32'h28000fff
+`define R1_N_EA_2 32'h28001fff
 
 
 // Name:         R2_N_SA_2
@@ -1372,7 +1371,7 @@
 // specified by the "Number of slave which returns data 
 // and response". Even with an external decoder, 
 // the generation of select lines only is possible.
-`define HSEL_ONLY_S2 1
+`define HSEL_ONLY_S2 0
 
 
 // Name:         ALIAS_S2
@@ -1437,7 +1436,7 @@
 // This parameter option is available only if the 
 // "Slave Visibility Mode" is set to "Normal" or "Normal & Boot" 
 // and if you have an internal decoder (AHB_HAS_XDCDR = 0).
-`define R1_N_SA_3 32'h28001000
+`define R1_N_SA_3 32'h28002000
 
 
 // Name:         R1_N_EA_3
@@ -1449,7 +1448,7 @@
 // Slave 3. This parameter option is available only if the 
 // "Slave Visibility Mode" is set to "Normal" or "Normal & Boot" 
 // and if you have an internal decoder (AHB_HAS_XDCDR = 0).
-`define R1_N_EA_3 32'h28001fff
+`define R1_N_EA_3 32'h28002fff
 
 
 // Name:         R2_N_SA_3
@@ -1622,7 +1621,7 @@
 // This parameter option is available only if the 
 // "Slave Visibility Mode" is set to "Normal" or "Normal & Boot" 
 // and if you have an internal decoder (AHB_HAS_XDCDR = 0).
-`define R1_N_SA_4 32'h28002000
+`define R1_N_SA_4 32'h28003000
 
 
 // Name:         R1_N_EA_4
@@ -1634,7 +1633,7 @@
 // Slave 4. This parameter option is available only if the 
 // "Slave Visibility Mode" is set to "Normal" or "Normal & Boot" 
 // and if you have an internal decoder (AHB_HAS_XDCDR = 0).
-`define R1_N_EA_4 32'h28002fff
+`define R1_N_EA_4 32'h28003fff
 
 
 // Name:         R2_N_SA_4
@@ -1808,7 +1807,7 @@
 // This parameter option is available only if the 
 // "Slave Visibility Mode" is set to "Normal" or "Normal & Boot" 
 // and if you have an internal decoder (AHB_HAS_XDCDR = 0).
-`define R1_N_SA_5 32'h28003000
+`define R1_N_SA_5 32'h10000000
 
 
 // Name:         R1_N_EA_5
@@ -1820,7 +1819,7 @@
 // Slave 5. This parameter option is available only if the 
 // "Slave Visibility Mode" is set to "Normal" or "Normal & Boot" 
 // and if you have an internal decoder (AHB_HAS_XDCDR = 0).
-`define R1_N_EA_5 32'h28003fff
+`define R1_N_EA_5 32'h1000ffff
 
 
 // Name:         R2_N_SA_5

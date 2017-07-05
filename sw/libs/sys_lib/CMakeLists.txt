@@ -8,7 +8,6 @@ set(SOURCES
     src/uart.c
     src/utils.c
     src/i2c.c
-    src/memctl.c
     src/ann.c
     src/camctl.c
     )
@@ -25,7 +24,6 @@ set(HEADERS
     inc/uart.h
     inc/utils.h
     inc/i2c.h
-    inc/memctl.h
     inc/ann.h
     inc/camctl.h
     )

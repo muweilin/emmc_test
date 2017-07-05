@@ -44,24 +44,24 @@ vmap $LIB_NAME $LIB_PATH
 
 echo "${Green}Compiling component: ${Brown} ahb_node ${NC}"
 echo "${Red}"
-vlog -quiet -sv -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_amba_constants.v  || goto error
-vlog -quiet -sv -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_cc_constants.v || goto error
-vlog -quiet -sv -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_constants.v   || goto error
-vlog -quiet -sv -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_bcm_params.v  || goto error
-vlog -quiet -sv -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_bcm02.v       || goto error
-vlog -quiet -sv -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_bcm01.v       || goto error
-vlog -quiet -sv -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_bcm53.v       || goto error
-vlog -quiet -sv -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_arbif.v       || goto error
-vlog -quiet -sv -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_dcdr.v        || goto error
-vlog -quiet -sv -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_dfltslv.v     || goto error
-vlog -quiet -sv -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_ebt.v         || goto error
-vlog -quiet -sv -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_gctrl.v       || goto error
-vlog -quiet -sv -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_mask.v        || goto error
-vlog -quiet -sv -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_mux.v         || goto error    
-vlog -quiet -sv -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_gating.v      || goto error
-vlog -quiet -sv -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb-undef.v       || goto error  
-vlog -quiet -sv -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_arb.v         || goto error 
-vlog -quiet -sv -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb.v             || goto error 
+vlog -quiet -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_amba_constants.v  || goto error
+#vlog -quiet -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_cc_constants.v || goto error
+vlog -quiet -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_constants.v   || goto error
+vlog -quiet -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_bcm_params.v  || goto error
+vlog -quiet -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_bcm02.v       || goto error
+vlog -quiet -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_bcm01.v       || goto error
+vlog -quiet -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_bcm53.v       || goto error
+vlog -quiet -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_arbif.v       || goto error
+vlog -quiet -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_dcdr.v        || goto error
+vlog -quiet -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_dfltslv.v     || goto error
+vlog -quiet -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_ebt.v         || goto error
+vlog -quiet -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_gctrl.v       || goto error
+vlog -quiet -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_mask.v        || goto error
+vlog -quiet -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_mux.v         || goto error    
+vlog -quiet -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_gating.v      || goto error
+vlog -quiet -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb-undef.v       || goto error  
+vlog -quiet -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb_arb.v         || goto error 
+vlog -quiet -work ${LIB_PATH} +incdir+${IP_PATH}   ${IP_PATH}/DW_ahb.v             || goto error 
                                   
                                   
 echo "${Cyan}--> ${IP} compilation complete! ${NC}"

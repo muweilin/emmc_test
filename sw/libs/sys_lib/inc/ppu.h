@@ -31,13 +31,13 @@
 #define ANN_BASE_ADDR          0x28002000
 
 /**  lpddr memory controller **/
-#define MEMCTL_BASE_ADDR          0x28000000
+//#define MEMCTL_BASE_ADDR          0x28000000
 
-#define MEMCTL_REG_SCONR          ( MEMCTL_BASE_ADDR + 0x00) 
-#define MEMCTL_REG_STMG0R         ( MEMCTL_BASE_ADDR + 0x04) 
-#define MEMCTL_REG_STMG1R         ( MEMCTL_BASE_ADDR + 0x08) 
-#define MEMCTL_REG_SCTLR          ( MEMCTL_BASE_ADDR + 0x0c) 
-#define MEMCTL_REG_SREFR          ( MEMCTL_BASE_ADDR + 0x10) 
+//#define MEMCTL_REG_SCONR          ( MEMCTL_BASE_ADDR + 0x00) 
+//#define MEMCTL_REG_STMG0R         ( MEMCTL_BASE_ADDR + 0x04) 
+//#define MEMCTL_REG_STMG1R         ( MEMCTL_BASE_ADDR + 0x08) 
+//#define MEMCTL_REG_SCTLR          ( MEMCTL_BASE_ADDR + 0x0c) 
+//#define MEMCTL_REG_SREFR          ( MEMCTL_BASE_ADDR + 0x10) 
 
 /**  camera controller  **/
 #define CAMCTL_BASE_ADDR          0x28001000
@@ -76,8 +76,10 @@
 /** Instruction RAM */
 //#define INSTR_RAM_BASE_ADDR           ( 0x00       )
 //#define INSTR_RAM_START_ADDR          ( 0x80       )
-#define INSTR_RAM_BASE_ADDR           ( 0x26000000 )
-#define INSTR_RAM_START_ADDR          ( 0x26000080 )
+//#define INSTR_RAM_BASE_ADDR           ( 0x26000000 )
+//#define INSTR_RAM_START_ADDR          ( 0x26000080 )
+#define INSTR_RAM_BASE_ADDR           ( 0x50000000 )
+#define INSTR_RAM_START_ADDR          ( 0x50000080 )
 
 /** ROM */
 #define ROM_BASE_ADDR                 ( 0x8000     )

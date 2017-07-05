@@ -18,6 +18,7 @@ int main()
 // set_pin_function(PIN0, FUNC_UART);
 // set_pin_function(PIN1, FUNC_UART);
 
-  printf("Hello World!!!!!\n");
+//  printf("Hello World!!!!!\n");
+  printf("HW!\n");
   return 0;
 }

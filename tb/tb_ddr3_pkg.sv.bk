@@ -1,0 +1,149 @@
+
+
+logic [63:0]          ddr3_stim  [10000:0];
+logic [31:0]          ddr3_data;
+logic [31:0]          ddr3_addr;
+logic [31:0]          ddr3_addr_old;
+logic [31:0]          memdata_rb;
+
+int    index = 0;
+logic  more_entries =1;
+
+//backdoor write for sdram
+task backdoor_write;
+    input [31:0]    addr   ; 
+    input [31:0]    wrdata ; //BL_MAX = 8; DQ_BITS = 16
+
+    reg  [2 : 0]  bank_addr;
+    reg  [14: 0]  row_addr ;
+    reg  [9 : 0]  col_addr ;
+    
+begin
+
+//    bank_addr  = addr[ 27 : 25 ];
+//    row_addr   = addr[ 24 : 10 ];
+//    col_addr   = addr[ 9  : 0  ];
+
+//    bank_addr  = addr[ 28 : 26 ];
+//    row_addr   = addr[ 25 : 11 ];
+//    col_addr   = addr[ 10  : 1 ];
+
+//    bank_addr  = addr[ 26 : 24 ];
+//    row_addr   = addr[ 23 : 9 ];
+//    col_addr   = {addr[8 : 0], 1'b0};
+
+    bank_addr  = addr[ 29 : 27 ];
+    row_addr   = addr[ 26 : 12 ];
+    col_addr   = {addr[11 : 5], 3'b0};
+
+    
+    ddr3_l.memory_write(bank_addr, row_addr, col_addr, wrdata[15 : 0]);
+    ddr3_u.memory_write(bank_addr, row_addr, col_addr, wrdata[31: 16]);
+
+end
+endtask
+
+//backdoor write for sdram
+task backdoor_read;
+    input [31:0]    addr    ;   //must align of 4 Bytes
+    input [31:0]    rddata  ;
+
+    reg  [2 : 0]  bank_addr;
+    reg  [14: 0]  row_addr ;
+    reg  [9 : 0]  col_addr ;
+    
+begin
+
+//    bank_addr  = addr[ 27 : 25 ];
+//    row_addr   = addr[ 24 : 10 ];
+//    col_addr   = addr[ 9  : 0  ];
+
+//    bank_addr  = addr[ 28 : 26 ];
+//    row_addr   = addr[ 25 : 11 ];
+//    col_addr   = addr[ 10  : 1 ];
+
+//    bank_addr  = addr[ 26 : 24 ];
+//    row_addr   = addr[ 23 : 9 ];
+//    col_addr   = {addr[8 : 0], 1'b0};
+    
+//    bank_addr  = addr[ 29 : 27 ];
+//    row_addr   = addr[ 26 : 12 ];
+//    col_addr   = {addr[11 : 3], 1'b0};
+
+
+    bank_addr  = addr[ 29 : 27 ];
+    row_addr   = addr[ 26 : 12 ];
+    col_addr   = {addr[11 : 5], 3'b0};
+
+    
+    ddr3_l.memory_write(bank_addr, row_addr, col_addr, rddata[15 : 0]);
+    ddr3_u.memory_write(bank_addr, row_addr, col_addr, rddata[31: 16]);
+    
+end
+endtask
+
+
+task ddr3_load;
+    begin
+      $readmemh("./slm_files/spi_stim.txt", ddr3_stim);  // read in the stimuli vectors  == address_value
+
+      $display("[DDR3] Loading SDRAM (Instruction Section)");
+         
+       ddr3_addr  = ddr3_stim[index][63:32]; // assign address
+       ddr3_addr_old = ddr3_addr - 32'h4;
+
+      while (more_entries)                        // loop until we have no more stimuli)
+      begin
+        ddr3_addr  = ddr3_stim[index][63:32]; // assign address
+        ddr3_data  = ddr3_stim[index][31:0];  // assign data
+
+        if (ddr3_addr != (ddr3_addr_old + 32'h4))
+        begin
+          $display("[DDR3] Prev address %h, Current address %h", ddr3_addr_old, ddr3_addr);
+          $display("[DDR3] Loading DRAM (Data Section)");
+        end
+
+        backdoor_write(ddr3_addr, ddr3_data);
+
+        index = index + 1;             // increment stimuli
+        ddr3_addr_old = ddr3_addr;
+        if ( ddr3_stim[index] === 64'bx ) // make sure we have more stimuli
+          more_entries = 0; 
+      end                                   // end while loop
+    end
+  endtask
+
+  task ddr3_check;
+      begin
+       index  = 0;
+       more_entries = 1;
+      
+       $display("[DDR3] Checking DRAM (Instruction Section)");
+         
+       ddr3_addr  = ddr3_stim[index][63:32]; // assign address
+       ddr3_addr_old = ddr3_addr - 32'h4;
+          
+       while (more_entries)                        // loop until we have no more stimuli)
+       begin
+         ddr3_addr  = ddr3_stim[index][63:32]; // assign address
+         ddr3_data  = ddr3_stim[index][31:0];  // assign data
+ 
+         if (ddr3_addr != (ddr3_addr_old + 32'h4))
+         begin
+           $display("[DDR3] Prev address %h, Current address %h", ddr3_addr_old, ddr3_addr);
+           $display("[DDR3] Checking DRAM (Data Section)");
+         end
+ 
+         backdoor_read(ddr3_addr, memdata_rb);
+
+         if (memdata_rb != ddr3_data)
+           $display("%t: [DDR3] Readback failed, expected %X, got %X", $time, ddr3_data, memdata_rb);
+
+         index = index + 1;             // increment stimuli
+         ddr3_addr_old = ddr3_addr;
+          if ( ddr3_stim[index] === 64'bx ) // make sure we have more stimuli
+            more_entries = 0;
+       end                                   // end while loop
+      end
+  endtask
+

@@ -24,10 +24,12 @@ tcsh ${PPU_PATH}/./vsim/vcompile/ips/vcompile_apb_node.csh || exit 1
 tcsh ${PPU_PATH}/./vsim/vcompile/ips/vcompile_apb2per.csh || exit 1
 
 tcsh ${PPU_PATH}/./vsim/vcompile/ips/vcompile_ahb_ann.csh || exit 1
-tcsh ${PPU_PATH}/./vsim/vcompile/ips/vcompile_ahb_common.csh || exit 1
-tcsh ${PPU_PATH}/./vsim/vcompile/ips/vcompile_ahb_mctl.csh || exit 1
+#tcsh ${PPU_PATH}/./vsim/vcompile/ips/vcompile_ahb_common.csh || exit 1
+#tcsh ${PPU_PATH}/./vsim/vcompile/ips/vcompile_ahb_mctl.csh || exit 1
 tcsh ${PPU_PATH}/./vsim/vcompile/ips/vcompile_ahb_camera.csh || exit 1
 tcsh ${PPU_PATH}/./vsim/vcompile/ips/vcompile_ahb_emmc.csh || exit 1
 tcsh ${PPU_PATH}/./vsim/vcompile/ips/vcompile_ahb_node.csh || exit 1
 tcsh ${PPU_PATH}/./vsim/vcompile/ips/vcompile_axi2ahb.csh || exit 1
+
+tcsh ${PPU_PATH}/./vsim/vcompile/ips/vcompile_axi_ddr3_if.csh || exit 1
 
