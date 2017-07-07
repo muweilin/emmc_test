@@ -2,29 +2,29 @@
 # Vivado v2015.2 (64-bit)
 # SW Build 1266856 on Fri Jun 26 16:35:25 MDT 2015
 # IP Build 1264090 on Wed Jun 24 14:22:01 MDT 2015
-# Start of session at: Sun Jul  2 16:52:50 2017
-# Process ID: 14526
-# Log file: /home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.runs/xilinx_clock_2x_synth_1/xilinx_clock_2x.vds
-# Journal file: /home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.runs/xilinx_clock_2x_synth_1/vivado.jou
+# Start of session at: Thu Jul  6 17:18:20 2017
+# Process ID: 23903
+# Log file: /home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.runs/xilinx_clock_2x_synth_1/xilinx_clock_2x.vds
+# Journal file: /home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.runs/xilinx_clock_2x_synth_1/vivado.jou
 #-----------------------------------------------------------
 source xilinx_clock_2x.tcl -notrace
 INFO: [IP_Flow 19-234] Refreshing IP repositories
 INFO: [IP_Flow 19-1704] No user IP repositories specified
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/Xilinx/Vivado/2015.2/data/ip'.
-WARNING: [IP_Flow 19-3664] IP 'xilinx_clock_2x' generated file not found '/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x.dcp'. Please regenerate to continue.
-WARNING: [IP_Flow 19-3664] IP 'xilinx_clock_2x' generated file not found '/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_stub.v'. Please regenerate to continue.
-WARNING: [IP_Flow 19-3664] IP 'xilinx_clock_2x' generated file not found '/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_stub.vhdl'. Please regenerate to continue.
-WARNING: [IP_Flow 19-3664] IP 'xilinx_clock_2x' generated file not found '/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_funcsim.v'. Please regenerate to continue.
-WARNING: [IP_Flow 19-3664] IP 'xilinx_clock_2x' generated file not found '/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_funcsim.vhdl'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'xilinx_clock_2x' generated file not found '/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x.dcp'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'xilinx_clock_2x' generated file not found '/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_stub.v'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'xilinx_clock_2x' generated file not found '/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_stub.vhdl'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'xilinx_clock_2x' generated file not found '/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_funcsim.v'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'xilinx_clock_2x' generated file not found '/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_funcsim.vhdl'. Please regenerate to continue.
 Command: synth_design -top xilinx_clock_2x -part xc7a100tfgg484-2 -mode out_of_context
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 954.172 ; gain = 143.516 ; free physical = 5779 ; free virtual = 26025
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 954.172 ; gain = 143.516 ; free physical = 5667 ; free virtual = 26411
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-638] synthesizing module 'xilinx_clock_2x' [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x.v:69]
-INFO: [Synth 8-638] synthesizing module 'xilinx_clock_2x_clk_wiz' [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_clk_wiz.v:67]
+INFO: [Synth 8-638] synthesizing module 'xilinx_clock_2x' [/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x.v:69]
+INFO: [Synth 8-638] synthesizing module 'xilinx_clock_2x_clk_wiz' [/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_clk_wiz.v:67]
 INFO: [Synth 8-638] synthesizing module 'IBUF' [/opt/Xilinx/Vivado/2015.2/scripts/rt/data/unisim_comp.v:10256]
 	Parameter CAPACITANCE bound to: DONT_CARE - type: string 
 	Parameter IBUF_DELAY_VALUE bound to: 0 - type: string 
@@ -84,10 +84,10 @@ INFO: [Synth 8-638] synthesizing module 'MMCME2_ADV' [/opt/Xilinx/Vivado/2015.2/
 INFO: [Synth 8-256] done synthesizing module 'MMCME2_ADV' (2#1) [/opt/Xilinx/Vivado/2015.2/scripts/rt/data/unisim_comp.v:15999]
 INFO: [Synth 8-638] synthesizing module 'BUFG' [/opt/Xilinx/Vivado/2015.2/scripts/rt/data/unisim_comp.v:607]
 INFO: [Synth 8-256] done synthesizing module 'BUFG' (3#1) [/opt/Xilinx/Vivado/2015.2/scripts/rt/data/unisim_comp.v:607]
-INFO: [Synth 8-256] done synthesizing module 'xilinx_clock_2x_clk_wiz' (4#1) [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_clk_wiz.v:67]
-INFO: [Synth 8-256] done synthesizing module 'xilinx_clock_2x' (5#1) [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x.v:69]
+INFO: [Synth 8-256] done synthesizing module 'xilinx_clock_2x_clk_wiz' (4#1) [/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_clk_wiz.v:67]
+INFO: [Synth 8-256] done synthesizing module 'xilinx_clock_2x' (5#1) [/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x.v:69]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 990.461 ; gain = 179.805 ; free physical = 5741 ; free virtual = 25988
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 990.461 ; gain = 179.805 ; free physical = 5630 ; free virtual = 26374
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -97,7 +97,7 @@ Report Check Netlist:
 |1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
 +------+------------------+-------+---------+-------+------------------+
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 990.461 ; gain = 179.805 ; free physical = 5741 ; free virtual = 25988
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 990.461 ; gain = 179.805 ; free physical = 5630 ; free virtual = 26374
 ---------------------------------------------------------------------------------
 INFO: [Netlist 29-17] Analyzing 2 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
@@ -107,42 +107,42 @@ Feature available: Internal_bitstream
 
 Processing XDC Constraints
 Initializing timing engine
-Parsing XDC File [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_ooc.xdc] for cell 'inst'
-Finished Parsing XDC File [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_ooc.xdc] for cell 'inst'
-Parsing XDC File [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_board.xdc] for cell 'inst'
-Finished Parsing XDC File [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_board.xdc] for cell 'inst'
-Parsing XDC File [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x.xdc] for cell 'inst'
-Finished Parsing XDC File [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x.xdc] for cell 'inst'
+Parsing XDC File [/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_ooc.xdc] for cell 'inst'
+Finished Parsing XDC File [/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_ooc.xdc] for cell 'inst'
+Parsing XDC File [/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_board.xdc] for cell 'inst'
+Finished Parsing XDC File [/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_board.xdc] for cell 'inst'
+Parsing XDC File [/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x.xdc] for cell 'inst'
+Finished Parsing XDC File [/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x.xdc] for cell 'inst'
 INFO: [Timing 38-2] Deriving generated clocks
-INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/xilinx_clock_2x_propImpl.xdc].
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/xilinx_clock_2x_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/xilinx_clock_2x_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
-Parsing XDC File [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.runs/xilinx_clock_2x_synth_1/dont_touch.xdc]
-Finished Parsing XDC File [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.runs/xilinx_clock_2x_synth_1/dont_touch.xdc]
+Parsing XDC File [/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.runs/xilinx_clock_2x_synth_1/dont_touch.xdc]
+Finished Parsing XDC File [/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.runs/xilinx_clock_2x_synth_1/dont_touch.xdc]
 Completed Processing XDC Constraints
 
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 1196.898 ; gain = 0.000 ; free physical = 5560 ; free virtual = 25807
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.03 . Memory (MB): peak = 1196.906 ; gain = 0.000 ; free physical = 5435 ; free virtual = 26179
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1196.902 ; gain = 386.246 ; free physical = 5560 ; free virtual = 25807
+Finished Constraint Validation : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1196.910 ; gain = 386.254 ; free physical = 5435 ; free virtual = 26179
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a100tfgg484-2
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1196.902 ; gain = 386.246 ; free physical = 5560 ; free virtual = 25807
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1196.910 ; gain = 386.254 ; free physical = 5435 ; free virtual = 26179
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 Applied set_property DONT_TOUCH = true for inst. (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1196.902 ; gain = 386.246 ; free physical = 5560 ; free virtual = 25807
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1196.910 ; gain = 386.254 ; free physical = 5435 ; free virtual = 26179
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1196.902 ; gain = 386.246 ; free physical = 5554 ; free virtual = 25801
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1196.910 ; gain = 386.254 ; free physical = 5432 ; free virtual = 26176
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -173,14 +173,14 @@ BRAMs: 270 (col length: RAMB18 80 RAMB36 40)
 ---------------------------------------------------------------------------------
 Finished Part Resource Summary
 ---------------------------------------------------------------------------------
-Start Parallel Synthesis Optimization  : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1196.902 ; gain = 386.246 ; free physical = 5554 ; free virtual = 25801
+Start Parallel Synthesis Optimization  : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1196.910 ; gain = 386.254 ; free physical = 5432 ; free virtual = 26176
 ---------------------------------------------------------------------------------
 Start Cross Boundary Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Cross Boundary Optimization : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1196.902 ; gain = 386.246 ; free physical = 5546 ; free virtual = 25793
+Finished Cross Boundary Optimization : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1196.910 ; gain = 386.254 ; free physical = 5432 ; free virtual = 26176
 ---------------------------------------------------------------------------------
-Finished Parallel Reinference  : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1196.902 ; gain = 386.246 ; free physical = 5546 ; free virtual = 25793
+Finished Parallel Reinference  : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1196.910 ; gain = 386.254 ; free physical = 5432 ; free virtual = 26176
 
 Report RTL Partitions: 
 +-+--------------+------------+----------+
@@ -191,16 +191,16 @@ Report RTL Partitions:
 Start Area Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Area Optimization : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1204.906 ; gain = 394.250 ; free physical = 5538 ; free virtual = 25785
+Finished Area Optimization : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1204.914 ; gain = 394.258 ; free physical = 5424 ; free virtual = 26168
 ---------------------------------------------------------------------------------
-Finished Parallel Area Optimization  : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1204.906 ; gain = 394.250 ; free physical = 5538 ; free virtual = 25785
+Finished Parallel Area Optimization  : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1204.914 ; gain = 394.258 ; free physical = 5424 ; free virtual = 26168
 
 Report RTL Partitions: 
 +-+--------------+------------+----------+
 | |RTL Partition |Replication |Instances |
 +-+--------------+------------+----------+
 +-+--------------+------------+----------+
-Finished Parallel Synthesis Optimization  : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1204.906 ; gain = 394.250 ; free physical = 5538 ; free virtual = 25785
+Finished Parallel Synthesis Optimization  : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1204.914 ; gain = 394.258 ; free physical = 5424 ; free virtual = 26168
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
@@ -208,10 +208,10 @@ Start Timing Optimization
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 1242.910 ; gain = 432.254 ; free physical = 5496 ; free virtual = 25743
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:17 ; elapsed = 00:00:17 . Memory (MB): peak = 1242.918 ; gain = 432.262 ; free physical = 5386 ; free virtual = 26131
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 1242.910 ; gain = 432.254 ; free physical = 5496 ; free virtual = 25743
+Finished Timing Optimization : Time (s): cpu = 00:00:17 ; elapsed = 00:00:17 . Memory (MB): peak = 1242.918 ; gain = 432.262 ; free physical = 5386 ; free virtual = 26131
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -223,7 +223,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 1252.922 ; gain = 442.266 ; free physical = 5488 ; free virtual = 25735
+Finished Technology Mapping : Time (s): cpu = 00:00:17 ; elapsed = 00:00:17 . Memory (MB): peak = 1252.930 ; gain = 442.273 ; free physical = 5378 ; free virtual = 26122
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -241,7 +241,7 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 1252.922 ; gain = 442.266 ; free physical = 5488 ; free virtual = 25735
+Finished IO Insertion : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 1252.930 ; gain = 442.273 ; free physical = 5378 ; free virtual = 26122
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -254,7 +254,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 1252.922 ; gain = 442.266 ; free physical = 5488 ; free virtual = 25735
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 1252.930 ; gain = 442.273 ; free physical = 5378 ; free virtual = 26122
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -266,13 +266,13 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 1252.922 ; gain = 442.266 ; free physical = 5488 ; free virtual = 25735
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 1252.930 ; gain = 442.273 ; free physical = 5378 ; free virtual = 26122
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Start Renaming Generated Ports : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 1252.922 ; gain = 442.266 ; free physical = 5488 ; free virtual = 25735
+Start Renaming Generated Ports : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 1252.930 ; gain = 442.273 ; free physical = 5378 ; free virtual = 26122
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 1252.922 ; gain = 442.266 ; free physical = 5488 ; free virtual = 25735
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 1252.930 ; gain = 442.273 ; free physical = 5378 ; free virtual = 26122
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -302,24 +302,24 @@ Report Instance Areas:
 |2     |  inst   |xilinx_clock_2x_clk_wiz |     5|
 +------+---------+------------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 1252.922 ; gain = 442.266 ; free physical = 5488 ; free virtual = 25735
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 1252.930 ; gain = 442.273 ; free physical = 5378 ; free virtual = 26122
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1252.922 ; gain = 127.309 ; free physical = 5488 ; free virtual = 25735
-Synthesis Optimization Complete : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 1252.922 ; gain = 442.266 ; free physical = 5488 ; free virtual = 25735
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 1252.930 ; gain = 127.309 ; free physical = 5377 ; free virtual = 26122
+Synthesis Optimization Complete : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 1252.930 ; gain = 442.273 ; free physical = 5377 ; free virtual = 26122
 INFO: [Project 1-571] Translating synthesized netlist
 INFO: [Netlist 29-17] Analyzing 2 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
-Parsing XDC File [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_ooc.xdc] for cell 'inst'
-Finished Parsing XDC File [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_ooc.xdc] for cell 'inst'
-Parsing XDC File [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_board.xdc] for cell 'inst'
-Finished Parsing XDC File [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_board.xdc] for cell 'inst'
-Parsing XDC File [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x.xdc] for cell 'inst'
-INFO: [Timing 38-35] Done setting XDC timing constraints. [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x.xdc:56]
-INFO: [Timing 38-2] Deriving generated clocks [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x.xdc:56]
-get_clocks: Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1559.355 ; gain = 306.430 ; free physical = 5190 ; free virtual = 25437
-Finished Parsing XDC File [/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x.xdc] for cell 'inst'
+Parsing XDC File [/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_ooc.xdc] for cell 'inst'
+Finished Parsing XDC File [/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_ooc.xdc] for cell 'inst'
+Parsing XDC File [/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_board.xdc] for cell 'inst'
+Finished Parsing XDC File [/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x_board.xdc] for cell 'inst'
+Parsing XDC File [/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x.xdc] for cell 'inst'
+INFO: [Timing 38-35] Done setting XDC timing constraints. [/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x.xdc:56]
+INFO: [Timing 38-2] Deriving generated clocks [/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x.xdc:56]
+get_clocks: Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1560.363 ; gain = 307.430 ; free physical = 5079 ; free virtual = 25824
+Finished Parsing XDC File [/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.srcs/sources_1/ip/xilinx_clock_2x/xilinx_clock_2x.xdc] for cell 'inst'
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
@@ -327,8 +327,8 @@ No Unisim elements were transformed.
 INFO: [Common 17-83] Releasing license: Synthesis
 30 Infos, 5 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 1559.355 ; gain = 640.180 ; free physical = 5190 ; free virtual = 25437
+synth_design: Time (s): cpu = 00:00:25 ; elapsed = 00:00:25 . Memory (MB): peak = 1560.363 ; gain = 641.188 ; free physical = 5079 ; free virtual = 25824
 INFO: [Common 17-600] The following parameters have non-default value.
 synth.vivado.isSynthRun
-report_utilization: Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.10 . Memory (MB): peak = 1567.375 ; gain = 0.000 ; free physical = 5188 ; free virtual = 25435
-INFO: [Common 17-206] Exiting Vivado at Sun Jul  2 16:53:23 2017...
+report_utilization: Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.11 . Memory (MB): peak = 1568.383 ; gain = 0.000 ; free physical = 5077 ; free virtual = 25821
+INFO: [Common 17-206] Exiting Vivado at Thu Jul  6 17:18:50 2017...

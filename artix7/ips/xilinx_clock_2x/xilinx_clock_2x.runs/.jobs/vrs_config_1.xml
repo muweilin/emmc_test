@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
 <Runs Version="1" Minor="0">
-	<Run Id="xilinx_clock_2x_synth_1" LaunchDir="/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.runs/xilinx_clock_2x_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+	<Run Id="xilinx_clock_2x_synth_1" LaunchDir="/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.runs/xilinx_clock_2x_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
 </Runs>
 

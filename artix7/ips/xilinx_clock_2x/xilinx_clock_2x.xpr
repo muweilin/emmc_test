@@ -3,10 +3,10 @@
 <!--                                                         -->
 <!-- Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="5" Path="/home/hetingting/artix7-board_use_mig/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.xpr">
+<Project Version="7" Minor="5" Path="/home/hetingting/artix7-board/artix7/ips/xilinx_clock_2x/xilinx_clock_2x.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
-    <Option Name="Id" Val="828bb51fd5924c5c93daa32f4a158c9d"/>
+    <Option Name="Id" Val="2d1c61e626e147189643cddb60f850f9"/>
     <Option Name="Part" Val="xc7a100tfgg484-2"/>
     <Option Name="CompiledLibDir" Val="$PCACHEDIR/compile_simlib"/>
     <Option Name="BoardPart" Val=""/>

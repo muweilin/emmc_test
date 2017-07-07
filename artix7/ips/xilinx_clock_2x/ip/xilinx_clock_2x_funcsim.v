@@ -1,7 +1,7 @@
 // Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2015.2 (lin64) Build 1266856 Fri Jun 26 16:35:25 MDT 2015
-// Date        : Sun Jul  2 16:53:39 2017
+// Date        : Thu Jul  6 17:19:03 2017
 // Host        : wusystem-server running 64-bit Ubuntu 14.04.5 LTS
 // Command     : write_verilog -force -mode funcsim xilinx_clock_2x_funcsim.v
 // Design      : xilinx_clock_2x

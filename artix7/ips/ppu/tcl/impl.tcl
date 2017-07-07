@@ -214,13 +214,13 @@ set_property IOSTANDARD  LVCMOS33        [get_ports emmc_cclk_out]
 set_property PACKAGE_PIN  R17      [get_ports emmc_ccmd]
 set_property IOSTANDARD  LVCMOS33        [get_ports emmc_ccmd]
 
-set_property PACKAGE_PIN   P17      [get_ports sdio_card_int_n]
-set_property IOSTANDARD  LVCMOS33        [get_ports sdio_card_int_n]
+#set_property PACKAGE_PIN   P17      [get_ports sdio_card_int_n]
+#set_property IOSTANDARD  LVCMOS33        [get_ports sdio_card_int_n]
 
-set_property PACKAGE_PIN  N13      [get_ports emmc_cdata[0]]
+set_property PACKAGE_PIN  P15      [get_ports emmc_cdata[0]]
 set_property IOSTANDARD  LVCMOS33        [get_ports emmc_cdata[0]]
 
-set_property PACKAGE_PIN  P15      [get_ports emmc_cdata[1]]
+set_property PACKAGE_PIN  N17      [get_ports emmc_cdata[1]]
 set_property IOSTANDARD  LVCMOS33        [get_ports emmc_cdata[1]]
 
 set_property PACKAGE_PIN  P20      [get_ports emmc_cdata[2]]

@@ -37,7 +37,7 @@
   emmc_cdata,        
 // emmc_card_detect_n, 
 /// emmc_card_write_prt,
-  sdio_card_int_n,   
+//  sdio_card_int_n,   
 //  mmc_4_4_rst_n;     
 
 
@@ -102,7 +102,7 @@
 	 inout wire   [3: 0]        emmc_cdata;
 //	input logic  [ 1: 0]      emmc_card_detect_n,
 //	input logic  [ 1: 0]      emmc_card_write_prt,
-	 input  wire        sdio_card_int_n;
+	// input  wire        sdio_card_int_n;
 	// output logic [ 1: 0]        mmc_4_4_rst_n;
 /*
   inout         gpio0;
@@ -230,7 +230,7 @@
 	 .emmc_cdata             ( emmc_cdata  ), //tri data0 N13 data1 P15 data2 P20  data3 P16
 	 .emmc_card_detect_n     ( 1'b0  ),
 	 .emmc_card_write_prt    ( 1'b0  ),
-	 .sdio_card_int_n        ( sdio_card_int_n  ),//P17
+	 .sdio_card_int_n        ( 1'b1  ),//P17
 	 .mmc_4_4_rst_n          (   ),
 
    //ddr3 sdram if
