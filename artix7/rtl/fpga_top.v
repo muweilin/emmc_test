@@ -5,10 +5,15 @@
   clk_n,
   rst_n,
 
-  spi_sck,
-  spi_csn,
-  spi_sdo0,
-  spi_sdi0,
+  spi_master_clk_o ,
+  spi_master_csn0_o,
+  spi_master_sdo0_o,
+  spi_master_sdi0_i,
+  
+ // spi_sck,
+ // spi_csn,
+ // spi_sdo0,
+ // spi_sdi0,
 
   uart_tx,
   uart_rx,
@@ -41,7 +46,7 @@
 //  mmc_4_4_rst_n;     
 
 
-  gpio0
+  gpio,
 //  gpio1,
 //  pclk,
 //  vsync,
@@ -69,14 +74,14 @@
   input         clk_n;
   input         rst_n;
 
-  output        spi_sck;
-  output        spi_csn;
-  output        spi_sdo0;
-  input         spi_sdi0;
+ // input        spi_sck;
+ // output        spi_csn;
+ // output        spi_sdo0;
+ // input         spi_sdi0;
   //uart
   output        uart_tx;
   input         uart_rx;
-  inout         gpio0;
+  inout  wire    [31:0]     gpio;
   //i2c eeprom
   inout         scl_io;
   inout         sda_io;
@@ -100,6 +105,11 @@
    output wire        emmc_cclk_out;
 	 inout wire        emmc_ccmd;
 	 inout wire   [3: 0]        emmc_cdata;
+	 
+	output  spi_master_clk_o ;
+	output  spi_master_csn0_o;
+	output  spi_master_sdo0_o;
+	input   spi_master_sdi0_i;
 //	input logic  [ 1: 0]      emmc_card_detect_n,
 //	input logic  [ 1: 0]      emmc_card_write_prt,
 	// input  wire        sdio_card_int_n;
@@ -130,7 +140,7 @@
 */
 
   wire clk;
-  wire [31:0] gpio;
+ // wire [31:0] gpio;
  
   //wire spi_sdi0 ; 
   wire spi_sdi1 ; 
@@ -141,7 +151,7 @@
   wire spi_sdo2 ;
   wire spi_sdo3 ; 
   
-  assign  gpio0 = gpio[0];
+//  assign  gpio0 = gpio[0];
 //  wire [15:0] wire_memctl_s_addr;
 
 //  assign memctl_s_addr = wire_memctl_s_addr[13:0];
@@ -173,16 +183,16 @@
      .spi_sdi3_i        ( spi_sdi3      ),
 
     //SPI Master
-     .spi_master_clk_o  (  ),
-     .spi_master_csn0_o (  ),
+     .spi_master_clk_o  ( spi_master_clk_o ),
+     .spi_master_csn0_o (spi_master_csn0_o  ),
      .spi_master_csn1_o (  ),
      .spi_master_csn2_o (  ),
      .spi_master_csn3_o (  ),
-     .spi_master_sdo0_o (  ),
+     .spi_master_sdo0_o (spi_master_sdo0_o  ),
      .spi_master_sdo1_o (  ),
      .spi_master_sdo2_o (  ),
      .spi_master_sdo3_o (  ),
-     .spi_master_sdi0_i (  ),
+     .spi_master_sdi0_i ( spi_master_sdi0_i ),
      .spi_master_sdi1_i (  ),
      .spi_master_sdi2_i (  ),
      .spi_master_sdi3_i (  ),

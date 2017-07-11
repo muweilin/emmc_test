@@ -32,9 +32,9 @@ void eoc(int i) {
   // activate GPIO
   CGREG |= (1 << CGGPIO);
   // setup GPIO
-  set_pin_function(PIN2, FUNC_GPIO);
-  set_gpio_pin_direction(PIN2, DIR_OUT);
-  set_gpio_pin_value(PIN2, 1);
+ // set_pin_function(PIN2, FUNC_GPIO);
+ // set_gpio_pin_direction(PIN2, DIR_OUT);
+ // set_gpio_pin_value(PIN2, 1);
 }
 
 // sleep for 'iter' iterations. each iteration is approx 10 cycles

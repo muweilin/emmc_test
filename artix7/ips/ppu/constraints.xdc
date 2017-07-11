@@ -805,3 +805,102 @@ set_property IOSTANDARD LVCMOS33 [get_ports {emmc_cdata[2]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {emmc_cdata[3]}]
 set_max_delay -from [get_pins {top_i/ppu_top_i/peripherals_i/ahb_subsystem_i/DWC_mobile_storage_top/DWC_mobile_storage/U_DWC_mobile_storage_biu/U_DWC_mobile_storage_regb/uhs_reg_ext_reg[19]/C}] -to [get_pins {top_i/ppu_top_i/peripherals_i/ahb_subsystem_i/DWC_mobile_storage_top/DWC_mobile_storage_clk_ctrl/r_clk_smpl_phase_ctrl_reg[3]/D}] 2.700
 set_max_delay -from [get_pins {top_i/ppu_top_i/peripherals_i/ahb_subsystem_i/DWC_mobile_storage_top/DWC_mobile_storage/U_DWC_mobile_storage_biu/U_DWC_mobile_storage_regb/uhs_reg_ext_reg[18]/C}] -to [get_pins {top_i/ppu_top_i/peripherals_i/ahb_subsystem_i/DWC_mobile_storage_top/DWC_mobile_storage_clk_ctrl/r_clk_smpl_phase_ctrl_reg[2]/D}] 3.000
+
+####################
+##    GPIO  ############
+####################
+set_property PACKAGE_PIN   E16      [get_ports gpio[0]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[0]]
+
+set_property PACKAGE_PIN   F16      [get_ports gpio[1]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[1]]
+
+set_property PACKAGE_PIN   D16     [get_ports gpio[2]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[2]]
+
+set_property PACKAGE_PIN   E17      [get_ports gpio[3]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[3]]
+
+set_property PACKAGE_PIN   B15      [get_ports gpio[4]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[4]]
+
+set_property PACKAGE_PIN   C14      [get_ports gpio[5]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[5]]
+
+set_property PACKAGE_PIN   B16      [get_ports gpio[6]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[6]]
+
+set_property PACKAGE_PIN   C15      [get_ports gpio[7]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[7]]
+
+set_property PACKAGE_PIN   A15     [get_ports gpio[8]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[8]]
+
+set_property PACKAGE_PIN   A13      [get_ports gpio[9]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[9]]
+
+set_property PACKAGE_PIN   A16     [get_ports gpio[10]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[10]]
+
+set_property PACKAGE_PIN   A14      [get_ports gpio[11]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[11]]
+
+set_property PACKAGE_PIN   B17      [get_ports gpio[12]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[12]]
+
+set_property PACKAGE_PIN   D17      [get_ports gpio[13]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[13]]
+
+set_property PACKAGE_PIN   B18      [get_ports gpio[14]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[14]]
+
+set_property PACKAGE_PIN   C17      [get_ports gpio[15]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[15]]
+
+set_property PACKAGE_PIN   C18      [get_ports gpio[16]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[16]]
+
+set_property PACKAGE_PIN   E19     [get_ports gpio[17]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[17]]
+
+set_property PACKAGE_PIN   C19      [get_ports gpio[18]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[18]]
+
+set_property PACKAGE_PIN   D19      [get_ports gpio[19]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[19]]
+
+set_property PACKAGE_PIN   F18      [get_ports gpio[20]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[20]]
+
+set_property PACKAGE_PIN   B20      [get_ports gpio[21]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[21]]
+
+set_property PACKAGE_PIN   E18      [get_ports gpio[22]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[22]]
+
+set_property PACKAGE_PIN   A20      [get_ports gpio[23]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[23]]
+
+set_property PACKAGE_PIN   A18      [get_ports gpio[24]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[24]]
+
+set_property PACKAGE_PIN   F19      [get_ports gpio[25]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[25]]
+
+set_property PACKAGE_PIN   A19      [get_ports gpio[26]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[26]]
+
+set_property PACKAGE_PIN   F20      [get_ports gpio[27]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[27]]
+
+set_property PACKAGE_PIN   D20      [get_ports gpio[28]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[28]]
+
+set_property PACKAGE_PIN   C22      [get_ports gpio[29]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[29]]
+
+set_property PACKAGE_PIN   C20      [get_ports gpio[30]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[30]]
+
+set_property PACKAGE_PIN   B22      [get_ports gpio[31]]
+set_property IOSTANDARD  LVCMOS33        [get_ports gpio[31]]

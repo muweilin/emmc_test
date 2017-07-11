@@ -1,27 +1,8 @@
-
 #include "pwm.h"
 #include "gpio.h"
 #include "uart.h"
 #include "utils.h"
 
-void open_pwm_pin(int pwm_ch)//set PIN mode
-{
-   volatile int pinnumber;
-
-   switch( pwm_ch )
-   {
-     case 0:  pinnumber = 5; break;
-     case 1:  pinnumber = 6; break;
-     case 2:  pinnumber = 7; break;
-     case 3:  pinnumber = 8; break;
-     default: 
-             uart_send("PWM Channel ID Err!!!\n", 22);
-             exit(1);
-   }
-
-   set_pin_function(pinnumber, FUNC_PWM);
-
-}
 
 void set_pwm_channel(int pwm_ch, int full, int duty)
 {
@@ -80,5 +61,3 @@ void stop_pwm_channel(int pwm_ch)
              exit(1);
    } 
 }
-
-

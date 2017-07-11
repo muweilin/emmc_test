@@ -1,4 +1,3 @@
-
 #include "camctl.h"
 #include "event.h"
 #include <stdio.h>
@@ -92,5 +91,4 @@ void camctl_stop()
   *(volatile int*) (CAMCTL_CTRL_REG) = val;
   
 }
-
 
