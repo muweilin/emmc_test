@@ -5,13 +5,16 @@ ips: clk mem ddr3 h2x ppu
 
 
 .PHONY: clk
-clk: ips/xilinx_clock_manager/ip/xilinx_clock_manager.dcp ips/xilinx_clock_2x/ip/xilinx_clock_2x.dcp
+clk: ips/xilinx_clock_manager/ip/xilinx_clock_manager.dcp ips/xilinx_clock_2x/ip/xilinx_clock_2x.dcp ips/xilinx_axi_clock_convert/ip/xilinx_axi_clock_convert.dcp
 
 ips/xilinx_clock_manager/ip/xilinx_clock_manager.dcp:
 	make -C ips/xilinx_clock_manager/ clean all
 
 ips/xilinx_clock_2x/ip/xilinx_clock_2x.dcp:
 	make -C ips/xilinx_clock_2x/ clean all
+	
+ips/xilinx_axi_clock_convert/ip/xilinx_axi_clock_convert.dcp:
+	make -C ips/xilinx_axi_clock_convert/ clean all
 
 .PHONY: mem
 mem: ips/xilinx_mem_16384x32/ip/xilinx_mem_16384x32.dcp ips/xilinx_mem_8192x32/ip/xilinx_mem_8192x32.dcp ips/xilinx_mem_512x32_dp/ip/xilinx_mem_512x32_dp.dcp ips/xilinx_mem_256x8/ip/xilinx_mem_256x8.dcp ips/xilinx_mem_128x8_dp/ip/xilinx_mem_128x8_dp.dcp ips/xilinx_mem_128x26_dp/ip/xilinx_mem_128x26_dp.dcp ips/xilinx_mem_1024x24/ip/xilinx_mem_1024x24.dcp
