@@ -338,7 +338,7 @@ module top
    (
     .core_in  ( core_scl_pad_o   ),
     .core_out ( core_scl_pad_i   ),
-    .core_oe  ( core_scl_padoen_o ),
+    .core_oe  ( ~core_scl_padoen_o ),
     .io_inout ( scl   )
   );
 
@@ -348,7 +348,7 @@ module top
    (
     .core_in  ( core_sda_pad_o   ),
     .core_out ( core_sda_pad_i   ),
-    .core_oe  ( core_sda_padoen_o ),
+    .core_oe  ( ~core_sda_padoen_o ),
     .io_inout ( sda   )
   );
 
@@ -358,7 +358,7 @@ module top
    (
     .core_in  ( core_scl1_pad_o   ),
     .core_out ( core_scl1_pad_i   ),
-    .core_oe  ( core_scl1_padoen_o ),
+    .core_oe  ( ~core_scl1_padoen_o ),
     .io_inout ( scl1   )
   );
 
@@ -368,7 +368,7 @@ module top
    (
     .core_in  ( core_sda1_pad_o   ),
     .core_out ( core_sda1_pad_i   ),
-    .core_oe  ( core_sda1_padoen_o ),
+    .core_oe  ( ~core_sda1_padoen_o ),
     .io_inout ( sda1   )
   );
 
@@ -491,7 +491,7 @@ module top
    (
     .core_in  ( core0_scl_pad_o   ),
     .core_out ( core0_scl_pad_i   ),
-    .core_oe  ( core0_scl_padoen_o ),
+    .core_oe  ( ~core0_scl_padoen_o ),
     .io_inout ( c0_scl   )
   );
 
@@ -501,7 +501,7 @@ module top
    (
     .core_in  ( core0_sda_pad_o   ),
     .core_out ( core0_sda_pad_i   ),
-    .core_oe  ( core0_sda_padoen_o ),
+    .core_oe  ( ~core0_sda_padoen_o ),
     .io_inout ( c0_sda   )
   );
 
