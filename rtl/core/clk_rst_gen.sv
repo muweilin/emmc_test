@@ -12,6 +12,7 @@
 
     output logic                            clk_o,
     output logic                            clk2x_o,
+    output logic                            clk_div2,
 
     output logic                            rstn_o
 );
@@ -46,5 +47,10 @@
       .rst_no              ( rstn_o          )
   );
 
+clk_div2 clk_divider_u( 
+   .clk(clk_o),
+   .rst_n(rstn_o), 
+   .clk_out(clk_div2)
+);
 
 endmodule

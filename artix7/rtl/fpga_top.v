@@ -48,17 +48,10 @@
 
   gpio,
 //  gpio1,
-//  pclk,
-//  vsync,
-//  href,
-//  cam7,
-//  cam6,
-//  cam5,
-//  cam4,
-//  cam3,
-//  cam2,
-//  cam1,
-//  cam0,
+  pclk,
+  vsync,
+  href,
+  cam_d
 
 //  c0_uart_tx,
 //  c0_uart_rx,
@@ -117,19 +110,13 @@
 /*
   inout         gpio0;
   inout         gpio1;
-
+*/
   input         pclk;
-  inout         vsync;
-  inout         href;
-  inout         cam7;
-  inout         cam6;
-  inout         cam5;
-  inout         cam4;
-  inout         cam3;
-  inout         cam2;
-  inout         cam1;
-  inout         cam0;
+  input         vsync;
+  input         href;
+  input  [7:0]  cam_d;
 
+/*
   //uart
   output        c0_uart_tx;
   input         c0_uart_rx;
@@ -161,6 +148,14 @@
 // Xilinx HDL Libraries Guide, version 14.5
 
   // PPU SoC
+  
+IBUFG #(
+.IBUF_LOW_PWR("TRUE"), // Low power="TRUE", Highest performance="FALSE"
+.IOSTANDARD("DEFAULT") // Specify the input I/O standard
+) IBUFG_inst (
+.O(pclk_in), // Clock buffer output
+.I(pclk) // Clock buffer input (connect directly to top-level port)
+);
   
  top  top_i
 (
@@ -229,10 +224,10 @@
      .pwm_o             (     ),
 
     //camera
-     .cam_pclk          (   ),
-     .cam_vsync         (  ),
-     .cam_href          (   ),
-     .cam_data          (   ),
+     .cam_pclk          ( pclk_in  ),
+     .cam_vsync         ( vsync ),
+     .cam_href          ( href  ),
+     .cam_data          ( cam_d ),
 
      //eMMC
 	 .emmc_cclk_out          ( emmc_cclk_out  ),// R16

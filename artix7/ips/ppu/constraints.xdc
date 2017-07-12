@@ -1046,6 +1046,36 @@ set_property IOSTANDARD LVCMOS33 [get_ports {gpio[30]}]
 set_property PACKAGE_PIN B22 [get_ports {gpio[31]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[31]}]
 
+set_property PACKAGE_PIN T20 [get_ports {cam_d[1]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {cam_d[1]}]
+
+set_property PACKAGE_PIN AB18 [get_ports {cam_d[2]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {cam_d[2]}]
+
+set_property PACKAGE_PIN AA18 [get_ports {cam_d[3]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {cam_d[3]}]
+
+set_property PACKAGE_PIN AA19 [get_ports {cam_d[4]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {cam_d[4]}]
+
+set_property PACKAGE_PIN AB20 [get_ports {cam_d[5]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {cam_d[5]}]
+
+set_property PACKAGE_PIN AA20 [get_ports {cam_d[6]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {cam_d[6]}]
+
+set_property PACKAGE_PIN AA21 [get_ports {cam_d[7]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {cam_d[7]}]
+
+set_property PACKAGE_PIN AB21 [get_ports {pclk}]
+set_property IOSTANDARD LVCMOS33 [get_ports {pclk}]
+
+set_property PACKAGE_PIN V17 [get_ports {vsync}]
+set_property IOSTANDARD LVCMOS33 [get_ports {vsync}]
+
+set_property PACKAGE_PIN V18 [get_ports {href}]
+set_property IOSTANDARD LVCMOS33 [get_ports {href}]
+
 set_property PACKAGE_PIN T16 [get_ports sda_io]
 set_property PACKAGE_PIN U16 [get_ports scl_io]
 set_property PACKAGE_PIN R16 [get_ports emmc_cclk_out]
