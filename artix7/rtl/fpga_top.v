@@ -20,6 +20,8 @@
 
   scl_io,
   sda_io,
+  scl_io1,
+  sda_io1,
 
    ddr3_dq   ,
   ddr3_dqs_n ,
@@ -48,17 +50,10 @@
 
   gpio,
 //  gpio1,
-//  pclk,
-//  vsync,
-//  href,
-//  cam7,
-//  cam6,
-//  cam5,
-//  cam4,
-//  cam3,
-//  cam2,
-//  cam1,
-//  cam0,
+  pclk,
+  vsync,
+  href,
+  cam_d
 
 //  c0_uart_tx,
 //  c0_uart_rx,
@@ -86,6 +81,9 @@
   inout         scl_io;
   inout         sda_io;
 
+  inout         scl_io1;
+  inout         sda_io1;
+  
    inout  wire    [31:0]     ddr3_dq;
     inout  wire    [3:0]      ddr3_dqs_n;
     inout  wire    [3:0]      ddr3_dqs_p;
@@ -117,19 +115,13 @@
 /*
   inout         gpio0;
   inout         gpio1;
-
+*/
   input         pclk;
-  inout         vsync;
-  inout         href;
-  inout         cam7;
-  inout         cam6;
-  inout         cam5;
-  inout         cam4;
-  inout         cam3;
-  inout         cam2;
-  inout         cam1;
-  inout         cam0;
+  input         vsync;
+  input         href;
+  input  [7:0]  cam_d;
 
+/*
   //uart
   output        c0_uart_tx;
   input         c0_uart_rx;
@@ -221,18 +213,18 @@
     //I2C
      .scl               ( scl_io ),
      .sda               ( sda_io ),
-     .scl1              (  ),
-     .sda1              (  ),
+     .scl1              ( scl_io1  ),
+     .sda1              ( sda_io1  ),
     //gpio
      .gpio              ( gpio   ),   
     //pwm
      .pwm_o             (     ),
 
     //camera
-     .cam_pclk          (   ),
-     .cam_vsync         (  ),
-     .cam_href          (   ),
-     .cam_data          (   ),
+     .cam_pclk          ( pclk  ),
+     .cam_vsync         ( vsync ),
+     .cam_href          ( href  ),
+     .cam_data          ( cam_d ),
 
      //eMMC
 	 .emmc_cclk_out          ( emmc_cclk_out  ),// R16
