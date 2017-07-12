@@ -20,6 +20,8 @@
 
   scl_io,
   sda_io,
+  scl_io1,
+  sda_io1,
 
    ddr3_dq   ,
   ddr3_dqs_n ,
@@ -79,6 +81,9 @@
   inout         scl_io;
   inout         sda_io;
 
+  inout         scl_io1;
+  inout         sda_io1;
+  
    inout  wire    [31:0]     ddr3_dq;
     inout  wire    [3:0]      ddr3_dqs_n;
     inout  wire    [3:0]      ddr3_dqs_p;
@@ -216,15 +221,15 @@ IBUFG #(
     //I2C
      .scl               ( scl_io ),
      .sda               ( sda_io ),
-     .scl1              (  ),
-     .sda1              (  ),
+     .scl1              ( scl_io1  ),
+     .sda1              ( sda_io1  ),
     //gpio
      .gpio              ( gpio   ),   
     //pwm
      .pwm_o             (     ),
 
     //camera
-     .cam_pclk          ( pclk_in  ),
+     .cam_pclk          ( pclk  ),
      .cam_vsync         ( vsync ),
      .cam_href          ( href  ),
      .cam_data          ( cam_d ),

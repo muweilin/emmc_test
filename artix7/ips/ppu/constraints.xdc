@@ -1,5 +1,6 @@
 
 create_clock -period 5.000 [get_ports clk_p]
+create_clock -period 41.000 [get_ports pclk]
 
 
 create_generated_clock -name cclk -source [get_pins top_i/ppu_top_i/clk_rst_gen_i/xilinx_clock_manager_inst/clk100_i] -divide_by 2 [get_pins top_i/ppu_top_i/peripherals_i/ahb_subsystem_i/DWC_mobile_storage_top/DWC_mobile_storage_clk_ctrl/r_cclk_reg/Q]
@@ -919,6 +920,8 @@ set_property IOSTANDARD LVCMOS33 [get_ports uart_tx]
 set_property IOSTANDARD LVCMOS33 [get_ports uart_rx]
 set_property IOSTANDARD LVCMOS33 [get_ports sda_io]
 set_property IOSTANDARD LVCMOS33 [get_ports scl_io]
+set_property IOSTANDARD LVCMOS33 [get_ports sda_io1]
+set_property IOSTANDARD LVCMOS33 [get_ports scl_io1]
 set_max_delay -from [get_pins {top_i/ppu_top_i/peripherals_i/ahb_subsystem_i/DWC_mobile_storage_top/DWC_mobile_storage/U_DWC_mobile_storage_biu/U_DWC_mobile_storage_regb/uhs_reg_ext_reg[24]/C}] -to [get_pins {top_i/ppu_top_i/peripherals_i/ahb_subsystem_i/DWC_mobile_storage_top/DWC_mobile_storage_clk_ctrl/r_clk_drv_phase_ctrl_reg[1]/D}] 2.600
 
 
@@ -950,10 +953,12 @@ set_max_delay -from [get_pins {top_i/ppu_top_i/peripherals_i/ahb_subsystem_i/DWC
 ####################
 ##    GPIO  ############
 ####################
-set_property PACKAGE_PIN E16 [get_ports {gpio[0]}]
+#set_property PACKAGE_PIN E16 [get_ports {gpio[0]}]
+set_property PACKAGE_PIN Y22 [get_ports {gpio[0]}]     #CAM PWDN
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[0]}]
 
-set_property PACKAGE_PIN F16 [get_ports {gpio[1]}]
+#set_property PACKAGE_PIN F16 [get_ports {gpio[1]}]  
+set_property PACKAGE_PIN T21 [get_ports {gpio[1]}]     #CAM FSIN
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[1]}]
 
 set_property PACKAGE_PIN D16 [get_ports {gpio[2]}]
@@ -1046,6 +1051,10 @@ set_property IOSTANDARD LVCMOS33 [get_ports {gpio[30]}]
 set_property PACKAGE_PIN B22 [get_ports {gpio[31]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[31]}]
 
+
+set_property PACKAGE_PIN Y17 [get_ports {cam_d[0]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {cam_d[0]}]
+
 set_property PACKAGE_PIN T20 [get_ports {cam_d[1]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {cam_d[1]}]
 
@@ -1073,11 +1082,13 @@ set_property IOSTANDARD LVCMOS33 [get_ports {pclk}]
 set_property PACKAGE_PIN V17 [get_ports {vsync}]
 set_property IOSTANDARD LVCMOS33 [get_ports {vsync}]
 
-set_property PACKAGE_PIN V18 [get_ports {href}]
+set_property PACKAGE_PIN U15 [get_ports {href}]
 set_property IOSTANDARD LVCMOS33 [get_ports {href}]
 
 set_property PACKAGE_PIN T16 [get_ports sda_io]
 set_property PACKAGE_PIN U16 [get_ports scl_io]
+set_property PACKAGE_PIN V15 [get_ports sda_io1]
+set_property PACKAGE_PIN W17 [get_ports scl_io1]
 set_property PACKAGE_PIN R16 [get_ports emmc_cclk_out]
 set_property PACKAGE_PIN R17 [get_ports emmc_ccmd]
 set_property PACKAGE_PIN P15 [get_ports {emmc_cdata[0]}]
@@ -1097,3 +1108,6 @@ set_property IOSTANDARD LVCMOS18 [get_ports spi_master_sdo0_o]
 
 set_property PULLUP true [get_ports scl_io]
 set_property PULLUP true [get_ports sda_io]
+
+set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets pclk_IBUF]
+
