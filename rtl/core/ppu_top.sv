@@ -149,6 +149,7 @@ module ppu_top
     output logic   [3:0]      ddr3_dm,
     output logic              ddr3_odt,
     output logic              clk_int,
+    output logic              clk_div2, 
     output logic              rstn_int
   );
 
@@ -203,6 +204,7 @@ module ppu_top
 
       .clk_o              ( clk_int          ),
       .clk2x_o          ( clk2x_int        ),
+      .clk_div2          ( clk_div2        ),
 
       .rstn_o           ( rstn_int         )
     );

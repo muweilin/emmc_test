@@ -2,6 +2,32 @@
 create_clock -period 5.000 [get_ports clk_p]
 create_clock -period 41.000 [get_ports pclk]
 
+
+create_generated_clock -name cclk -source [get_pins top_i/ppu_top_i/clk_rst_gen_i/xilinx_clock_manager_inst/clk100_i] -divide_by 2 [get_pins top_i/ppu_top_i/peripherals_i/ahb_subsystem_i/DWC_mobile_storage_top/DWC_mobile_storage_clk_ctrl/r_cclk_reg/Q]
+
+
+create_generated_clock -name sample -source [get_pins top_i/ppu_top_i/clk_rst_gen_i/xilinx_clock_manager_inst/clk100_i] -divide_by 2 [get_pins top_i/ppu_top_i/peripherals_i/ahb_subsystem_i/DWC_mobile_storage_top/DWC_mobile_storage_clk_ctrl/r_cclk_sample_reg/Q]
+
+
+create_generated_clock -name cclk_drv -source [get_pins top_i/ppu_top_i/clk_rst_gen_i/xilinx_clock_manager_inst/clk100_i] -divide_by 2 [get_pins top_i/ppu_top_i/peripherals_i/ahb_subsystem_i/DWC_mobile_storage_top/DWC_mobile_storage_clk_ctrl/r_cclk_drv_reg/Q]
+
+set_false_path -from cclk_drv -to clk_pll_i
+
+set_false_path -from clk50_o_xilinx_clock_manager_1 -to cclk
+
+set_false_path -from clk50_o_xilinx_clock_manager_1 -to clk_pll_i
+
+set_false_path -from clk50_o_xilinx_clock_manager_1 -to cclk_drv
+set_false_path -from cclk_drv -to cclk
+
+set_false_path -from cclk -to cclk_drv
+
+set_false_path -from cclk -to sample
+
+set_false_path -from sample -to cclk
+
+set_false_path -from sample -to clk_pll_i
+
 ############## NET - IOSTANDARD ##################
 
 
@@ -1024,6 +1050,7 @@ set_property IOSTANDARD LVCMOS33 [get_ports {gpio[30]}]
 
 set_property PACKAGE_PIN B22 [get_ports {gpio[31]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[31]}]
+
 
 set_property PACKAGE_PIN Y17 [get_ports {cam_d[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {cam_d[0]}]

@@ -154,6 +154,14 @@
 
   // PPU SoC
   
+IBUFG #(
+.IBUF_LOW_PWR("TRUE"), // Low power="TRUE", Highest performance="FALSE"
+.IOSTANDARD("DEFAULT") // Specify the input I/O standard
+) IBUFG_inst (
+.O(pclk_in), // Clock buffer output
+.I(pclk) // Clock buffer input (connect directly to top-level port)
+);
+  
  top  top_i
 (
      .sys_clk_p         ( clk_p         ),

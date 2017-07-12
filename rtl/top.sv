@@ -8,6 +8,7 @@ module top
     input  logic              rstn_i,
     input  logic              testmode_i,
     input  logic              fetch_enable_i,
+    output logic             xclk,
 
    //SPI Slave
     input  logic              spi_clk_i,
@@ -329,6 +330,7 @@ module top
     .tdi_i                    (  tdi_i   ),
     .tdo_o                    (  tdo_o   ),
     .clk_int (clk_int),
+    .clk_div2 (xclk),
     .rstn_int (rstn_int)
   );
 
