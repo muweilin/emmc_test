@@ -378,6 +378,7 @@ set SRC_CORE " \
    $RTL/core/boot_rom_wrap.sv \
    $RTL/core/peripherals.sv \
    $RTL/core/xilinx_ddr3_if_wrap.sv \
+   $RTL/core/clk_div2.v \
 "
 
 # core0

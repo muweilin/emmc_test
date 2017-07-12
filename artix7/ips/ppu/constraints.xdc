@@ -1085,6 +1085,9 @@ set_property IOSTANDARD LVCMOS33 [get_ports {vsync}]
 set_property PACKAGE_PIN U15 [get_ports {href}]
 set_property IOSTANDARD LVCMOS33 [get_ports {href}]
 
+set_property PACKAGE_PIN AB22 [get_ports {xclk}]
+set_property IOSTANDARD LVCMOS33 [get_ports {xclk}]
+
 set_property PACKAGE_PIN T16 [get_ports sda_io]
 set_property PACKAGE_PIN U16 [get_ports scl_io]
 set_property PACKAGE_PIN V15 [get_ports sda_io1]
