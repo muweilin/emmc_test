@@ -8,6 +8,7 @@
 #include "event.h"
 #include "gpio.h"
 #include "uart.h"
+#include "sccb_bsp.h"
 
 #define IMAGE_WIDTH	 4 
 #define IMAGE_HEIGHT     4
@@ -18,7 +19,7 @@ int Isr_Type;
 int main()
 {
   int i;
-  
+  uint8_t ver;
   //set_pin_function(PIN4, FUNC_CAM);
   //set_pin_function(PIN5, FUNC_CAM);
   //set_pin_function(PIN6, FUNC_CAM);
@@ -32,6 +33,17 @@ int main()
 
   //memctl_init();
   //printf("DRAM init done!!!\n");
+  SCCB_init();
+  printf("SCCB init done!!!\n");
+  
+  SCCB_WriteByte(0x11, 0x40); //no pre-scale
+  ver = SCCB_ReadByte(0x11);
+  printf("SCCB receive: %d\n", ver);
+
+  SCCB_WriteByte(0x0d, 0x80); //PLL 6x
+  ver = SCCB_ReadByte(0x0d);
+  printf("SCCB receive: %d\n", ver);
+
   Isr_Type = 0;
   camctl_init();
   printf("Camera init done!!!\n");

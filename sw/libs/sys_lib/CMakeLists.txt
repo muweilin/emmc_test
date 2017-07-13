@@ -10,6 +10,7 @@ set(SOURCES
     src/i2c.c
     src/ann.c
     src/camctl.c
+    src/sccb_bsp.c
     )
 
 set(HEADERS
@@ -26,6 +27,7 @@ set(HEADERS
     inc/i2c.h
     inc/ann.h
     inc/camctl.h
+    inc/sccb_bsp.h
     )
 
 include_directories(inc/)
