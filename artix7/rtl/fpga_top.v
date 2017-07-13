@@ -20,6 +20,8 @@
 
   scl_io,
   sda_io,
+  scl1_io,
+  sda1_io,
 
    ddr3_dq   ,
   ddr3_dqs_n ,
@@ -47,6 +49,7 @@
 
 
   gpio,
+  xclk,
 //  gpio1,
   pclk,
   vsync,
@@ -66,7 +69,7 @@
   input         clk_p;
   input         clk_n;
   input         rst_n;
-
+  output        xclk;
  // input        spi_sck;
  // output        spi_csn;
  // output        spi_sdo0;
@@ -78,6 +81,8 @@
   //i2c eeprom
   inout         scl_io;
   inout         sda_io;
+  inout         scl1_io;
+  inout         sda1_io;
 
    inout  wire    [31:0]     ddr3_dq;
     inout  wire    [3:0]      ddr3_dqs_n;
@@ -148,14 +153,14 @@
 // Xilinx HDL Libraries Guide, version 14.5
 
   // PPU SoC
-OBUF #(
-.DRIVE(12), // Specify the output drive strength
-.IOSTANDARD("DEFAULT"), // Specify the output I/O standard
-.SLEW("SLOW") // Specify the output slew rate
-) OBUF_inst (
-.O(xclk), // Buffer output (connect directly to top-level port)
-.I(xclk_core) // Buffer input
-);  
+//OBUF #(
+//.DRIVE(12), // Specify the output drive strength
+//.IOSTANDARD("DEFAULT"), // Specify the output I/O standard
+//.SLEW("SLOW") // Specify the output slew rate
+//) OBUF_inst (
+//.O(xclk), // Buffer output (connect directly to top-level port)
+//.I(xclk_core) // Buffer input
+//);  
 
   
  top  top_i
@@ -165,7 +170,7 @@ OBUF #(
      .rstn_i            ( rst_n       ),
      .testmode_i        ( 1'b0          ),
      .fetch_enable_i    ( 1'b1  ),
-     .xclk(xclk_core),
+     .xclk(xclk),
 
    //SPI Slave
      .spi_clk_i         ( spi_sck       ),
@@ -218,8 +223,8 @@ OBUF #(
     //I2C
      .scl               ( scl_io ),
      .sda               ( sda_io ),
-     .scl1              (  ),
-     .sda1              (  ),
+     .scl1              ( scl1_io ),
+     .sda1              ( sda1_io ),
     //gpio
      .gpio              ( gpio   ),   
     //pwm

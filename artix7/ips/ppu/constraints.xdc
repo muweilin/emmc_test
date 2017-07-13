@@ -381,8 +381,8 @@ set_property IOSTANDARD DIFF_SSTL15 [get_ports {ddr3_dqs_p[0]}]
 set_property SLEW FAST [get_ports {ddr3_dqs_n[0]}]
 set_property IN_TERM UNTUNED_SPLIT_50 [get_ports {ddr3_dqs_n[0]}]
 set_property IOSTANDARD DIFF_SSTL15 [get_ports {ddr3_dqs_n[0]}]
-set_property PACKAGE_PIN D1 [get_ports {ddr3_dqs_n[0]}]
 set_property PACKAGE_PIN E1 [get_ports {ddr3_dqs_p[0]}]
+set_property PACKAGE_PIN D1 [get_ports {ddr3_dqs_n[0]}]
 
 # PadFunction: IO_L9P_T1_DQS_AD7P_35
 set_property SLEW FAST [get_ports {ddr3_dqs_p[1]}]
@@ -393,8 +393,8 @@ set_property IOSTANDARD DIFF_SSTL15 [get_ports {ddr3_dqs_p[1]}]
 set_property SLEW FAST [get_ports {ddr3_dqs_n[1]}]
 set_property IN_TERM UNTUNED_SPLIT_50 [get_ports {ddr3_dqs_n[1]}]
 set_property IOSTANDARD DIFF_SSTL15 [get_ports {ddr3_dqs_n[1]}]
-set_property PACKAGE_PIN J2 [get_ports {ddr3_dqs_n[1]}]
 set_property PACKAGE_PIN K2 [get_ports {ddr3_dqs_p[1]}]
+set_property PACKAGE_PIN J2 [get_ports {ddr3_dqs_n[1]}]
 
 # PadFunction: IO_L15P_T2_DQS_35
 set_property SLEW FAST [get_ports {ddr3_dqs_p[2]}]
@@ -405,8 +405,8 @@ set_property IOSTANDARD DIFF_SSTL15 [get_ports {ddr3_dqs_p[2]}]
 set_property SLEW FAST [get_ports {ddr3_dqs_n[2]}]
 set_property IN_TERM UNTUNED_SPLIT_50 [get_ports {ddr3_dqs_n[2]}]
 set_property IOSTANDARD DIFF_SSTL15 [get_ports {ddr3_dqs_n[2]}]
-set_property PACKAGE_PIN L1 [get_ports {ddr3_dqs_n[2]}]
 set_property PACKAGE_PIN M1 [get_ports {ddr3_dqs_p[2]}]
+set_property PACKAGE_PIN L1 [get_ports {ddr3_dqs_n[2]}]
 
 # PadFunction: IO_L21P_T3_DQS_35
 set_property SLEW FAST [get_ports {ddr3_dqs_p[3]}]
@@ -445,6 +445,8 @@ set_property LOC PHASER_OUT_PHY_X1Y7 [get_cells -hier -filter {NAME =~ */ddr_phy
 set_property LOC PHASER_OUT_PHY_X1Y7 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/phaser_out}]
 set_property LOC PHASER_OUT_PHY_X1Y7 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/phaser_out}]
 set_property LOC PHASER_OUT_PHY_X1Y7 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/phaser_out}]
+set_property LOC PHASER_OUT_PHY_X1Y7 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/phaser_out}]
+set_property LOC PHASER_OUT_PHY_X1Y7 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/phaser_out}]
 current_instance -quiet
 set_property LOC PHASER_OUT_PHY_X1Y7 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/phaser_out}]
 current_instance top_i/ppu_top_i/ddr3_if_inst/xilinx_ddr3_if_inst
@@ -460,6 +462,8 @@ set_property LOC PHASER_OUT_PHY_X1Y6 [get_cells -hier -filter {NAME =~ */ddr_phy
 set_property LOC PHASER_OUT_PHY_X1Y6 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/phaser_out}]
 set_property LOC PHASER_OUT_PHY_X1Y6 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/phaser_out}]
 set_property LOC PHASER_OUT_PHY_X1Y6 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/phaser_out}]
+set_property LOC PHASER_OUT_PHY_X1Y6 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/phaser_out}]
+set_property LOC PHASER_OUT_PHY_X1Y6 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/phaser_out}]
 current_instance -quiet
 set_property LOC PHASER_OUT_PHY_X1Y6 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/phaser_out}]
 current_instance top_i/ppu_top_i/ddr3_if_inst/xilinx_ddr3_if_inst
@@ -475,6 +479,8 @@ set_property LOC PHASER_OUT_PHY_X1Y5 [get_cells -hier -filter {NAME =~ */ddr_phy
 set_property LOC PHASER_OUT_PHY_X1Y5 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/phaser_out}]
 set_property LOC PHASER_OUT_PHY_X1Y5 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/phaser_out}]
 set_property LOC PHASER_OUT_PHY_X1Y5 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/phaser_out}]
+set_property LOC PHASER_OUT_PHY_X1Y5 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/phaser_out}]
+set_property LOC PHASER_OUT_PHY_X1Y5 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/phaser_out}]
 current_instance -quiet
 set_property LOC PHASER_OUT_PHY_X1Y5 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/phaser_out}]
 current_instance top_i/ppu_top_i/ddr3_if_inst/xilinx_ddr3_if_inst
@@ -490,6 +496,8 @@ set_property LOC PHASER_OUT_PHY_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_ph
 set_property LOC PHASER_OUT_PHY_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/phaser_out}]
 set_property LOC PHASER_OUT_PHY_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/phaser_out}]
 set_property LOC PHASER_OUT_PHY_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/phaser_out}]
+set_property LOC PHASER_OUT_PHY_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/phaser_out}]
+set_property LOC PHASER_OUT_PHY_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/phaser_out}]
 current_instance -quiet
 set_property LOC PHASER_OUT_PHY_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/phaser_out}]
 current_instance top_i/ppu_top_i/ddr3_if_inst/xilinx_ddr3_if_inst
@@ -505,6 +513,8 @@ set_property LOC PHASER_OUT_PHY_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_ph
 set_property LOC PHASER_OUT_PHY_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/phaser_out}]
 set_property LOC PHASER_OUT_PHY_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/phaser_out}]
 set_property LOC PHASER_OUT_PHY_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/phaser_out}]
+set_property LOC PHASER_OUT_PHY_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/phaser_out}]
+set_property LOC PHASER_OUT_PHY_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/phaser_out}]
 current_instance -quiet
 set_property LOC PHASER_OUT_PHY_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/phaser_out}]
 current_instance top_i/ppu_top_i/ddr3_if_inst/xilinx_ddr3_if_inst
@@ -520,9 +530,13 @@ set_property LOC PHASER_OUT_PHY_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy
 set_property LOC PHASER_OUT_PHY_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/phaser_out}]
 set_property LOC PHASER_OUT_PHY_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/phaser_out}]
 set_property LOC PHASER_OUT_PHY_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/phaser_out}]
+set_property LOC PHASER_OUT_PHY_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/phaser_out}]
+set_property LOC PHASER_OUT_PHY_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/phaser_out}]
 current_instance -quiet
 set_property LOC PHASER_OUT_PHY_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/phaser_out}]
 current_instance top_i/ppu_top_i/ddr3_if_inst/xilinx_ddr3_if_inst
+set_property LOC PHASER_OUT_PHY_X1Y8 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/phaser_out}]
+set_property LOC PHASER_OUT_PHY_X1Y8 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/phaser_out}]
 set_property LOC PHASER_OUT_PHY_X1Y8 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/phaser_out}]
 set_property LOC PHASER_OUT_PHY_X1Y8 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/phaser_out}]
 set_property LOC PHASER_OUT_PHY_X1Y8 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/phaser_out}]
@@ -554,6 +568,8 @@ set_property LOC PHASER_IN_PHY_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy
 set_property LOC PHASER_IN_PHY_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/phaser_in_gen.phaser_in}]
 set_property LOC PHASER_IN_PHY_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/phaser_in_gen.phaser_in}]
 set_property LOC PHASER_IN_PHY_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/phaser_in_gen.phaser_in}]
+set_property LOC PHASER_IN_PHY_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/phaser_in_gen.phaser_in}]
+set_property LOC PHASER_IN_PHY_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/phaser_in_gen.phaser_in}]
 current_instance -quiet
 set_property LOC PHASER_IN_PHY_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/phaser_in_gen.phaser_in}]
 current_instance top_i/ppu_top_i/ddr3_if_inst/xilinx_ddr3_if_inst
@@ -569,6 +585,8 @@ set_property LOC PHASER_IN_PHY_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy
 set_property LOC PHASER_IN_PHY_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/phaser_in_gen.phaser_in}]
 set_property LOC PHASER_IN_PHY_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/phaser_in_gen.phaser_in}]
 set_property LOC PHASER_IN_PHY_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/phaser_in_gen.phaser_in}]
+set_property LOC PHASER_IN_PHY_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/phaser_in_gen.phaser_in}]
+set_property LOC PHASER_IN_PHY_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/phaser_in_gen.phaser_in}]
 current_instance -quiet
 set_property LOC PHASER_IN_PHY_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/phaser_in_gen.phaser_in}]
 current_instance top_i/ppu_top_i/ddr3_if_inst/xilinx_ddr3_if_inst
@@ -584,6 +602,8 @@ set_property LOC PHASER_IN_PHY_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_
 set_property LOC PHASER_IN_PHY_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/phaser_in_gen.phaser_in}]
 set_property LOC PHASER_IN_PHY_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/phaser_in_gen.phaser_in}]
 set_property LOC PHASER_IN_PHY_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/phaser_in_gen.phaser_in}]
+set_property LOC PHASER_IN_PHY_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/phaser_in_gen.phaser_in}]
+set_property LOC PHASER_IN_PHY_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/phaser_in_gen.phaser_in}]
 current_instance -quiet
 set_property LOC PHASER_IN_PHY_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/phaser_in_gen.phaser_in}]
 current_instance top_i/ppu_top_i/ddr3_if_inst/xilinx_ddr3_if_inst
@@ -599,6 +619,8 @@ set_property LOC PHASER_IN_PHY_X1Y8 [get_cells -hier -filter {NAME =~ */ddr_phy_
 set_property LOC PHASER_IN_PHY_X1Y8 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/phaser_in_gen.phaser_in}]
 set_property LOC PHASER_IN_PHY_X1Y8 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/phaser_in_gen.phaser_in}]
 set_property LOC PHASER_IN_PHY_X1Y8 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/phaser_in_gen.phaser_in}]
+set_property LOC PHASER_IN_PHY_X1Y8 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/phaser_in_gen.phaser_in}]
+set_property LOC PHASER_IN_PHY_X1Y8 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/phaser_in_gen.phaser_in}]
 current_instance -quiet
 set_property LOC PHASER_IN_PHY_X1Y8 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/phaser_in_gen.phaser_in}]
 
@@ -617,6 +639,8 @@ set_property LOC OUT_FIFO_X1Y7 [get_cells -hier -filter {NAME =~ */ddr_phy_4lane
 set_property LOC OUT_FIFO_X1Y7 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/out_fifo}]
 set_property LOC OUT_FIFO_X1Y7 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/out_fifo}]
 set_property LOC OUT_FIFO_X1Y7 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/out_fifo}]
+set_property LOC OUT_FIFO_X1Y7 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/out_fifo}]
+set_property LOC OUT_FIFO_X1Y7 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/out_fifo}]
 current_instance -quiet
 set_property LOC OUT_FIFO_X1Y7 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/out_fifo}]
 current_instance top_i/ppu_top_i/ddr3_if_inst/xilinx_ddr3_if_inst
@@ -632,6 +656,8 @@ set_property LOC OUT_FIFO_X1Y6 [get_cells -hier -filter {NAME =~ */ddr_phy_4lane
 set_property LOC OUT_FIFO_X1Y6 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/out_fifo}]
 set_property LOC OUT_FIFO_X1Y6 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/out_fifo}]
 set_property LOC OUT_FIFO_X1Y6 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/out_fifo}]
+set_property LOC OUT_FIFO_X1Y6 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/out_fifo}]
+set_property LOC OUT_FIFO_X1Y6 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/out_fifo}]
 current_instance -quiet
 set_property LOC OUT_FIFO_X1Y6 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/out_fifo}]
 current_instance top_i/ppu_top_i/ddr3_if_inst/xilinx_ddr3_if_inst
@@ -647,6 +673,8 @@ set_property LOC OUT_FIFO_X1Y5 [get_cells -hier -filter {NAME =~ */ddr_phy_4lane
 set_property LOC OUT_FIFO_X1Y5 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/out_fifo}]
 set_property LOC OUT_FIFO_X1Y5 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/out_fifo}]
 set_property LOC OUT_FIFO_X1Y5 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/out_fifo}]
+set_property LOC OUT_FIFO_X1Y5 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/out_fifo}]
+set_property LOC OUT_FIFO_X1Y5 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/out_fifo}]
 current_instance -quiet
 set_property LOC OUT_FIFO_X1Y5 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/out_fifo}]
 current_instance top_i/ppu_top_i/ddr3_if_inst/xilinx_ddr3_if_inst
@@ -662,6 +690,8 @@ set_property LOC OUT_FIFO_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy_4lan
 set_property LOC OUT_FIFO_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/out_fifo}]
 set_property LOC OUT_FIFO_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/out_fifo}]
 set_property LOC OUT_FIFO_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/out_fifo}]
+set_property LOC OUT_FIFO_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/out_fifo}]
+set_property LOC OUT_FIFO_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/out_fifo}]
 current_instance -quiet
 set_property LOC OUT_FIFO_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/out_fifo}]
 current_instance top_i/ppu_top_i/ddr3_if_inst/xilinx_ddr3_if_inst
@@ -677,6 +707,8 @@ set_property LOC OUT_FIFO_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy_4lan
 set_property LOC OUT_FIFO_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/out_fifo}]
 set_property LOC OUT_FIFO_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/out_fifo}]
 set_property LOC OUT_FIFO_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/out_fifo}]
+set_property LOC OUT_FIFO_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/out_fifo}]
+set_property LOC OUT_FIFO_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/out_fifo}]
 current_instance -quiet
 set_property LOC OUT_FIFO_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/out_fifo}]
 current_instance top_i/ppu_top_i/ddr3_if_inst/xilinx_ddr3_if_inst
@@ -692,6 +724,8 @@ set_property LOC OUT_FIFO_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_4lane
 set_property LOC OUT_FIFO_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/out_fifo}]
 set_property LOC OUT_FIFO_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/out_fifo}]
 set_property LOC OUT_FIFO_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/out_fifo}]
+set_property LOC OUT_FIFO_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/out_fifo}]
+set_property LOC OUT_FIFO_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/out_fifo}]
 current_instance -quiet
 set_property LOC OUT_FIFO_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/out_fifo}]
 current_instance top_i/ppu_top_i/ddr3_if_inst/xilinx_ddr3_if_inst
@@ -707,6 +741,8 @@ set_property LOC OUT_FIFO_X1Y8 [get_cells -hier -filter {NAME =~ */ddr_phy_4lane
 set_property LOC OUT_FIFO_X1Y8 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/out_fifo}]
 set_property LOC OUT_FIFO_X1Y8 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/out_fifo}]
 set_property LOC OUT_FIFO_X1Y8 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/out_fifo}]
+set_property LOC OUT_FIFO_X1Y8 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/out_fifo}]
+set_property LOC OUT_FIFO_X1Y8 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/out_fifo}]
 current_instance -quiet
 set_property LOC OUT_FIFO_X1Y8 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/out_fifo}]
 
@@ -723,6 +759,8 @@ set_property LOC IN_FIFO_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy_4lane
 set_property LOC IN_FIFO_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/in_fifo_gen.in_fifo}]
 set_property LOC IN_FIFO_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/in_fifo_gen.in_fifo}]
 set_property LOC IN_FIFO_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/in_fifo_gen.in_fifo}]
+set_property LOC IN_FIFO_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/in_fifo_gen.in_fifo}]
+set_property LOC IN_FIFO_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/in_fifo_gen.in_fifo}]
 current_instance -quiet
 set_property LOC IN_FIFO_X1Y11 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/in_fifo_gen.in_fifo}]
 current_instance top_i/ppu_top_i/ddr3_if_inst/xilinx_ddr3_if_inst
@@ -738,6 +776,8 @@ set_property LOC IN_FIFO_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy_4lane
 set_property LOC IN_FIFO_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/in_fifo_gen.in_fifo}]
 set_property LOC IN_FIFO_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/in_fifo_gen.in_fifo}]
 set_property LOC IN_FIFO_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/in_fifo_gen.in_fifo}]
+set_property LOC IN_FIFO_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/in_fifo_gen.in_fifo}]
+set_property LOC IN_FIFO_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/in_fifo_gen.in_fifo}]
 current_instance -quiet
 set_property LOC IN_FIFO_X1Y10 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/in_fifo_gen.in_fifo}]
 current_instance top_i/ppu_top_i/ddr3_if_inst/xilinx_ddr3_if_inst
@@ -753,6 +793,8 @@ set_property LOC IN_FIFO_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes
 set_property LOC IN_FIFO_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/in_fifo_gen.in_fifo}]
 set_property LOC IN_FIFO_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/in_fifo_gen.in_fifo}]
 set_property LOC IN_FIFO_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/in_fifo_gen.in_fifo}]
+set_property LOC IN_FIFO_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/in_fifo_gen.in_fifo}]
+set_property LOC IN_FIFO_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/in_fifo_gen.in_fifo}]
 current_instance -quiet
 set_property LOC IN_FIFO_X1Y9 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/in_fifo_gen.in_fifo}]
 current_instance top_i/ppu_top_i/ddr3_if_inst/xilinx_ddr3_if_inst
@@ -768,6 +810,8 @@ set_property LOC IN_FIFO_X1Y8 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes
 set_property LOC IN_FIFO_X1Y8 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/in_fifo_gen.in_fifo}]
 set_property LOC IN_FIFO_X1Y8 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/in_fifo_gen.in_fifo}]
 set_property LOC IN_FIFO_X1Y8 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/in_fifo_gen.in_fifo}]
+set_property LOC IN_FIFO_X1Y8 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/in_fifo_gen.in_fifo}]
+set_property LOC IN_FIFO_X1Y8 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/in_fifo_gen.in_fifo}]
 current_instance -quiet
 set_property LOC IN_FIFO_X1Y8 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/in_fifo_gen.in_fifo}]
 
@@ -784,6 +828,8 @@ set_property LOC PHY_CONTROL_X1Y1 [get_cells -hier -filter {NAME =~ */ddr_phy_4l
 set_property LOC PHY_CONTROL_X1Y1 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/phy_control_i}]
 set_property LOC PHY_CONTROL_X1Y1 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/phy_control_i}]
 set_property LOC PHY_CONTROL_X1Y1 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/phy_control_i}]
+set_property LOC PHY_CONTROL_X1Y1 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/phy_control_i}]
+set_property LOC PHY_CONTROL_X1Y1 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/phy_control_i}]
 current_instance -quiet
 set_property LOC PHY_CONTROL_X1Y1 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/phy_control_i}]
 current_instance top_i/ppu_top_i/ddr3_if_inst/xilinx_ddr3_if_inst
@@ -799,6 +845,8 @@ set_property LOC PHY_CONTROL_X1Y2 [get_cells -hier -filter {NAME =~ */ddr_phy_4l
 set_property LOC PHY_CONTROL_X1Y2 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/phy_control_i}]
 set_property LOC PHY_CONTROL_X1Y2 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/phy_control_i}]
 set_property LOC PHY_CONTROL_X1Y2 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/phy_control_i}]
+set_property LOC PHY_CONTROL_X1Y2 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/phy_control_i}]
+set_property LOC PHY_CONTROL_X1Y2 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/phy_control_i}]
 current_instance -quiet
 set_property LOC PHY_CONTROL_X1Y2 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/phy_control_i}]
 
@@ -815,9 +863,13 @@ set_property LOC PHASER_REF_X1Y1 [get_cells -hier -filter {NAME =~ */ddr_phy_4la
 set_property LOC PHASER_REF_X1Y1 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/phaser_ref_i}]
 set_property LOC PHASER_REF_X1Y1 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/phaser_ref_i}]
 set_property LOC PHASER_REF_X1Y1 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/phaser_ref_i}]
+set_property LOC PHASER_REF_X1Y1 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/phaser_ref_i}]
+set_property LOC PHASER_REF_X1Y1 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/phaser_ref_i}]
 current_instance -quiet
 set_property LOC PHASER_REF_X1Y1 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_1.u_ddr_phy_4lanes/phaser_ref_i}]
 current_instance top_i/ppu_top_i/ddr3_if_inst/xilinx_ddr3_if_inst
+set_property LOC PHASER_REF_X1Y2 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/phaser_ref_i}]
+set_property LOC PHASER_REF_X1Y2 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/phaser_ref_i}]
 set_property LOC PHASER_REF_X1Y2 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/phaser_ref_i}]
 set_property LOC PHASER_REF_X1Y2 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/phaser_ref_i}]
 set_property LOC PHASER_REF_X1Y2 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/phaser_ref_i}]
@@ -846,6 +898,8 @@ set_property LOC OLOGIC_X1Y143 [get_cells -hier -filter {NAME =~ */ddr_phy_4lane
 set_property LOC OLOGIC_X1Y143 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/ddr_byte_group_io/*slave_ts}]
 set_property LOC OLOGIC_X1Y143 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/ddr_byte_group_io/*slave_ts}]
 set_property LOC OLOGIC_X1Y143 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/ddr_byte_group_io/*slave_ts}]
+set_property LOC OLOGIC_X1Y143 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/ddr_byte_group_io/*slave_ts}]
+set_property LOC OLOGIC_X1Y143 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/ddr_byte_group_io/*slave_ts}]
 current_instance -quiet
 set_property LOC OLOGIC_X1Y143 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_D.ddr_byte_lane_D/ddr_byte_group_io/*slave_ts}]
 current_instance top_i/ppu_top_i/ddr3_if_inst/xilinx_ddr3_if_inst
@@ -861,6 +915,8 @@ set_property LOC OLOGIC_X1Y131 [get_cells -hier -filter {NAME =~ */ddr_phy_4lane
 set_property LOC OLOGIC_X1Y131 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/ddr_byte_group_io/*slave_ts}]
 set_property LOC OLOGIC_X1Y131 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/ddr_byte_group_io/*slave_ts}]
 set_property LOC OLOGIC_X1Y131 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/ddr_byte_group_io/*slave_ts}]
+set_property LOC OLOGIC_X1Y131 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/ddr_byte_group_io/*slave_ts}]
+set_property LOC OLOGIC_X1Y131 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/ddr_byte_group_io/*slave_ts}]
 current_instance -quiet
 set_property LOC OLOGIC_X1Y131 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_C.ddr_byte_lane_C/ddr_byte_group_io/*slave_ts}]
 current_instance top_i/ppu_top_i/ddr3_if_inst/xilinx_ddr3_if_inst
@@ -876,9 +932,13 @@ set_property LOC OLOGIC_X1Y119 [get_cells -hier -filter {NAME =~ */ddr_phy_4lane
 set_property LOC OLOGIC_X1Y119 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/ddr_byte_group_io/*slave_ts}]
 set_property LOC OLOGIC_X1Y119 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/ddr_byte_group_io/*slave_ts}]
 set_property LOC OLOGIC_X1Y119 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/ddr_byte_group_io/*slave_ts}]
+set_property LOC OLOGIC_X1Y119 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/ddr_byte_group_io/*slave_ts}]
+set_property LOC OLOGIC_X1Y119 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/ddr_byte_group_io/*slave_ts}]
 current_instance -quiet
 set_property LOC OLOGIC_X1Y119 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_B.ddr_byte_lane_B/ddr_byte_group_io/*slave_ts}]
 current_instance top_i/ppu_top_i/ddr3_if_inst/xilinx_ddr3_if_inst
+set_property LOC OLOGIC_X1Y107 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/ddr_byte_group_io/*slave_ts}]
+set_property LOC OLOGIC_X1Y107 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/ddr_byte_group_io/*slave_ts}]
 set_property LOC OLOGIC_X1Y107 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/ddr_byte_group_io/*slave_ts}]
 set_property LOC OLOGIC_X1Y107 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/ddr_byte_group_io/*slave_ts}]
 set_property LOC OLOGIC_X1Y107 [get_cells -hier -filter {NAME =~ */ddr_phy_4lanes_0.u_ddr_phy_4lanes/ddr_byte_lane_A.ddr_byte_lane_A/ddr_byte_group_io/*slave_ts}]
@@ -920,8 +980,8 @@ set_property IOSTANDARD LVCMOS33 [get_ports uart_tx]
 set_property IOSTANDARD LVCMOS33 [get_ports uart_rx]
 set_property IOSTANDARD LVCMOS33 [get_ports sda_io]
 set_property IOSTANDARD LVCMOS33 [get_ports scl_io]
-set_property IOSTANDARD LVCMOS33 [get_ports sda_io1]
-set_property IOSTANDARD LVCMOS33 [get_ports scl_io1]
+set_property IOSTANDARD LVCMOS33 [get_ports sda1_io]
+set_property IOSTANDARD LVCMOS33 [get_ports scl1_io]
 set_max_delay -from [get_pins {top_i/ppu_top_i/peripherals_i/ahb_subsystem_i/DWC_mobile_storage_top/DWC_mobile_storage/U_DWC_mobile_storage_biu/U_DWC_mobile_storage_regb/uhs_reg_ext_reg[24]/C}] -to [get_pins {top_i/ppu_top_i/peripherals_i/ahb_subsystem_i/DWC_mobile_storage_top/DWC_mobile_storage_clk_ctrl/r_clk_drv_phase_ctrl_reg[1]/D}] 2.600
 
 
@@ -942,7 +1002,6 @@ set_max_delay -from [get_pins {top_i/ppu_top_i/peripherals_i/ahb_subsystem_i/DWC
 
 set_property IOSTANDARD LVCMOS33 [get_ports emmc_cclk_out]
 set_property IOSTANDARD LVCMOS33 [get_ports emmc_ccmd]
-set_property IOSTANDARD LVCMOS33 [get_ports sdio_card_int_n]
 set_property IOSTANDARD LVCMOS33 [get_ports {emmc_cdata[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {emmc_cdata[1]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {emmc_cdata[2]}]
@@ -954,11 +1013,11 @@ set_max_delay -from [get_pins {top_i/ppu_top_i/peripherals_i/ahb_subsystem_i/DWC
 ##    GPIO  ############
 ####################
 #set_property PACKAGE_PIN E16 [get_ports {gpio[0]}]
-set_property PACKAGE_PIN Y22 [get_ports {gpio[0]}]     #CAM PWDN
+set_property PACKAGE_PIN Y22 [get_ports {gpio[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[0]}]
 
-#set_property PACKAGE_PIN F16 [get_ports {gpio[1]}]  
-set_property PACKAGE_PIN T21 [get_ports {gpio[1]}]     #CAM FSIN
+#set_property PACKAGE_PIN F16 [get_ports {gpio[1]}]
+set_property PACKAGE_PIN T21 [get_ports {gpio[1]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[1]}]
 
 set_property PACKAGE_PIN D16 [get_ports {gpio[2]}]
@@ -1076,22 +1135,22 @@ set_property IOSTANDARD LVCMOS33 [get_ports {cam_d[6]}]
 set_property PACKAGE_PIN AA21 [get_ports {cam_d[7]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {cam_d[7]}]
 
-set_property PACKAGE_PIN AB21 [get_ports {pclk}]
-set_property IOSTANDARD LVCMOS33 [get_ports {pclk}]
+set_property PACKAGE_PIN AB21 [get_ports pclk]
+set_property IOSTANDARD LVCMOS33 [get_ports pclk]
 
-set_property PACKAGE_PIN V17 [get_ports {vsync}]
-set_property IOSTANDARD LVCMOS33 [get_ports {vsync}]
+set_property PACKAGE_PIN V17 [get_ports vsync]
+set_property IOSTANDARD LVCMOS33 [get_ports vsync]
 
-set_property PACKAGE_PIN U15 [get_ports {href}]
-set_property IOSTANDARD LVCMOS33 [get_ports {href}]
+set_property PACKAGE_PIN U15 [get_ports href]
+set_property IOSTANDARD LVCMOS33 [get_ports href]
 
-set_property PACKAGE_PIN AB22 [get_ports {xclk}]
-set_property IOSTANDARD LVCMOS33 [get_ports {xclk}]
+set_property PACKAGE_PIN AB22 [get_ports xclk]
+set_property IOSTANDARD LVCMOS33 [get_ports xclk]
 
 set_property PACKAGE_PIN T16 [get_ports sda_io]
 set_property PACKAGE_PIN U16 [get_ports scl_io]
-set_property PACKAGE_PIN V15 [get_ports sda_io1]
-set_property PACKAGE_PIN W17 [get_ports scl_io1]
+set_property PACKAGE_PIN V15 [get_ports sda1_io]
+set_property PACKAGE_PIN W17 [get_ports scl1_io]
 set_property PACKAGE_PIN R16 [get_ports emmc_cclk_out]
 set_property PACKAGE_PIN R17 [get_ports emmc_ccmd]
 set_property PACKAGE_PIN P15 [get_ports {emmc_cdata[0]}]
@@ -1112,5 +1171,14 @@ set_property IOSTANDARD LVCMOS18 [get_ports spi_master_sdo0_o]
 set_property PULLUP true [get_ports scl_io]
 set_property PULLUP true [get_ports sda_io]
 
+set_property PULLUP true [get_ports scl1_io]
+set_property PULLUP true [get_ports sda1_io]
+
 set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets pclk_IBUF]
 
+
+
+set_false_path -from [get_clocks clk50_o_xilinx_clock_manager_1] -to [get_clocks pclk]
+
+
+set_false_path -from [get_clocks pclk] -to [get_clocks clk50_o_xilinx_clock_manager_1]

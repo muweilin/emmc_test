@@ -20,7 +20,7 @@
 #define _SPI_H_
 
 #include <ppu.h>
-
+#define SPI_BASE_ADDR SPI0_BASE_ADDR
 #define SPI_QPI    1
 #define SPI_NO_QPI 0
 

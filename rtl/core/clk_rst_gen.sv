@@ -47,10 +47,19 @@
       .rst_no              ( rstn_o          )
   );
 
-clk_div2 clk_divider_u( 
-   .clk(clk_o),
-   .rst_n(rstn_o), 
-   .clk_out(clk_div2)
-);
+xilinx_clock_div2 xilinx_clock_div2_i
+   (
+   // Clock in ports
+    .clk50_i(clk_o),      // input clk50_i
+    // Clock out ports
+    .clk5_o(clk_div2),     // output clk5_o
+    // Status and control signals
+    .rstn_i(rstn_i), // input rstn_i
+    .locked(locked2));      // output locked
+//clk_div2 clk_divider_u( 
+//   .clk(clk_o),
+//   .rst_n(rstn_o), 
+//   .clk_out(clk_div2)
+//);
 
 endmodule
