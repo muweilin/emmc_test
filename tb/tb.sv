@@ -394,8 +394,9 @@ logic [31:0]          ddr_datarb;
   )
   i2c_eeprom_model_i
   (
-    .scl_io ( scl_io  ),
-    .sda_io ( sda_io  ),
+    .scl_io ( scl1_io  ),
+
+    .sda_io ( sda1_io  ),
     .rst_ni ( s_rst_n )
   );
 
@@ -491,8 +492,8 @@ logic [31:0]          ddr_datarb;
     //I2C
      .scl               ( scl_io ),
      .sda               ( sda_io ),
-     .scl1              (  ),
-     .sda1              (  ),
+     .scl1              ( scl1_io ),
+     .sda1              ( sda1_io ),
     //gpio
      .gpio              ( gpio   ),   
     //pwm

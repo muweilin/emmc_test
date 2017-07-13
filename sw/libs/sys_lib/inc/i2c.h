@@ -35,12 +35,12 @@
 #define I2C_CTR_INTEN     0x40 // interrupt enable only
 #define I2C_CTR_EN_INTEN  0xC0 // enable i2c and interrupts
 
-#define I2C_REG_PRE             ( I2C_BASE_ADDR + 0x00 )
-#define I2C_REG_CTR             ( I2C_BASE_ADDR + 0x04 )
-#define I2C_REG_RX              ( I2C_BASE_ADDR + 0x08 )
-#define I2C_REG_STATUS          ( I2C_BASE_ADDR + 0x0C )
-#define I2C_REG_TX              ( I2C_BASE_ADDR + 0x10 )
-#define I2C_REG_CMD             ( I2C_BASE_ADDR + 0x14 )
+#define I2C_REG_PRE             ( I2C1_BASE_ADDR + 0x00 )
+#define I2C_REG_CTR             ( I2C1_BASE_ADDR + 0x04 )
+#define I2C_REG_RX              ( I2C1_BASE_ADDR + 0x08 )
+#define I2C_REG_STATUS          ( I2C1_BASE_ADDR + 0x0C )
+#define I2C_REG_TX              ( I2C1_BASE_ADDR + 0x10 )
+#define I2C_REG_CMD             ( I2C1_BASE_ADDR + 0x14 )
 
 #define I2C_PRE 	REG(I2C_REG_PRE)             
 #define I2C_CTR 	REG(I2C_REG_CTR)             
