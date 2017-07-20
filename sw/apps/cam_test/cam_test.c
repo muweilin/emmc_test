@@ -9,40 +9,54 @@
 #include "gpio.h"
 #include "uart.h"
 #include "sccb_bsp.h"
+#include "oled.h"
+#include "bmp.h"
+#include "camctl.h"
+#include<i2c.h>
 
-#define IMAGE_WIDTH	 4 
-#define IMAGE_HEIGHT     4
+#define IMAGE_WIDTH	 320 
+#define IMAGE_HEIGHT     240
 #define IMAGE_LENGTH  IMAGE_WIDTH *IMAGE_HEIGHT
-
-int Isr_Type;
+int send_img(volatile unsigned int* pix, int len);
+volatile int Isr_Type;
 
 int main()
 {
   int i;
-  uint8_t ver;
-  //set_pin_function(PIN4, FUNC_CAM);
-  //set_pin_function(PIN5, FUNC_CAM);
-  //set_pin_function(PIN6, FUNC_CAM);
-  //set_pin_function(PIN7, FUNC_CAM);
-  //set_pin_function(PIN8, FUNC_CAM);
-  //set_pin_function(PIN9, FUNC_CAM);
-  //set_pin_function(PIN10, FUNC_CAM);
-  //set_pin_function(PIN11, FUNC_CAM);
-  //set_pin_function(PIN12, FUNC_CAM);
-  //set_pin_function(PIN13, FUNC_CAM);
-
-  //memctl_init();
-  //printf("DRAM init done!!!\n");
-  SCCB_init();
-  printf("SCCB init done!!!\n");
+  int ver;
+  Lcd_Init();
+  printf("LCD inited\n");
   
-  SCCB_WriteByte(0x11, 0x40); //no pre-scale
-  ver = SCCB_ReadByte(0x11);
-  printf("SCCB receive: %d\n", ver);
+  
+ // LCD_Clear(0x07E0);
+//  LCD_Clear(0xF800);
+ /// LCD_Clear(0x001F);
+   display_image((volatile unsigned short*)sy);
+  
+printf("LCD clear\n");
+  
+  SCCB_init();
+  SCCB_WriteByte(0x12, 0x80);
+  SCCB_WriteByte(0x11, 0x01); //2/ pre-scale
+  SCCB_WriteByte(0x0d, 0x00); //PLL 0x
+  SCCB_WriteByte(0x12, 0x46); //QVGA
+  //SCCB_WriteByte(0x66, 0x20); //QVGA
 
-  SCCB_WriteByte(0x0d, 0x80); //PLL 6x
+
+
+  do{
+        i2c_send_data(0x42); 
+        i2c_send_command(I2C_START_WRITE);
+    }while(!i2c_get_ack());
+      
+   i2c_send_command(I2C_STOP);
+   while(i2c_busy());
   ver = SCCB_ReadByte(0x0d);
-  printf("SCCB receive: %d\n", ver);
+  printf("SCCB receive: %x\n", ver);
+ ver = SCCB_ReadByte(0x11);
+  printf("SCCB receive: %x\n", ver);
+  ver = SCCB_ReadByte(0x12);
+  printf("SCCB receive: %x\n", ver);
 
   Isr_Type = 0;
   camctl_init();
@@ -50,25 +64,33 @@ int main()
 
   int_enable();
   IER |= (1<< INT_CAM);	//enable camera interrupt
-  //EER |= (1<< INT_CAM);	//enable camera interrupt
+  EER |= (1<< INT_CAM);	//enable camera interrupt
   printf("INT_CAM init done!!!\n");
 
   camctl_start();
 
-/*  for(i = 0; i < 50000; i = i+1) asm volatile("nop");
-
-  int_disable();
-  camctl_stop();
-  printf("Camera stooooop!!!\n");
-*/
   while(1){
      if(Isr_Type != 0)
 	{
 	   printf("Get in ISR, Service Type: %d\n", Isr_Type);
-	   send_img((volatile unsigned char*)FRAME1_ADDR, IMAGE_LENGTH*2);
+           if(Isr_Type == 1) {
+                display_image((volatile unsigned char*)FRAME1_ADDR);
+		//send_img((volatile unsigned char*)FRAME1_ADDR, IMAGE_LENGTH*2);
+		}
+	   else if(Isr_Type == 2){
+               display_image((volatile unsigned char*)FRAME2_ADDR);
+		//send_img((volatile unsigned char*)FRAME2_ADDR, IMAGE_LENGTH*2);
+		}
+	   else if(Isr_Type == 3){
+               display_image((volatile unsigned char*)FRAME3_ADDR);
+		//send_img((volatile unsigned char*)FRAME3_ADDR, IMAGE_LENGTH*2);
+		}
+          Isr_Type = 0;
+          camctl_int_enable(SET_FM1_INT, SET_FM2_INT, SET_FM3_INT, UNSET_RQFUL_INT, UNSET_RQOVF_INT, SET_PROERR_INT);
+          printf("Status reg1:%d\n", *(volatile int*) (CAMCTL_STATUS));
+          camctl_start();	//open the camera
 	}
   }
-
   return 0;
 }
 
@@ -79,11 +101,10 @@ void ISR_CAM(void)
   //uart_send("Enter ISP\n", 10);
   //uart_wait_tx_done();
 
-  //camctl_stop();	//close the camera
-
+  camctl_stop();	//close the camera
   ICP = (1 << INT_CAM);
-  IER &= ~(1<< INT_CAM);
-  camctl_int_disable(UNSET_FM1_INT, UNSET_FM2_INT, UNSET_FM3_INT, UNSET_RQFUL_INT, UNSET_RQOVF_INT, UNSET_PROERR_INT);
+  //IER &= ~(1<< INT_CAM);
+ // camctl_int_disable(UNSET_FM1_INT, UNSET_FM2_INT, UNSET_FM3_INT, UNSET_RQFUL_INT, UNSET_RQOVF_INT, UNSET_PROERR_INT);
 
   val = *(volatile int*) (CAMCTL_STATUS);
 
@@ -121,37 +142,51 @@ void ISR_CAM(void)
     Isr_Type = 7;
     val = CLR_PROERR1_INT(val);
   }
-
+  printf("val:%d\n", val);
   *(volatile int*) (CAMCTL_STATUS) = val;
-  
+  printf("Status reg:%d\n", *(volatile int*) (CAMCTL_STATUS));
   //camctl_int_enable(SET_FM1_INT, SET_FM2_INT, SET_FM3_INT, UNSET_RQFUL_INT, UNSET_RQOVF_INT, SET_PROERR_INT);
 
 }
-
-int send_img(volatile unsigned char* pix, int len)
+int send_img(volatile unsigned int* pix, int len)
 {
 
   int i, j;
+  int ht;  
+  int ht_ver;  
   unsigned int tmp;
+  unsigned int httmp;
   char ch[3];
 
-  for(i = 0; i < len; i++)
+  for(i = 0; i < IMAGE_HEIGHT; i++)
   {
-    tmp = *(pix+i); //0 ~ 255
- 
-    for(j = 0; j < 3; j++)
+    for(ht=0; ht< (IMAGE_WIDTH*2)/4; ht++)
     {
-      ch[j] = tmp % 10 + 48;
-      tmp = tmp/10;
-    }
-   
-    for(j = 2; j >= 0; j--){
-      uart_sendchar(ch[j]);
-      uart_wait_tx_done();
-    }
+        httmp = *(pix+(i*IMAGE_WIDTH*2)/4+ht); //0 ~ 255
+        for(ht_ver=0;ht_ver<4;ht_ver++)
+        {
+           tmp = httmp&(0xff<<(8*ht_ver));
+           tmp = tmp>>((8*ht_ver)); 
+           for(j = 0; j < 3; j++)
+           {
+             ch[j] = tmp % 10 + 48;
+             tmp = tmp/10;
+           }
+           
+           for(j = 2; j >= 0; j--){
+             uart_sendchar(ch[j]);
+             uart_wait_tx_done();
+           }
 
-    uart_sendchar(' ');
-    uart_wait_tx_done();
+          uart_sendchar(' ');
+          uart_wait_tx_done();
+        }
+  }
+ uart_sendchar('\n');
+ uart_wait_tx_done();
+  uart_sendchar(' ');
+          uart_wait_tx_done();
+  //waste_time();
   }
 
   uart_sendchar('\n');
@@ -161,7 +196,5 @@ int send_img(volatile unsigned char* pix, int len)
 
   return 0;
 }
-
-
 
 

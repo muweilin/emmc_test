@@ -11,6 +11,7 @@ set(SOURCES
     src/ann.c
     src/camctl.c
     src/sccb_bsp.c
+    src/oled.c
     )
 
 set(HEADERS
@@ -28,6 +29,9 @@ set(HEADERS
     inc/ann.h
     inc/camctl.h
     inc/sccb_bsp.h
+    inc/oled.h
+    inc/bmp.h 
+    inc/oledfont.h
     )
 
 include_directories(inc/)

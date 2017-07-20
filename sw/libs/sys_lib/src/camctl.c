@@ -61,7 +61,7 @@ void camctl_init()
   *(volatile int*) (CAMCTL_FRAME2_ADDR)   = FRAME2_ADDR;
   *(volatile int*) (CAMCTL_FRAME3_ADDR)   = FRAME3_ADDR;
   
-  camctl_int_enable(SET_FM1_INT, SET_FM2_INT, SET_FM3_INT, UNSET_RQFUL_INT, UNSET_RQOVF_INT, SET_PROERR_INT);
+  camctl_int_enable(SET_FM1_INT, SET_FM2_INT, SET_FM3_INT, SET_RQFUL_INT, SET_RQOVF_INT, SET_PROERR_INT);
 
 }
 

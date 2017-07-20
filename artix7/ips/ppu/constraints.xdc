@@ -1012,72 +1012,71 @@ set_max_delay -from [get_pins {top_i/ppu_top_i/peripherals_i/ahb_subsystem_i/DWC
 ####################
 ##    GPIO  ############
 ####################
-#set_property PACKAGE_PIN E16 [get_ports {gpio[0]}]
-set_property PACKAGE_PIN Y22 [get_ports {gpio[0]}]
+#gpio0-5 use for lcd
+set_property PACKAGE_PIN N14 [get_ports {gpio[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[0]}]
-
-#set_property PACKAGE_PIN F16 [get_ports {gpio[1]}]
-set_property PACKAGE_PIN T21 [get_ports {gpio[1]}]
+#gpio0-5 use for lcd
+set_property PACKAGE_PIN N13 [get_ports {gpio[1]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[1]}]
-
+#gpio0-5 use for lcd
 set_property PACKAGE_PIN D16 [get_ports {gpio[2]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[2]}]
-
+#gpio0-5 use for lcd
 set_property PACKAGE_PIN E17 [get_ports {gpio[3]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[3]}]
-
-set_property PACKAGE_PIN B15 [get_ports {gpio[4]}]
+#gpio0-5 use for lcd
+set_property PACKAGE_PIN R14 [get_ports {gpio[4]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[4]}]
-
-set_property PACKAGE_PIN C14 [get_ports {gpio[5]}]
+#gpio0-5 use for lcd
+set_property PACKAGE_PIN P14 [get_ports {gpio[5]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[5]}]
 
-set_property PACKAGE_PIN B16 [get_ports {gpio[6]}]
+set_property PACKAGE_PIN AB22 [get_ports {gpio[6]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[6]}]
 
-set_property PACKAGE_PIN C15 [get_ports {gpio[7]}]
+set_property PACKAGE_PIN R18 [get_ports {gpio[7]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[7]}]
 
-set_property PACKAGE_PIN A15 [get_ports {gpio[8]}]
+set_property PACKAGE_PIN C15 [get_ports {gpio[8]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[8]}]
 
-set_property PACKAGE_PIN A13 [get_ports {gpio[9]}]
+set_property PACKAGE_PIN  V15 [get_ports {gpio[9]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[9]}]
 
-set_property PACKAGE_PIN A16 [get_ports {gpio[10]}]
+set_property PACKAGE_PIN U15 [get_ports {gpio[10]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[10]}]
 
-set_property PACKAGE_PIN A14 [get_ports {gpio[11]}]
+set_property PACKAGE_PIN V17 [get_ports {gpio[11]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[11]}]
 
 set_property PACKAGE_PIN B17 [get_ports {gpio[12]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[12]}]
 
-set_property PACKAGE_PIN D17 [get_ports {gpio[13]}]
+set_property PACKAGE_PIN AB21 [get_ports {gpio[13]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[13]}]
 
-set_property PACKAGE_PIN B18 [get_ports {gpio[14]}]
+set_property PACKAGE_PIN AA20 [get_ports {gpio[14]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[14]}]
 
-set_property PACKAGE_PIN C17 [get_ports {gpio[15]}]
+set_property PACKAGE_PIN AA21 [get_ports {gpio[15]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[15]}]
 
-set_property PACKAGE_PIN C18 [get_ports {gpio[16]}]
+set_property PACKAGE_PIN AA19 [get_ports {gpio[16]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[16]}]
 
-set_property PACKAGE_PIN E19 [get_ports {gpio[17]}]
+set_property PACKAGE_PIN AB20 [get_ports {gpio[17]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[17]}]
 
-set_property PACKAGE_PIN C19 [get_ports {gpio[18]}]
+set_property PACKAGE_PIN AB18 [get_ports {gpio[18]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[18]}]
 
-set_property PACKAGE_PIN D19 [get_ports {gpio[19]}]
+set_property PACKAGE_PIN AA18 [get_ports {gpio[19]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[19]}]
 
-set_property PACKAGE_PIN F18 [get_ports {gpio[20]}]
+set_property PACKAGE_PIN Y17 [get_ports {gpio[20]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[20]}]
 
-set_property PACKAGE_PIN B20 [get_ports {gpio[21]}]
+set_property PACKAGE_PIN T20 [get_ports {gpio[21]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[21]}]
 
 set_property PACKAGE_PIN E18 [get_ports {gpio[22]}]
@@ -1110,63 +1109,67 @@ set_property IOSTANDARD LVCMOS33 [get_ports {gpio[30]}]
 set_property PACKAGE_PIN B22 [get_ports {gpio[31]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio[31]}]
 
-
-set_property PACKAGE_PIN Y17 [get_ports {cam_d[0]}]
+#J6-25
+set_property PACKAGE_PIN F18 [get_ports {cam_d[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {cam_d[0]}]
-
-set_property PACKAGE_PIN T20 [get_ports {cam_d[1]}]
+#J6-26
+set_property PACKAGE_PIN B20 [get_ports {cam_d[1]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {cam_d[1]}]
-
-set_property PACKAGE_PIN AB18 [get_ports {cam_d[2]}]
+#J6-23
+set_property PACKAGE_PIN C19 [get_ports {cam_d[2]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {cam_d[2]}]
-
-set_property PACKAGE_PIN AA18 [get_ports {cam_d[3]}]
+#J6-24
+set_property PACKAGE_PIN D19 [get_ports {cam_d[3]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {cam_d[3]}]
-
-set_property PACKAGE_PIN AA19 [get_ports {cam_d[4]}]
+#J6-21
+set_property PACKAGE_PIN C18 [get_ports {cam_d[4]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {cam_d[4]}]
-
-set_property PACKAGE_PIN AB20 [get_ports {cam_d[5]}]
+#J6-22
+set_property PACKAGE_PIN E19 [get_ports {cam_d[5]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {cam_d[5]}]
-
-set_property PACKAGE_PIN AA20 [get_ports {cam_d[6]}]
+#J6-17
+set_property PACKAGE_PIN B18 [get_ports {cam_d[6]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {cam_d[6]}]
-
-set_property PACKAGE_PIN AA21 [get_ports {cam_d[7]}]
+#J6-18
+set_property PACKAGE_PIN C17 [get_ports {cam_d[7]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {cam_d[7]}]
 
-set_property PACKAGE_PIN AB21 [get_ports pclk]
+#J6-16
+set_property PACKAGE_PIN D17 [get_ports pclk]
 set_property IOSTANDARD LVCMOS33 [get_ports pclk]
-
-set_property PACKAGE_PIN V17 [get_ports vsync]
+#J6-14
+set_property PACKAGE_PIN A14 [get_ports vsync]
 set_property IOSTANDARD LVCMOS33 [get_ports vsync]
-
-set_property PACKAGE_PIN U15 [get_ports href]
+#j6-13
+set_property PACKAGE_PIN A16 [get_ports href]
 set_property IOSTANDARD LVCMOS33 [get_ports href]
-
-set_property PACKAGE_PIN AB22 [get_ports xclk]
+#j7-13
+set_property PACKAGE_PIN V10 [get_ports xclk]
 set_property IOSTANDARD LVCMOS33 [get_ports xclk]
+
+#J6-12
+set_property PACKAGE_PIN A13 [get_ports sda1_io]
+#J6-11
+set_property PACKAGE_PIN A15 [get_ports scl1_io]
 
 set_property PACKAGE_PIN T16 [get_ports sda_io]
 set_property PACKAGE_PIN U16 [get_ports scl_io]
-set_property PACKAGE_PIN V15 [get_ports sda1_io]
-set_property PACKAGE_PIN W17 [get_ports scl1_io]
 set_property PACKAGE_PIN R16 [get_ports emmc_cclk_out]
 set_property PACKAGE_PIN R17 [get_ports emmc_ccmd]
 set_property PACKAGE_PIN P15 [get_ports {emmc_cdata[0]}]
 set_property PACKAGE_PIN P20 [get_ports {emmc_cdata[2]}]
 set_property PACKAGE_PIN P16 [get_ports {emmc_cdata[3]}]
-set_property PACKAGE_PIN G16 [get_ports spi_master_clk_o]
-set_property PACKAGE_PIN J19 [get_ports spi_master_csn0_o]
-set_property PACKAGE_PIN H19 [get_ports spi_master_sdi0_i]
-set_property PACKAGE_PIN G17 [get_ports spi_master_sdo0_o]
 set_property PACKAGE_PIN N17 [get_ports {emmc_cdata[1]}]
 
+set_property PACKAGE_PIN E16 [get_ports spi_master_clk_o]
+set_property PACKAGE_PIN C14 [get_ports spi_master_csn0_o]
+set_property PACKAGE_PIN B15 [get_ports spi_master_sdi0_i]
+set_property PACKAGE_PIN F16 [get_ports spi_master_sdo0_o]
 
-set_property IOSTANDARD LVCMOS18 [get_ports spi_master_clk_o]
-set_property IOSTANDARD LVCMOS18 [get_ports spi_master_csn0_o]
-set_property IOSTANDARD LVCMOS18 [get_ports spi_master_sdi0_i]
-set_property IOSTANDARD LVCMOS18 [get_ports spi_master_sdo0_o]
+set_property IOSTANDARD LVCMOS33 [get_ports spi_master_clk_o]
+set_property IOSTANDARD LVCMOS33 [get_ports spi_master_csn0_o]
+set_property IOSTANDARD LVCMOS33 [get_ports spi_master_sdi0_i]
+set_property IOSTANDARD LVCMOS33 [get_ports spi_master_sdo0_o]
 
 set_property PULLUP true [get_ports scl_io]
 set_property PULLUP true [get_ports sda_io]
@@ -1174,9 +1177,50 @@ set_property PULLUP true [get_ports sda_io]
 set_property PULLUP true [get_ports scl1_io]
 set_property PULLUP true [get_ports sda1_io]
 
-set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets pclk_IBUF]
+###############
+#### clock ####
+###############
+set_property PACKAGE_PIN   R4        [get_ports clk_p]
+set_property IOSTANDARD DIFF_SSTL15  [get_ports clk_p]
+
+###############
+#### reset ####
+###############
+set_property PACKAGE_PIN   T6      [get_ports rst_n]
+set_property IOSTANDARD LVCMOS15   [get_ports rst_n]
 
 
+##########
+## uart ##
+##########
+#J7.1: B13_L16_P
+set_property PACKAGE_PIN  W15        [get_ports uart_tx]
+set_property IOSTANDARD LVCMOS33   [get_ports uart_tx]
+
+#J7.2: B13_L16_N
+set_property PACKAGE_PIN  W16      [get_ports uart_rx]
+set_property IOSTANDARD  LVCMOS33       [get_ports uart_rx]
+
+
+
+
+####################
+##    SPI  master flash   ##
+####################
+#set_property PACKAGE_PIN   G16    [get_ports spi_master_clk_o]
+#set_property IOSTANDARD  LVCMOS18        [get_ports spi_master_clk_o]
+
+#set_property PACKAGE_PIN    J19    [get_ports spi_master_csn0_o]
+#set_property IOSTANDARD  LVCMOS18        [get_ports spi_master_csn0_o]
+#IO0
+#set_property PACKAGE_PIN   G17    [get_ports spi_master_sdo0_o]
+#set_property IOSTANDARD  LVCMOS18        [get_ports spi_master_sdo0_o]
+#IO1
+#set_property PACKAGE_PIN     H19   [get_ports spi_master_sdi0_i]
+#set_property IOSTANDARD  LVCMOS18        [get_ports spi_master_sdi0_i]
+#IO2: G15, LVCMOS18
+#IO3: G18, LVCMOS18
+###############################
 
 set_false_path -from [get_clocks clk50_o_xilinx_clock_manager_1] -to [get_clocks pclk]
 
