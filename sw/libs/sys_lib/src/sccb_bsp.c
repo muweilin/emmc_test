@@ -56,7 +56,7 @@ uint8_t SCCB_ReadByte(uint8_t ReadAddress)
    i2c_get_ack();
    ver = i2c_get_data();
    i2c_send_command(I2C_STOP_READ);
-   i2c_get_ack();
+   //i2c_get_ack();
    return ver;
 }
 

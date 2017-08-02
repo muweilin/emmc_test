@@ -1143,14 +1143,11 @@ set_property IOSTANDARD LVCMOS33 [get_ports vsync]
 #j6-13
 set_property PACKAGE_PIN A16 [get_ports href]
 set_property IOSTANDARD LVCMOS33 [get_ports href]
-#j7-13
-set_property PACKAGE_PIN V10 [get_ports xclk]
-set_property IOSTANDARD LVCMOS33 [get_ports xclk]
 
 #J6-12
-set_property PACKAGE_PIN A13 [get_ports sda1_io]
+set_property PACKAGE_PIN A13 [get_ports scl1_io]
 #J6-11
-set_property PACKAGE_PIN A15 [get_ports scl1_io]
+set_property PACKAGE_PIN A15 [get_ports sda1_io]
 
 set_property PACKAGE_PIN T16 [get_ports sda_io]
 set_property PACKAGE_PIN U16 [get_ports scl_io]
@@ -1160,16 +1157,6 @@ set_property PACKAGE_PIN P15 [get_ports {emmc_cdata[0]}]
 set_property PACKAGE_PIN P20 [get_ports {emmc_cdata[2]}]
 set_property PACKAGE_PIN P16 [get_ports {emmc_cdata[3]}]
 set_property PACKAGE_PIN N17 [get_ports {emmc_cdata[1]}]
-
-set_property PACKAGE_PIN E16 [get_ports spi_master_clk_o]
-set_property PACKAGE_PIN C14 [get_ports spi_master_csn0_o]
-set_property PACKAGE_PIN B15 [get_ports spi_master_sdi0_i]
-set_property PACKAGE_PIN F16 [get_ports spi_master_sdo0_o]
-
-set_property IOSTANDARD LVCMOS33 [get_ports spi_master_clk_o]
-set_property IOSTANDARD LVCMOS33 [get_ports spi_master_csn0_o]
-set_property IOSTANDARD LVCMOS33 [get_ports spi_master_sdi0_i]
-set_property IOSTANDARD LVCMOS33 [get_ports spi_master_sdo0_o]
 
 set_property PULLUP true [get_ports scl_io]
 set_property PULLUP true [get_ports sda_io]
@@ -1207,19 +1194,33 @@ set_property IOSTANDARD  LVCMOS33       [get_ports uart_rx]
 ####################
 ##    SPI  master flash   ##
 ####################
-#set_property PACKAGE_PIN   G16    [get_ports spi_master_clk_o]
-#set_property IOSTANDARD  LVCMOS18        [get_ports spi_master_clk_o]
+set_property PACKAGE_PIN   G16    [get_ports spi_master_clk_o]
+set_property IOSTANDARD  LVCMOS18        [get_ports spi_master_clk_o]
 
-#set_property PACKAGE_PIN    J19    [get_ports spi_master_csn0_o]
-#set_property IOSTANDARD  LVCMOS18        [get_ports spi_master_csn0_o]
+set_property PACKAGE_PIN    J19    [get_ports spi_master_csn0_o]
+set_property IOSTANDARD  LVCMOS18        [get_ports spi_master_csn0_o]
 #IO0
-#set_property PACKAGE_PIN   G17    [get_ports spi_master_sdo0_o]
-#set_property IOSTANDARD  LVCMOS18        [get_ports spi_master_sdo0_o]
+set_property PACKAGE_PIN   G17    [get_ports spi_master_sdo0_o]
+set_property IOSTANDARD  LVCMOS18        [get_ports spi_master_sdo0_o]
 #IO1
-#set_property PACKAGE_PIN     H19   [get_ports spi_master_sdi0_i]
-#set_property IOSTANDARD  LVCMOS18        [get_ports spi_master_sdi0_i]
+set_property PACKAGE_PIN     H19   [get_ports spi_master_sdi0_i]
+set_property IOSTANDARD  LVCMOS18        [get_ports spi_master_sdi0_i]
 #IO2: G15, LVCMOS18
 #IO3: G18, LVCMOS18
+
+####################
+##    SPI  master 1   ##
+####################
+
+set_property PACKAGE_PIN E16 [get_ports spi1_master_clk_o]
+set_property PACKAGE_PIN C14 [get_ports spi1_master_csn0_o]
+set_property PACKAGE_PIN B15 [get_ports spi1_master_sdi0_i]
+set_property PACKAGE_PIN F16 [get_ports spi1_master_sdo0_o]
+
+set_property IOSTANDARD LVCMOS33 [get_ports spi1_master_clk_o]
+set_property IOSTANDARD LVCMOS33 [get_ports spi1_master_csn0_o]
+set_property IOSTANDARD LVCMOS33 [get_ports spi1_master_sdi0_i]
+set_property IOSTANDARD LVCMOS33 [get_ports spi1_master_sdo0_o]
 ###############################
 
 set_false_path -from [get_clocks clk50_o_xilinx_clock_manager_1] -to [get_clocks pclk]

@@ -21,6 +21,8 @@
 
 #include <ppu.h>
 #define SPI_BASE_ADDR SPI0_BASE_ADDR
+#define SPI_BASE_ADDR1 SPI1_BASE_ADDR
+
 #define SPI_QPI    1
 #define SPI_NO_QPI 0
 
@@ -46,6 +48,17 @@
 #define SPI_REG_INTCFG                ( SPI_BASE_ADDR + 0x24 )
 #define SPI_REG_INTSTA                ( SPI_BASE_ADDR + 0x28 )
 
+#define SPI1_REG_STATUS                ( SPI_BASE_ADDR1 + 0x00 )
+#define SPI1_REG_CLKDIV                ( SPI_BASE_ADDR1 + 0x04 )
+#define SPI1_REG_SPICMD                ( SPI_BASE_ADDR1 + 0x08 )
+#define SPI1_REG_SPIADR                ( SPI_BASE_ADDR1 + 0x0C )
+#define SPI1_REG_SPILEN                ( SPI_BASE_ADDR1 + 0x10 )
+#define SPI1_REG_SPIDUM                ( SPI_BASE_ADDR1 + 0x14 )
+#define SPI1_REG_TXFIFO                ( SPI_BASE_ADDR1 + 0x18 )
+#define SPI1_REG_RXFIFO                ( SPI_BASE_ADDR1 + 0x20 )
+#define SPI1_REG_INTCFG                ( SPI_BASE_ADDR1 + 0x24 )
+#define SPI1_REG_INTSTA                ( SPI_BASE_ADDR1 + 0x28 )
+
 #define SPI_STATUS			REG(SPI_REG_STATUS)              
 #define SPI_CLKDIV 			REG(SPI_REG_CLKDIV)              
 #define SPI_SPICMD 			REG(SPI_REG_SPICMD)              
@@ -56,6 +69,17 @@
 #define SPI_RXFIFO			REG(SPI_REG_RXFIFO)           
 #define SPI_INTCFG   			REG(SPI_REG_INTCFG)            
 #define SPI_INTSTA			REG(SPI_REG_INTSTA)       
+
+#define SPI1_STATUS			REG(SPI1_REG_STATUS)              
+#define SPI1_CLKDIV 			REG(SPI1_REG_CLKDIV)              
+#define SPI1_SPICMD 			REG(SPI1_REG_SPICMD)              
+#define SPI1_SPIADR			REG(SPI1_REG_SPIADR)               
+#define SPI1_SPILEN			REG(SPI1_REG_SPILEN)               
+#define SPI1_SPIDUM                	REG(SPI1_REG_SPIDUM)	
+#define SPI1_TXFIFO			REG(SPI1_REG_TXFIFO)          
+#define SPI1_RXFIFO			REG(SPI1_REG_RXFIFO)           
+#define SPI1_INTCFG   			REG(SPI1_REG_INTCFG)            
+#define SPI1_INTSTA			REG(SPI1_REG_INTSTA) 
 
 #define PIN_SSPI_SIO0 4
 #define PIN_SSPI_SIO1 5
@@ -97,5 +121,25 @@ int spi_get_status();
 // 
 void spi_write(int cmd, int addr, int addrlen, int *data, int datalen);
 void spi_read(int cmd, int addr, int addrlen, int *data, int datalen);
+
+void spi1_send_data_noaddr(int cmd, char *data, int datalen, int useQpi);
+
+void spi1_setup_cmd_addr(int cmd, int cmdlen, int addr, int addrlen);
+
+void spi1_setup_dummy(int dummy_rd, int dummy_wr);
+
+void spi1_set_datalen(int datalen);
+
+void spi1_start_transaction(int trans_type, int csnum);
+
+int spi1_get_status();
+
+void spi1_write_fifo(int *data, int datalen);
+
+void spi1_read_fifo(int *data, int datalen);
+
+void spi1_write(int cmd, int addr, int addrlen, int *data, int datalen);
+
+void spi1_read(int cmd, int addr, int addrlen, int *data, int datalen);
 
 #endif // _SPI_H_

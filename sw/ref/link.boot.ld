@@ -4,7 +4,7 @@ __DYNAMIC  =  0;
 MEMORY
 {
     rom         : ORIGIN = 0x00010000, LENGTH = 0x2000  /*  8KB */
-    stack       : ORIGIN = 0x2000C000, LENGTH = 0x4000  /* 16KB */
+    stack       : ORIGIN = 0x53000000, LENGTH = 0x4000  /* 16KB */
 }
 
 /* Stack information variables */

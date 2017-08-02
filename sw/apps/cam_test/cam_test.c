@@ -19,6 +19,7 @@
 #define IMAGE_LENGTH  IMAGE_WIDTH *IMAGE_HEIGHT
 int send_img(volatile unsigned int* pix, int len);
 volatile int Isr_Type;
+extern dis_line;
 
 int main()
 {
@@ -28,18 +29,46 @@ int main()
   printf("LCD inited\n");
   
   
- // LCD_Clear(0x07E0);
-//  LCD_Clear(0xF800);
+  LCD_Clear(BLACK);
+  BACK_COLOR=BLACK;
+  POINT_COLOR=WHITE;
+  display_shade(110);
+  display_image(5, 100, 105 - 1, 200 - 1, (volatile unsigned char*)logo);
+  printf_lcd("ICT WuSystem!");
+  POINT_COLOR = BLUE;
+  printf_lcd("      U");                                                      
+  printf_lcd("  UUUUUUUU       UUUUUUUU    UUU    UUU");
+  printf_lcd(" U    U   U       U      U    U      U");
+  printf_lcd("U     U    U      U      U    U      U");
+  printf_lcd("U     U    U      U     u     U      U");
+  printf_lcd(" UU   U   UU      U Chip      U      U");
+  printf_lcd("   UUUUUUU        U     5G    U      U");
+  printf_lcd("      U   RISC-V  U      AI   U      U");
+  printf_lcd("      UU         UUUUUUU  IOT  UUUUUU");
  /// LCD_Clear(0x001F);
-   display_image((volatile unsigned short*)sy);
-  
-printf("LCD clear\n");
+  POINT_COLOR=WHITE;
+ while(1){
+	LCD_ShowString(145,dis_line ,"-> -");
+	delay_ms(300);
+        LCD_ShowString(145,dis_line ,"-> \\");
+	delay_ms(300);
+	LCD_ShowString(145,dis_line ,"-> |");
+	delay_ms(300);
+	LCD_ShowString(145,dis_line ,"-> /");
+	delay_ms(300);
+  }
+ 
+ printf("LCD clear\n");
+ 
   
   SCCB_init();
   SCCB_WriteByte(0x12, 0x80);
   SCCB_WriteByte(0x11, 0x01); //2/ pre-scale
   SCCB_WriteByte(0x0d, 0x00); //PLL 0x
-  SCCB_WriteByte(0x12, 0x46); //QVGA
+  SCCB_WriteByte(0x12, 0x06); //VGA
+
+  //SCCB_WriteByte(0x18, 0x78);
+  //SCCB_WriteByte(0x1A, 0xA0);
   //SCCB_WriteByte(0x66, 0x20); //QVGA
 
 
@@ -51,12 +80,12 @@ printf("LCD clear\n");
       
    i2c_send_command(I2C_STOP);
    while(i2c_busy());
-  ver = SCCB_ReadByte(0x0d);
+  ver = SCCB_ReadByte(0x18);
   printf("SCCB receive: %x\n", ver);
- ver = SCCB_ReadByte(0x11);
+  ver = SCCB_ReadByte(0x1A);
   printf("SCCB receive: %x\n", ver);
-  ver = SCCB_ReadByte(0x12);
-  printf("SCCB receive: %x\n", ver);
+  //ver = SCCB_ReadByte(0x12);
+  //printf("SCCB receive: %x\n", ver);
 
   Isr_Type = 0;
   camctl_init();
@@ -74,15 +103,15 @@ printf("LCD clear\n");
 	{
 	   printf("Get in ISR, Service Type: %d\n", Isr_Type);
            if(Isr_Type == 1) {
-                display_image((volatile unsigned char*)FRAME1_ADDR);
+                display_cam((volatile unsigned char*)FRAME1_ADDR);
 		//send_img((volatile unsigned char*)FRAME1_ADDR, IMAGE_LENGTH*2);
 		}
 	   else if(Isr_Type == 2){
-               display_image((volatile unsigned char*)FRAME2_ADDR);
+               display_cam((volatile unsigned char*)FRAME2_ADDR);
 		//send_img((volatile unsigned char*)FRAME2_ADDR, IMAGE_LENGTH*2);
 		}
 	   else if(Isr_Type == 3){
-               display_image((volatile unsigned char*)FRAME3_ADDR);
+               display_cam((volatile unsigned char*)FRAME3_ADDR);
 		//send_img((volatile unsigned char*)FRAME3_ADDR, IMAGE_LENGTH*2);
 		}
           Isr_Type = 0;

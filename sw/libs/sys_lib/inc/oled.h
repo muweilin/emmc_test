@@ -32,8 +32,8 @@
 //******************************************************************************/
 #ifndef __OLED_H
 #define __OLED_H			  	 	   
-#define LCD_W 320
-#define LCD_H 240
+#define LCD_W 480
+#define LCD_H 320
 #define	u8 unsigned char
 #define	u16 unsigned int
 #define	u32 unsigned long
@@ -66,16 +66,15 @@
 
 #define OLED_SDIN_Clr() set_gpio_pin_value(1, 0)//DIN
 #define OLED_SDIN_Set() set_gpio_pin_value(1, 1)
-
  		     
 #define OLED_CMD  0	//写命令
 #define OLED_DATA 1	//写数据
 
 void Lcd_Init(void); 
-void LCD_Clear(u16 Color);
+void LCD_Clear(u32 color);
 void Address_set(unsigned int x1,unsigned int y1,unsigned int x2,unsigned int y2);
 void LCD_WR_DATA8(char da); //发送数据-8位参数
-void LCD_WR_DATA(int da);
+void LCD_WR_DATA(u32 da);
 void LCD_WR_REG(char da);
 
 void LCD_DrawPoint(u16 x,u16 y);//画点
@@ -90,19 +89,21 @@ void LCD_ShowNum(u16 x,u16 y,u32 num,u8 len);//显示数字
 void LCD_Show2Num(u16 x,u16 y,u16 num,u8 len);//显示2个数字
 void LCD_ShowString(u16 x,u16 y,const u8 *p);		 //显示一个字符串,16字体
 void delay_ms(int delay);
-void showhanzi(unsigned int x,unsigned int y,unsigned char index);
-void display_image(volatile unsigned char* image_addr);
-
+void display_cam(volatile unsigned char* image_addr);
+void display_image(u16 x1, u16 y1, u16 x2, u16 y2, volatile unsigned char* image_addr);
+void display_shade(u16 x1);
+extern  u16 BACK_COLOR, POINT_COLOR;   //背景色，画笔色
+void printf_lcd(const char* image_addr);
 //画笔颜色
-#define WHITE         	 0xFFFF
-#define BLACK         	 0x0000	  
-#define BLUE         	 0x001F  
+#define WHITE         	 0xFCFCFC
+#define BLACK         	 0x000000	  
+#define BLUE         	 0xFC0000  
+#define RED           	 0x0000FC
+#define GREEN         	 0x00FC00
 #define BRED             0XF81F
-#define GRED 			 0XFFE0
-#define GBLUE			 0X07FF
-#define RED           	 0xF800
+#define GRED 	         0XFFE0
+#define GBLUE	         0X07FF
 #define MAGENTA       	 0xF81F
-#define GREEN         	 0x07E0
 #define CYAN          	 0x7FFF
 #define YELLOW        	 0xFFE0
 #define BROWN 			 0XBC40 //棕色
