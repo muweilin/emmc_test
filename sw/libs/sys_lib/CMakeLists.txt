@@ -12,6 +12,8 @@ set(SOURCES
     src/camctl.c
     src/sccb_bsp.c
     src/oled.c
+    src/emmc.c
+    src/emmc_callback.c
     )
 
 set(HEADERS
@@ -32,6 +34,8 @@ set(HEADERS
     inc/oled.h
     inc/bmp.h 
     inc/oledfont.h
+    inc/emmc.h
+    inc/emmc_callback.h
     )
 
 include_directories(inc/)
