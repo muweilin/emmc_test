@@ -50,6 +50,9 @@
 #define CAMCTL_INT_ENABLE         ( CAMCTL_BASE_ADDR + 0x18)
 #define CAMCTL_CTRL_REG           ( CAMCTL_BASE_ADDR + 0x1C)
 
+/**  emmc controller  **/
+#define EMMC_BASE_ADDR            0x28003000
+
 /** SOC PERIPHERALS */
 #define SOC_PERIPHERALS_BASE_ADDR     ( PPU_BASE_ADDR + 0xA100000 )
 
