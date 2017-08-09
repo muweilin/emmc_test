@@ -350,7 +350,8 @@ static void r1_r6_response_postproc(void *the_data, u32 * interrupt_status)    /
 	if (the_task_status->resp_buffer) {
 		if ((SD_TYPE == the_card_info[the_task_status->slot_num].card_type) || 
             (SDCOMBO_TYPE == the_card_info[the_task_status->slot_num].card_type) || 
-            (SD_MEM_2_0_TYPE == the_card_info[the_task_status->slot_num].card_type)) {
+            (SD_MEM_2_0_TYPE == the_card_info[the_task_status->slot_num].card_type) ||
+            (SD_MEM_3_0_TYPE == the_card_info[the_task_status->slot_num].card_type)) {
 			r1_check_val =  the_task_status->resp_buffer[0] & 0x0000ffff;
 		} 
         else if (SDIO_TYPE == the_card_info[the_task_status->slot_num].card_type) {
@@ -1217,6 +1218,7 @@ static callback_search_table the_callback_table[] = {
    	{CMD38      , {short_response_preproc, r1b_response_postproc}},   //
 	{CMD39      , {short_response_rca_preproc, r4_response_postproc}},
 	{ACMD41     , {short_response_preproc, short_response_postproc}},   //
+	{ACMD42     , {short_response_sd_app_specific_data, r1_response_postproc}},   // new add comment
 	{CMD42      , {short_response_block_write_preproc, r1b_response_write_data_postproc}},   //delete
 	{ACMD51     , {short_response_sd_data_app_specific_data, r1_response_read_data_postproc}},
 	{CMD52      , {short_response_preproc, r5_response_postproc}},

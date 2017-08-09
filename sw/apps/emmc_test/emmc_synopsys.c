@@ -5,6 +5,7 @@
 #include "emmc.h"
 #include "int.h"
 #include "event.h"
+#include "gpio.h"
 //#include "uart.h"
 #define MEM_SIZE 8192
 #define SECTOR_SIZE     512 //4 // 8 //16 // 32 //64 //128 //256 //512
@@ -27,7 +28,8 @@ int a;
 u32 cmd_tx_done;
 
 u32 retval=0;
-
+set_gpio_pin_direction(2, 1);
+set_gpio_pin_value(2, 0);
 
 int_enable();
 
@@ -48,7 +50,24 @@ even number of multiple block transfers. This test is introduced here since some
 card show block write skip problem for odd number of block transfers
 ************************************************************************************************/	
 u32 ret,REG;
-emmc_set_bits(EMMC_REG_CTYPE, 0x00000001);
+//emmc_set_bits(EMMC_REG_CTYPE, 0x00000001);
+/************************************************************************************************	
+This test is Erase function validataion for MMC and SD cards.
+@paramerter slot
+@parameter  Erase_block_start address/sector index (For MMC4.2 and SD2.0 this is sector index for other cards it is byte address)
+@parameter  Erase_block_End address/sector index (For MMC4.2 and SD2.0 this is sector index for other cards it is byte address)
+************************************************************************************************/	
+#if 0 
+{
+
+printf("Starting Erase......\n");
+
+ret = emmc_erase(0,0x0,0x0);
+if(ret)
+        printf("Erase operation failed with %d\n",ret);
+}
+#endif
+
 #if 1
 {
 
@@ -66,7 +85,7 @@ emmc_set_bits(EMMC_REG_CTYPE, 0x00000001);
         memset((void *)buff_read1 ,0x00,MEM_SIZE);
         memset((void *)buff_write1,0x00,MEM_SIZE);
         printf("TESTING  write and read for MMC/SD device\n");
-        data_to_write = 23;//IDMAC testing
+        data_to_write = 0xF0;//IDMAC testing
 	for(ii = 0; ii<NO_OF_TEST_LOOPS; )
 	{
 	
@@ -75,6 +94,7 @@ emmc_set_bits(EMMC_REG_CTYPE, 0x00000001);
 	    memset((void*)(buff_write1),data_to_write,SECTOR_SIZE);
 	    memset((void*)(buff_write1+SECTOR_SIZE),0xaa,(MEM_SIZE-SECTOR_SIZE));
        #if 1
+	        set_gpio_pin_value(2, 1);
         	ret =  emmc_read_write_multiple_blocks(0, ii,NUM_OF_MUTLIPLE_BLOCKS , buff_write1, WRITE,(SECT_SIZE_SHIFT + 1));
 //        	ret =  synopmob_read_write_multiple_blocks(0, 0,NUM_OF_MUTLIPLE_BLOCKS , buff_write1, WRITE,(SECT_SIZE_SHIFT + 1));
 	        if (ret) {
@@ -84,8 +104,9 @@ emmc_set_bits(EMMC_REG_CTYPE, 0x00000001);
        
 		plat_delay(10000);
       #endif
+	    
 		ret =  emmc_read_write_multiple_blocks(0, ii, NUM_OF_MUTLIPLE_BLOCKS  , buff_read1, READ,(SECT_SIZE_SHIFT + 1));
-//	    	ret =  synopmob_read_write_multiple_blocks(0, 0, NUM_OF_MUTLIPLE_BLOCKS  , buff_read1, READ,(SECT_SIZE_SHIFT + 1));
+//	    ret =  synopmob_read_write_multiple_blocks(0, 0, NUM_OF_MUTLIPLE_BLOCKS  , buff_read1, READ,(SECT_SIZE_SHIFT + 1));
 	        if (ret) {
         	        printf("READ FAILED with %u value at ii = %d\n",ret,ii);
                 	break;
@@ -122,29 +143,14 @@ emmc_set_bits(EMMC_REG_CTYPE, 0x00000001);
 		else
 		        data_to_write += 1;
 */
-		data_to_write += 1;
+		//data_to_write += 1;
 	}
 	printf("READ_WRITE TEST COMPLETED\n");
 }
 # endif
 
 
-/************************************************************************************************	
-This test is Erase function validataion for MMC and SD cards.
-@paramerter slot
-@parameter  Erase_block_start address/sector index (For MMC4.2 and SD2.0 this is sector index for other cards it is byte address)
-@parameter  Erase_block_End address/sector index (For MMC4.2 and SD2.0 this is sector index for other cards it is byte address)
-************************************************************************************************/	
-#if 0 
-{
 
-printf("Starting Erase......\n");
-
-ret = emmc_erase(0,0x0,0x0);
-if(ret)
-        printf("Erase operation failed with %d\n",ret);
-}
-#endif
 
 int_disable();
 	

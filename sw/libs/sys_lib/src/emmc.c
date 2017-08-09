@@ -6,6 +6,8 @@ static char rcs_datetime[] = "$DateTime: 2010/08/05 01:35:11 $";
 #include "emmc.h"
 #include "event.h"
 #include "int.h"
+#include "gpio.h"
+
  current_task_status current_task;
 //current_task_status  *p =&current_task;
  Card_info *the_card_info;
@@ -31,12 +33,11 @@ u32 emmc_init_controller()
 	u32 buffer_reg = 0;	/* multipurpose buffer register */
 	u32 num_of_cards, fifo_thresh;
 	s32 retval = 0;
-
 	memset((void *) &the_ip_status, 0, sizeof(the_ip_status));
 
        //set cclk_in (ciu_clk)
 	
-        emmc_set_register(EMMC_REG_UHS_REG_EXT,0x00810000);   //ext_clk_div 2, clk_2x = 100Mhz, clk_in = 50Mhz, clk_drv and clk_sample delay 1 clk_2x, 
+        emmc_set_register(EMMC_REG_UHS_REG_EXT,0xC1020000);   //ext_clk_div 8, clk_2x = 100Mhz, clk_in = 25Mhz, clk_drv and clk_sample delay 4 clk_2x, 
         printf(" Value of EMMC_REG_UHS_REG_EXT : %x .\n", emmc_read_register(EMMC_REG_UHS_REG_EXT));
 	    emmc_set_bits(EMMC_REG_GPIO,0x00000100);  //open cclk_in
     
@@ -82,7 +83,7 @@ u32 emmc_init_controller()
 //	clock_val = (1 << the_ip_status.num_of_cards) - 1 ;	
         clock_val = 1;
         emmc_set_register(EMMC_REG_CLKSRC, 0);
-        emmc_set_register(EMMC_REG_CLKDIV, 0x3F);  //set clk_div 63, fout = 400k
+        emmc_set_register(EMMC_REG_CLKDIV, 15);  //set clk_div 63, fout = 400k
         emmc_set_register(EMMC_REG_CLKENA, clock_val);
 	printf("EMMC_REG_CLKDIV is %x\n",L_EMMC_REG_CLKDIV);
 	emmc_send_clock_only_cmd();  //only update CLKDIV CLKSRC CLKENA
@@ -157,7 +158,7 @@ u32 emmc_enumerate_the_card(u32 slot_num)
 	*/
 	//the_card_info[slot_num].divider_val = MMC_FOD_DIVIDER_VALUE;   //((CIU_CLK/(MMC_FOD_VALUE*2))+1)
     //	the_card_info[slot_num].divider_val = MMC_FOD_DIVIDER_VALUE;   //((CIU_CLK/(MMC_FOD_VALUE*2))+1)=201
-        the_card_info[slot_num].divider_val = 63;     //
+    the_card_info[slot_num].divider_val = 15;
 
 	/*Lets start with the single bit mode initially*/
 	emmc_clear_bits(EMMC_REG_CTYPE, ((1<<slot_num) | (1<<(slot_num + 16)))); //1bit mode
@@ -220,7 +221,7 @@ u32 emmc_enumerate_the_card(u32 slot_num)
 } 
 /**
   * Determine the card type in the slot.
-  * This function determines the card type in the slot. The steps for doing so
+  * This function determines emmc_set_sd_wide_busthe card type in the slot. The steps for doing so
   * are as follows:
   *	-# Send a CMD5 to the slot. If a response is received, it is a SDIO card
   *	-# Send ACMD41 + CMD55 combo to the slot. If a response is received, 
@@ -273,7 +274,11 @@ Card_Type emmc_get_card_type(u32 slot)
 	   Issue cmd0 before proceeding to detect SDmem as per SPEC. 
          */
     printf("Sending SD_CMD0 to slot %x\n", slot);
-	
+	//while(1)
+	//{
+	//	emmc_send_serial_command(slot, CMD0, 0, NULL, NULL, 0,  NULL, NULL);
+	//}
+
 	if ((retval = emmc_send_serial_command(slot, CMD0, 0, NULL, NULL, 0,  NULL, NULL))) {
 	//	return ERRTYPE;
 		printf("  After send cmd0 %d\n", retval);
@@ -286,6 +291,8 @@ Card_Type emmc_get_card_type(u32 slot)
 	 Host checks the validity by analyzing the response of CMD8. Note that argumnet passed is
   	 VHS=1 => 2.7 to 3.3 volts and Check pattern = 0xAA 
 	*/	
+    
+    
 
 	printf("Sending CMD8 to slot %x\n", slot);
 	retval = emmc_send_serial_command(slot, CMD8, 0x000001AA, resp_buffer, NULL, 0,  NULL, NULL);
@@ -1442,9 +1449,10 @@ u32 emmc_set_sd_wide_bus(u32 slot, u32 width)
 	u32 resp;
 
 //check SD_BUS_WIDTHS bit of SCR Register   //ly   if the reason not equal 0  : card support 1bit /4bit
-	if ((the_card_info[slot].the_scr_bytes[6] & 0x05) == 0) {   
-		return ERRNOTSUPPORTED;
-	}
+	//if ((the_card_info[slot].the_scr_bytes[1] & 0x05) == 0) {  
+	//    printf("return ERRNOTSUPPORTED \n"); 
+	//	return ERRNOTSUPPORTED;
+	//}
 
 	if (4 == width) {
 		arg = 2;
@@ -1452,6 +1460,20 @@ u32 emmc_set_sd_wide_bus(u32 slot, u32 width)
 		arg = 0;
 	} else {
 		return ERRILLEGALCOMMAND;
+	}
+
+    /* Check if the card is in standby state and put in trans
+		   state.
+		 */
+	if ((retval = emmc_put_in_trans_state(slot))) {
+		printf("%x TRANS STATE FAILED\n", retval);
+		return retval;
+	}
+    printf("Clr card detect on dat3. \n");
+    if ((retval =
+	     emmc_send_serial_command(slot, ACMD42, 0, &resp, NULL, 0, NULL, NULL))) {
+             printf("WE HAVE RETVAL = %x\n", retval);
+	     return retval;
 	}
 
 	if ((retval =
@@ -1643,7 +1665,7 @@ u32 emmc_read_write_bytes(u32 slot, u32 * resp_buffer,
 	} else if (CUSTOM_BLKSIZE(custom_command)) {
 		the_block_size =
 		    1 << ((CUSTOM_BLKSIZE(custom_command) - 1));
-		//    printf("CUSTOM :the the_block_size %d\n",the_block_size);
+		    printf("CUSTOM :the the_block_size %d\n",the_block_size);
 	} else if (read_or_write) {
 		the_block_size = the_card_info[slot].card_write_blksize;
 		printf("write : the the_block_size %d\n",the_block_size);
@@ -1685,7 +1707,6 @@ if(CMD42 == (custom_command & 0x3f)){/*This hack is required as CMD42 block size
 		      card_write_blksize : the_card_info[slot].
 		      card_read_blksize)) >
 		    the_card_info[slot].card_size) {
-			printf("2 flag.\n");
 			return ERRADDRESSRANGE;
 		}
 	}
@@ -2247,14 +2268,14 @@ u32 emmc_reset_sd_2_0_card(u32 slot)
 	/* Fod the clock and OD the bussince we start enumerating now */
 	//printf("Setting divider value to %x(%x)\n",SD_FOD_DIVIDER_VALUE, slot);
     //emmc_set_bits(CTRL, ENABLE_OD_PULLUP); // This is not required for SD cards 
-	//the_card_info[slot].divider_val = SD_FOD_DIVIDER_VALUE;
+	the_card_info[slot].divider_val = 15;
 	/* Reset the card. Since we really dont know as to from where the call has been made*/
 	if ((retval = emmc_send_serial_command(slot, CMD0, 0, NULL, NULL, 0, NULL, NULL))) {
 		goto HOUSEKEEP;                  //CMD0 : GO_IDLE_STATE
 	}
 	printf("Sending SD_CMD8 to slot %x\n", slot);
 	retval = emmc_send_serial_command(slot, SD_CMD8, 0x000001AA, resp_buffer, NULL, 0,  NULL, NULL);
-
+    
 	if (!retval) {
 		/* Found an SD_2.0 Card */
 		printf("SD_CMD8 received the response:%x\n",resp_buffer[0]);
@@ -2271,7 +2292,6 @@ u32 emmc_reset_sd_2_0_card(u32 slot)
 	if ((retval = emmc_set_sd_2_0_voltage_range(slot))) {
 		goto HOUSEKEEP;
 	}
-	
     /*
 	 * The voltage setting is complete for SD2.0 cards. If required, Voltage switching to be performed now. 	 
  	 */
@@ -2287,7 +2307,6 @@ u32 emmc_reset_sd_2_0_card(u32 slot)
 		// By this time card is operating in 1.8V mode
 	}
 #endif
-
 	/* Now in READY state Now extract the CID this uses CMD2. SD2.0 alos uses same cid command */
 	if ((retval = emmc_get_cid(slot))) {
 		goto HOUSEKEEP;
@@ -2332,20 +2351,18 @@ u32 emmc_reset_sd_2_0_card(u32 slot)
 
 #endif
 
-
+	/* If compiled with SD_SET_WIDE_BUS flag then do the needful*/
+    printf("-> Get SCR \n");
 	if ((retval = emmc_process_scr(slot))) {
 		/* Switch off the card */
 		goto HOUSEKEEP;
 	}
 
-
-	/* If compiled with SD_SET_WIDE_BUS flag then do the needful*/
-#ifdef SD_SET_WIDE_BUS
+	printf("-> Set sd wide bus \n");
 	if ((retval = emmc_set_sd_wide_bus(slot, 4))) {
 		retval = 0;
 		goto HOUSEKEEP;
 	}
-#endif
 
     // If DDR operation is required, check for DDR support from the card.
     // If support exist program the host controller to operate in DDR mode.
@@ -2368,10 +2385,10 @@ u32 emmc_reset_sd_2_0_card(u32 slot)
 
 
     HOUSEKEEP:
-	the_card_info[slot].divider_val = clock_freq_to_set;
+	//the_card_info[slot].divider_val = clock_freq_to_set;
 	the_card_info[slot].enum_status = retval;
-	emmc_set_clk_freq(clock_freq_to_set);
-	emmc_clear_bits(EMMC_REG_CTRL, ENABLE_OD_PULLUP);
+	//emmc_set_clk_freq(clock_freq_to_set);
+	//emmc_clear_bits(EMMC_REG_CTRL, ENABLE_OD_PULLUP);
 	return retval;
 
 }
@@ -4270,7 +4287,7 @@ u32 emmc_read_write_multiple_blocks(u32 slot, u32 start_sect,
 	else {*/
 		retval =  emmc_read_write_bytes(slot, resp_buff, buffer,
 					      start_sect * sect_size_in_bytes, //start 
-					      start_sect *sect_size_in_bytes +sect_size_in_bytes *num_of_sects, //end
+					      start_sect * sect_size_in_bytes + sect_size_in_bytes * num_of_sects, //end
 					      0, NULL, NULL,
 					      read_or_write_to_send,
 					      sect_size << CUSTOM_BLKSIZE_SHIFT, //10<<12=0xa000

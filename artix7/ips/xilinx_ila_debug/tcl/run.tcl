@@ -12,7 +12,7 @@ create_project $ip_name . -part $partNumber
 create_ip -name ila -vendor xilinx.com -library ip -module_name $ip_name
 
 
-set_property -dict [list CONFIG.C_DATA_DEPTH {8192} CONFIG.C_NUM_OF_PROBES {6} CONFIG.C_INPUT_PIPE_STAGES {5}  CONFIG.C_PROBE1_WIDTH {1}] [get_ips ${ip_name}]
+set_property -dict [list CONFIG.C_DATA_DEPTH {8192} CONFIG.C_NUM_OF_PROBES {3} CONFIG.C_INPUT_PIPE_STAGES {5}  CONFIG.C_PROBE1_WIDTH {1} CONFIG.C_PROBE1_WIDTH {1} CONFIG.C_PROBE1_WIDTH {4}] [get_ips ${ip_name}]
 
 generate_target all [get_files ./$ip_name.srcs/sources_1/ip/$ip_name/$ip_name.xci]
 

@@ -149,6 +149,7 @@ emmc_preproc_callback emmc_get_pre_callback(u32);
 #define CMD40   40  /* MMC_GO_IRQ_STATE         bcr                R5  */
 
 #define ACMD41  41  /* SD_SEND_OP_COND          ??                 R1  */
+#define ACMD42  42  /* SET_CLR_CARD_DETECT      ac                 R1  */
 
 /* class 7 */
 #define CMD42   42  /* MMC_LOCK_UNLOCK          adtc               R1b */
