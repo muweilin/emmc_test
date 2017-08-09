@@ -37,7 +37,7 @@ int main()
 
   uart_set_cfg(0, 49); //100M: 125000
   
-/*
+
   int * q = (volatile int*)ext_ram_addr;
 
   for(i = 0; i < COPY_SIZE; i++) {
@@ -94,7 +94,7 @@ int main()
 
   uart_send("Jumping to Instruction RAM\n", 27);
   uart_wait_tx_done();
-*/
+
   BOOTREG = INSTR_RAM_BASE_ADDR;
   
   jump_and_start((volatile int *)(INSTR_RAM_START_ADDR));
