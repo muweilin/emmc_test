@@ -10,10 +10,16 @@
   spi_master_sdo0_o,
   spi_master_sdi0_i,
   
- // spi_sck,
- // spi_csn,
- // spi_sdo0,
- // spi_sdi0,
+  spi1_master_clk_o ,
+  spi1_master_csn0_o,
+  spi1_master_sdo0_o,
+  spi1_master_sdi0_i,
+  
+
+  spi_sck,
+  spi_csn,
+  spi_sdo0,
+  spi_sdi0,
 
   uart_tx,
   uart_rx,
@@ -49,7 +55,6 @@
 
 
   gpio,
-  xclk,
 //  gpio1,
   pclk,
   vsync,
@@ -69,11 +74,11 @@
   input         clk_p;
   input         clk_n;
   input         rst_n;
-  output        xclk;
- // input        spi_sck;
- // output        spi_csn;
- // output        spi_sdo0;
- // input         spi_sdi0;
+  //spi slave
+  input         spi_sck;
+  input        spi_csn;
+  output        spi_sdo0;
+  input         spi_sdi0;
   //uart
   output        uart_tx;
   input         uart_rx;
@@ -108,6 +113,12 @@
 	output  spi_master_csn0_o;
 	output  spi_master_sdo0_o;
 	input   spi_master_sdi0_i;
+
+	output  spi1_master_clk_o ;
+	output  spi1_master_csn0_o;
+	output  spi1_master_sdo0_o;
+	input   spi1_master_sdi0_i;
+
 //	input logic  [ 1: 0]      emmc_card_detect_n,
 //	input logic  [ 1: 0]      emmc_card_write_prt,
 	// input  wire        sdio_card_int_n;
@@ -138,7 +149,7 @@
   wire spi_sdi1 ; 
   wire spi_sdi2 ; 
   wire spi_sdi3 ; 
- // wire spi_sdo0 ;
+ // wire spi_sdo0 PIN_SSPI_SIO0;
   wire spi_sdo1 ;
   wire spi_sdo2 ;
   wire spi_sdo3 ; 
@@ -170,7 +181,6 @@
      .rstn_i            ( rst_n       ),
      .testmode_i        ( 1'b0          ),
      .fetch_enable_i    ( 1'b1  ),
-     .xclk(xclk),
 
    //SPI Slave
      .spi_clk_i         ( spi_sck       ),
@@ -185,30 +195,30 @@
      .spi_sdi3_i        ( spi_sdi3      ),
 
     //SPI Master
-     .spi_master_clk_o  ( spi_master_clk_o ),
-     .spi_master_csn0_o (spi_master_csn0_o  ),
+     .spi_master_clk_o  ( spi_master_clk_o   ),
+     .spi_master_csn0_o ( spi_master_csn0_o  ),
      .spi_master_csn1_o (  ),
      .spi_master_csn2_o (  ),
      .spi_master_csn3_o (  ),
-     .spi_master_sdo0_o (spi_master_sdo0_o  ),
+     .spi_master_sdo0_o ( spi_master_sdo0_o  ),
      .spi_master_sdo1_o (  ),
      .spi_master_sdo2_o (  ),
      .spi_master_sdo3_o (  ),
-     .spi_master_sdi0_i ( spi_master_sdi0_i ),
+     .spi_master_sdi0_i ( spi_master_sdi0_i  ),
      .spi_master_sdi1_i (  ),
      .spi_master_sdi2_i (  ),
      .spi_master_sdi3_i (  ),
 
-     .spi_master1_clk_o  (  ),
-     .spi_master1_csn0_o ( ),
+     .spi_master1_clk_o  ( spi1_master_clk_o ),
+     .spi_master1_csn0_o ( spi1_master_csn0_o ),
      .spi_master1_csn1_o (  ),
      .spi_master1_csn2_o (  ),
      .spi_master1_csn3_o (  ),
-     .spi_master1_sdo0_o (  ),
+     .spi_master1_sdo0_o ( spi1_master_sdo0_o ),
      .spi_master1_sdo1_o (  ),
      .spi_master1_sdo2_o (  ),
      .spi_master1_sdo3_o (  ),
-     .spi_master1_sdi0_i (),
+     .spi_master1_sdi0_i ( spi1_master_sdi0_i ),
      .spi_master1_sdi1_i (  ),
      .spi_master1_sdi2_i (  ),
      .spi_master1_sdi3_i (  ),
@@ -239,7 +249,7 @@
      //eMMC
 	 .emmc_cclk_out          ( emmc_cclk_out  ),// R16
 	 .emmc_ccmd              ( emmc_ccmd  ), //tri R17
-	 .emmc_cdata             ( emmc_cdata  ), //tri data0 N13 data1 P15 data2 P20  data3 P16
+	 .emmc_cdata             ( emmc_cdata ), //tri data0 N13 data1 P15 data2 P20  data3 P16
 	 .emmc_card_detect_n     ( 1'b0  ),
 	 .emmc_card_write_prt    ( 1'b0  ),
 	 .sdio_card_int_n        ( 1'b1  ),//P17

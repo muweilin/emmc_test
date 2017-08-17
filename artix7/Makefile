@@ -16,7 +16,7 @@ ips/xilinx_clock_2x/ip/xilinx_clock_2x.dcp:
 ips/xilinx_axi_clock_convert/ip/xilinx_axi_clock_convert.dcp:
 	make -C ips/xilinx_axi_clock_convert/ clean all
 	
-ips/xilinx_axi_clock_convert/ip/xilinx_clock_div2.dcp:
+ips/xilinx_clock_div2/ip/xilinx_clock_div2.dcp:
 	make -C ips/xilinx_clock_div2/ clean all
 
 .PHONY: mem
@@ -71,6 +71,7 @@ clean:
 dist-clean:
 	make -C ips/xilinx_clock_manager/ clean
 	make -C ips/xilinx_clock_2x/ clean
+	make -C ips/xilinx_clock_div2/ clean
 	make -C ips/xilinx_ahblite_axi_bridge/ clean
 	make -C ips/xilinx_ddr3_if/ clean
 	make -C ips/xilinx_mem_16384x32/ clean

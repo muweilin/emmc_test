@@ -23,16 +23,16 @@ int main()
      
      printf("gpio %d direction is %d\n",i,dir);
      
-     set_gpio_pin_value(i, 1);
-     
-     while(delay--);
-     
      set_gpio_pin_value(i, 0);
-     delay = 0xFFFFFFFF;
-    while(delay--);
-    waste_time() ;
+     printf("gpio %d v is %d\n",i,0);
+     waste_time();
+     
      set_gpio_pin_value(i, 1);
-  
+     printf("gpio %d v is %d\n",i,1);
+     delay = 0xFFFFFFFF;
+    waste_time() ;
+     set_gpio_pin_value(i, 0);
+      printf("gpio %d v is %d\n",i,0);
    //get_gpio_pin_value(i);
  }
 

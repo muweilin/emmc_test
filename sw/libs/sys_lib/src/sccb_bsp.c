@@ -36,6 +36,7 @@ uint8_t SCCB_WriteByte(uint8_t WriteAddress, uint8_t SendByte)
 
 uint8_t SCCB_ReadByte(uint8_t ReadAddress)
 {
+   int ver;
    i2c_send_data(0x42);  //write ID R/Wn = 0
    i2c_send_command(I2C_START_WRITE);
    i2c_get_ack();  //can don't care
@@ -53,7 +54,10 @@ uint8_t SCCB_ReadByte(uint8_t ReadAddress)
 
    i2c_send_command(I2C_READ);
    i2c_get_ack();
-   return i2c_get_data();
+   ver = i2c_get_data();
+   i2c_send_command(I2C_STOP_READ);
+   //i2c_get_ack();
+   return ver;
 }
 
 

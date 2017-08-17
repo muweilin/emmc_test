@@ -277,6 +277,15 @@ module DWC_mobile_storage_top(
         .clk_smpl_phase_ctrl    (clk_smpl_phase_ctrl)        
         //eMMC 4.5 ends
         );
+xilinx_ila_debug your_instance_name (
+        .clk(clk), // input wire clk
+
+
+        .probe0(cclk_in), // input wire [0:0]  probe0
+        .probe1(cdata_in), // input wire [3:0]  probe1
+        .probe2(cclk_in_sample) // input wire [0:0]  probe2
+);
+
 
 endmodule
 

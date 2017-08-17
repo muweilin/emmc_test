@@ -114,3 +114,81 @@ void spi_read(int cmd, int addr, int addrlen, int *data, int datalen)
   spi_start_transaction(SPI_CMD_RD,SPI_CSN0);
   spi_read_fifo(data,datalen); 
 }
+
+//spi1 firmware functions
+void spi1_send_data_noaddr(int cmd, char *data, int datalen, int useQpi);
+
+void spi1_setup_cmd_addr(int cmd, int cmdlen, int addr, int addrlen) {
+    int cmd_reg;
+    cmd_reg = cmd << (32 - cmdlen);
+    *(volatile int*) (SPI1_REG_SPICMD) = cmd_reg;
+    *(volatile int*) (SPI1_REG_SPIADR) = addr;
+    *(volatile int*) (SPI1_REG_SPILEN) = (cmdlen & 0x3F) | ((addrlen << 8) & 0x3F00);
+}
+
+void spi1_setup_dummy(int dummy_rd, int dummy_wr) {
+    *(volatile int*) (SPI1_REG_SPIDUM) = ((dummy_wr << 16) & 0xFFFF0000) | (dummy_rd & 0xFFFF);
+}
+
+void spi1_set_datalen(int datalen) {
+    volatile int old_len;
+    old_len = *(volatile int*) (SPI1_REG_SPILEN);
+    old_len = ((datalen << 16) & 0xFFFF0000) | (old_len & 0xFFFF);
+    *(volatile int*) (SPI1_REG_SPILEN) = old_len;
+}
+
+void spi1_start_transaction(int trans_type, int csnum) {
+    *(volatile int*) (SPI1_REG_STATUS) = ((1 << (csnum + 8)) & 0xF00) | ((1 << trans_type) & 0xFF);
+}
+
+int spi1_get_status() {
+    volatile int status;
+    status = *(volatile int*) (SPI1_REG_STATUS);
+    return status;
+}
+
+void spi1_write_fifo(int *data, int datalen) {
+    volatile int num_words, i;
+
+    num_words = (datalen >> 5) & 0x7FF;
+
+    if ( (datalen & 0x1F) != 0)
+        num_words++;
+
+    for (i = 0; i < num_words; i++) {
+        while ((((*(volatile int*) (SPI1_REG_STATUS)) >> 24) & 0xFF) >= 8);
+        *(volatile int*) (SPI1_REG_TXFIFO) = data[i];
+    }
+}
+
+void spi1_read_fifo(int *data, int datalen) {
+    volatile int num_words, i;
+
+    num_words = (datalen >> 5) & 0x7FF;
+
+    if ( (datalen & 0x1F) != 0)
+        num_words++;
+
+    for (i = 0; i < num_words; i++) {
+        while ((((*(volatile int*) (SPI1_REG_STATUS)) >> 16) & 0xFF) == 0);
+        data[i] = *(volatile int*) (SPI1_REG_RXFIFO);
+    }
+}
+
+void spi1_write(int cmd, int addr, int addrlen, int *data, int datalen)
+{
+  spi1_setup_cmd_addr(cmd,8,addr,addrlen);
+  spi1_set_datalen(datalen);
+  spi1_start_transaction(SPI_CMD_WR,SPI_CSN0);
+  spi1_write_fifo(data,datalen);
+  while((spi1_get_status() & 0xFFFF) != 1);
+}
+
+void spi1_read(int cmd, int addr, int addrlen, int *data, int datalen)
+{
+  spi1_setup_cmd_addr(cmd,8,addr,addrlen);
+  spi1_set_datalen(datalen);
+  spi1_setup_dummy(32,0);
+  spi1_start_transaction(SPI_CMD_RD,SPI_CSN0);
+  spi1_read_fifo(data,datalen); 
+}

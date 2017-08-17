@@ -171,6 +171,7 @@ add_subdirectory(cam_test)
 add_subdirectory(pwm_test)
 add_subdirectory(helloworld)
 add_subdirectory(Arduino_tests)
+add_subdirectory(emmc_test)
 
 # add_subdirectory(debug)
 add_subdirectory(bench)
