@@ -16,10 +16,10 @@
   spi1_master_sdi0_i,
   
 
- // spi_sck,
- // spi_csn,
- // spi_sdo0,
- // spi_sdi0,
+  spi_sck,
+  spi_csn,
+  spi_sdo0,
+  spi_sdi0,
 
   uart_tx,
   uart_rx,
@@ -74,10 +74,11 @@
   input         clk_p;
   input         clk_n;
   input         rst_n;
- // input        spi_sck;
- // output        spi_csn;
- // output        spi_sdo0;
- // input         spi_sdi0;
+  //spi slave
+  input         spi_sck;
+  input        spi_csn;
+  output        spi_sdo0;
+  input         spi_sdi0;
   //uart
   output        uart_tx;
   input         uart_rx;
@@ -248,7 +249,7 @@
      //eMMC
 	 .emmc_cclk_out          ( emmc_cclk_out  ),// R16
 	 .emmc_ccmd              ( emmc_ccmd  ), //tri R17
-	 .emmc_cdata             ( emmc_cdata  ), //tri data0 N13 data1 P15 data2 P20  data3 P16
+	 .emmc_cdata             ( emmc_cdata ), //tri data0 N13 data1 P15 data2 P20  data3 P16
 	 .emmc_card_detect_n     ( 1'b0  ),
 	 .emmc_card_write_prt    ( 1'b0  ),
 	 .sdio_card_int_n        ( 1'b1  ),//P17
