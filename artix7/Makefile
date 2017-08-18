@@ -5,7 +5,7 @@ ips: clk mem ddr3 h2x ppu
 
 
 .PHONY: clk
-clk: ips/xilinx_clock_manager/ip/xilinx_clock_manager.dcp ips/xilinx_clock_2x/ip/xilinx_clock_2x.dcp ips/xilinx_axi_clock_convert/ip/xilinx_axi_clock_convert.dcp
+clk: ips/xilinx_clock_manager/ip/xilinx_clock_manager.dcp ips/xilinx_clock_2x/ip/xilinx_clock_2x.dcp ips/xilinx_axi_clock_convert/ip/xilinx_axi_clock_convert.dcp ips/xilinx_clock_div2/ip/xilinx_clock_div2.dcp
 
 ips/xilinx_clock_manager/ip/xilinx_clock_manager.dcp:
 	make -C ips/xilinx_clock_manager/ clean all

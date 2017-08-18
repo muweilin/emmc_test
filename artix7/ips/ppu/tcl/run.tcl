@@ -34,7 +34,7 @@ add_files -norecurse $FPGA_IPS/xilinx_ahblite_axi_bridge/ip/h2x_bridge.dcp
 add_files -norecurse $FPGA_IPS/xilinx_ddr3_if/ip/xilinx_ddr3_if.dcp 
 add_files -norecurse $FPGA_IPS/xilinx_axi_clock_convert/ip/xilinx_axi_clock_converter.dcp
 add_files -norecurse $FPGA_IPS/xilinx_clock_div2/ip/xilinx_clock_div2.dcp
-add_files -norecurse $FPGA_IPS/xilinx_ila_debug/ip/xilinx_ila_debug.dcp
+#add_files -norecurse $FPGA_IPS/xilinx_ila_debug/ip/xilinx_ila_debug.dcp
 
 # needed only if used in batch mode
 update_compile_order -fileset sources_1
