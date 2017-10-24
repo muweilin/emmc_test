@@ -16,10 +16,10 @@
   spi1_master_sdi0_i,
   
 
-  spi_sck,
-  spi_csn,
-  spi_sdo0,
-  spi_sdi0,
+ // spi_sck,
+ // spi_csn,
+ // spi_sdo0,
+ // spi_sdi0,
 
   uart_tx,
   uart_rx,
@@ -59,7 +59,13 @@
   pclk,
   vsync,
   href,
-  cam_d
+  cam_d,
+  tck_i,  
+  trstn_i,
+  tms_i,  
+  tdi_i,  
+  tdo_o  
+  
 
 //  c0_uart_tx,
 //  c0_uart_rx,
@@ -75,10 +81,10 @@
   input         clk_n;
   input         rst_n;
   //spi slave
-  input         spi_sck;
-  input        spi_csn;
-  output        spi_sdo0;
-  input         spi_sdi0;
+//  input         spi_sck;
+ // input        spi_csn;
+ // output        spi_sdo0;
+  //input         spi_sdi0;
   //uart
   output        uart_tx;
   input         uart_rx;
@@ -88,6 +94,16 @@
   inout         sda_io;
   inout         scl1_io;
   inout         sda1_io;
+  
+  input tck_i;  
+  input trstn_i;
+  input tms_i;  
+  input tdi_i;  
+  output tdo_o;  
+  
+  
+  
+  
 
    inout  wire    [31:0]     ddr3_dq;
     inout  wire    [3:0]      ddr3_dqs_n;
@@ -275,11 +291,11 @@
      .init_calib_complete    (   ),
 
      //jtag
-     .tck_i              (    ),
-     .trstn_i            (    ),
-     .tms_i              (    ),
-     .tdi_i              (    ),
-     .tdo_o              (    ),
+     .tck_i              (  tck_i   ),
+     .trstn_i            (  trstn_i  ),
+     .tms_i              (  tms_i  ),
+     .tdi_i               ( tdi_i    ),
+     .tdo_o              (  tdo_o  ),
 
 ///////////////////////////////////////////
 ////             PPU0                 ////

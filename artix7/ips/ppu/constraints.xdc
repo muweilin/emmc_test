@@ -1214,3 +1214,24 @@ set_false_path -from [get_clocks clk50_o_xilinx_clock_manager_1] -to [get_clocks
 
 set_false_path -from [get_clocks pclk] -to [get_clocks clk50_o_xilinx_clock_manager_1]
 
+####################
+##    jtag    ##
+####################
+
+#J7-20
+set_property PACKAGE_PIN V18 [get_ports tck_i]
+#J7-15
+set_property PACKAGE_PIN AA11 [get_ports tdi_i]
+#J7-16
+set_property PACKAGE_PIN AA10 [get_ports tdo_o]
+#J7-17
+set_property PACKAGE_PIN AB10 [get_ports tms_i]
+#J7-18
+set_property PACKAGE_PIN AA9 [get_ports trstn_i]
+
+set_property IOSTANDARD LVCMOS33 [get_ports tck_i]
+set_property IOSTANDARD LVCMOS33 [get_ports tdi_i]
+set_property IOSTANDARD LVCMOS33 [get_ports tdo_o]
+set_property IOSTANDARD LVCMOS33 [get_ports tms_i]
+set_property IOSTANDARD LVCMOS33 [get_ports trstn_i]
+
