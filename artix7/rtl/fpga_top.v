@@ -265,7 +265,7 @@
      //eMMC
 	 .emmc_cclk_out          ( emmc_cclk_out  ),// R16
 	 .emmc_ccmd              ( emmc_ccmd  ), //tri R17
-	 .emmc_cdata             ( emmc_cdata ), //tri data0 N13 data1 P15 data2 P20  data3 P16
+	 .emmc_cdata             ( {12'h0, emmc_cdata} ), //tri data0 N13 data1 P15 data2 P20  data3 P16
 	 .emmc_card_detect_n     ( 1'b0  ),
 	 .emmc_card_write_prt    ( 1'b0  ),
 	 .sdio_card_int_n        ( 1'b1  ),//P17
