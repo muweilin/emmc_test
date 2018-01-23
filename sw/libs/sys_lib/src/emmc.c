@@ -10,7 +10,8 @@ static char rcs_datetime[] = "$DateTime: 2010/08/05 01:35:11 $";
 
  current_task_status current_task;
 //current_task_status  *p =&current_task;
- Card_info *the_card_info;
+ Card_info Card_info_inst[2];
+ Card_info *the_card_info = Card_info_inst;
  IP_status_info the_ip_status;
 
 
@@ -2328,6 +2329,7 @@ u32 emmc_reset_sd_2_0_card(u32 slot)
 		/* Switch off the card */
 		goto HOUSEKEEP;
 	}
+	printf("1Card capacity = %x Kbytes\n", the_card_info[slot].card_size);
 	#endif
 #ifdef SWITCH_VOLTAGE_18
     // For any Data transfer command in UHS-1, bus width is 4. We shoudl switch the host controller 
@@ -2348,7 +2350,7 @@ u32 emmc_reset_sd_2_0_card(u32 slot)
 		retval = 0;
 		goto HOUSEKEEP;
 	}
-
+	printf("2Card capacity = %x Kbytes\n", the_card_info[slot].card_size);
 #endif
 
 	/* If compiled with SD_SET_WIDE_BUS flag then do the needful*/
@@ -2366,7 +2368,7 @@ u32 emmc_reset_sd_2_0_card(u32 slot)
 
     // If DDR operation is required, check for DDR support from the card.
     // If support exist program the host controller to operate in DDR mode.
-
+printf("3Card capacity = %x Kbytes\n", the_card_info[slot].card_size);
 #ifdef SD_SWITCH_DDR
     printf("CTYPE REGISTER before switching DDR is %08x\n",emmc_read_register(EMMC_REG_CTYPE));
 	if((emmc_read_register(EMMC_REG_CTYPE) & (1 << slot)) == (1<<slot)){ // We can switch to DDR only in 4 bit wide bus 
@@ -2380,6 +2382,7 @@ u32 emmc_reset_sd_2_0_card(u32 slot)
 		printf("DDR operation is not possible\n");
 		goto HOUSEKEEP;
 	}
+
 
 #endif
 
@@ -2801,14 +2804,14 @@ u32 emmc_process_SD_2_0_csd(u32 slot)
 	the_card_info[slot].card_read_blksize = 512;
 	the_card_info[slot].orig_card_write_blksize = 512;
 	/* Set the card capacity Note the capacity is in Kilo bytes*/
-	the_card_info[slot].card_size = blocknr * 1024;
+	the_card_info[slot].card_size = card_size;
 
 /*
 	printf("Card capacity = %x Kbytes\n", card_size);
 	printf("Read Block size = %x bytes\n",the_card_info[slot].card_read_blksize);
 	printf("Write Block size = %xbytes\n",the_card_info[slot].card_write_blksize);
 */
-	printf("Card capacity = %x Kbytes\n", card_size);
+	printf("Card capacity = %x Kbytes\n", the_card_info[slot].card_size);
 	printf("Read Block size = %x bytes\n",the_card_info[slot].card_read_blksize);
 	printf("Write Block size = %xbytes\n",the_card_info[slot].card_write_blksize);
 	return 0;
@@ -4258,7 +4261,7 @@ u32 emmc_read_write_multiple_blocks(u32 slot, u32 start_sect,
 	u32 read_or_write_to_send;
 	u32 sect_size_in_bytes;
 	sect_size_in_bytes = 1 << (sect_size - 1); //1<<9
-
+    printf("12Card capacity = %x Kbytes\n", the_card_info[slot].card_size);
 	if (read_or_write) {
 		read_or_write_to_send = sect_size_in_bytes * num_of_sects;
 	} else {
@@ -4269,6 +4272,8 @@ u32 emmc_read_write_multiple_blocks(u32 slot, u32 start_sect,
 		retval = ERRADDRESSRANGE;
 		goto HOUSEKEEP;
 	}
+
+	printf("Card capacity = %x Kbytes\n", the_card_info[slot].card_size);
 /*
    if((SD_MEM_2_0_TYPE == the_card_info[slot].card_type )|| (SD_MEM_3_0_TYPE == the_card_info[slot].card_type)) {
 		retval = emmc_read_write_bytes_SD_2_0(slot,resp_buff,buffer,

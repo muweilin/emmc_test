@@ -35,7 +35,7 @@ int main()
   char ch;
   int dat = 0xaaaa1111;
 
-  uart_set_cfg(0, 49); //100M: 125000
+  uart_set_cfg(0, 26); //100M: 125000
   
 
   int * q = (volatile int*)ext_ram_addr;

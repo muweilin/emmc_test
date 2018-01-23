@@ -20,6 +20,7 @@
 
  #define NO_OF_TEST_LOOPS  3  
 
+extern Card_info *the_card_info;
 
 int main()
 {
@@ -88,7 +89,6 @@ if(ret)
         data_to_write = 0xF0;//IDMAC testing
 	for(ii = 0; ii<NO_OF_TEST_LOOPS; )
 	{
-	
 
 	    memset((void *)buff_read1,0x00,MEM_SIZE);
 	    memset((void*)(buff_write1),data_to_write,SECTOR_SIZE);
